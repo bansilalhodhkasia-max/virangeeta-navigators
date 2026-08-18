@@ -1,218 +1,1436 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Scholar Path Russia by Virangeeta Navigators — explore Russian universities, compare programs and costs, discover scholarship pathways and apply with confidence.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Scholar Path Russia by Virangeeta Navigators — explore Russian universities, scholarships, estimated costs and admission pathways.">
   <meta name="theme-color" content="#07111f">
+
   <title>Scholar Path Russia | Virangeeta Navigators</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --navy: #07111f;
+      --teal: #117f76;
+      --teal-dark: #0b625c;
+      --mint: #eef9f6;
+      --paper: #f7f9fc;
+      --white: #ffffff;
+      --text: #0d1728;
+      --muted: #68778b;
+      --line: #dce3eb;
+      --soft: #eef2f6;
+      --shadow: 0 15px 45px rgba(7,17,31,.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 20px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+    }
+
+    .apply-btn,
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--teal);
+      color: white;
+      padding: 15px 23px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .apply-btn:hover,
+    .primary-btn:hover {
+      background: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero {
+      background:
+        radial-gradient(circle at 90% 20%, rgba(17,127,118,.12), transparent 30%),
+        linear-gradient(135deg, #f7f9fc, #ffffff);
+      padding: 85px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: -4px;
+      margin: 20px 0 28px;
+    }
+
+    h1 span {
+      color: var(--teal);
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 20px;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .trust span {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 9px 15px;
+      border-radius: 999px;
+      color: #526174;
+      font-weight: 700;
+    }
+
+    .hero-card {
+      min-height: 420px;
+      background: var(--mint);
+      border: 1px solid #d7eae5;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border: 1px solid #cce4df;
+      border-radius: 50%;
+    }
+
+    .hero-card img {
+      position: relative;
+      z-index: 2;
+      width: 250px;
+      height: 250px;
+      object-fit: contain;
+    }
+
+    .coordinate {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      z-index: 3;
+      background: white;
+      padding: 12px 18px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.06);
+      font-weight: 700;
+      color: #526174;
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 12px 0 18px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* UNIVERSITY EXPLORER */
+
+    .explorer {
+      background: var(--paper);
+    }
+
+    .filters {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 25px;
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 35px;
+      box-shadow: var(--shadow);
+    }
+
+    .filter label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: #526174;
+      margin-bottom: 7px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--teal);
+    }
+
+    .record-count {
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .university-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .university-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 8px 30px rgba(7,17,31,.04);
+      transition: .2s;
+    }
+
+    .university-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 15px;
+    }
+
+    .badge {
+      background: var(--soft);
+      color: #536174;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge.green {
+      background: #e3f5ef;
+      color: var(--teal-dark);
+    }
+
+    .university-card h3 {
+      font-size: 25px;
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+
+    .location {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .info-box {
+      background: var(--paper);
+      border-radius: 14px;
+      padding: 13px;
+    }
+
+    .info-box small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-top: 3px;
+    }
+
+    .verify-note {
+      margin-top: 17px;
+      font-size: 13px;
+      color: var(--muted);
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* COST */
+
+    .cost-section {
+      background: white;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .calculator-card,
+    .result-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .calculator-card {
+      background: var(--paper);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .result-card {
+      background: var(--navy);
+      color: white;
+    }
+
+    .result-card .muted {
+      color: #aab8c8;
+    }
+
+    .big-cost {
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1;
+      margin: 15px 0 25px;
+      color: white;
+    }
+
+    .cost-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .disclaimer {
+      margin-top: 20px;
+      color: #aab8c8;
+      font-size: 13px;
+    }
+
+    /* SCHOLARSHIP */
+
+    .scholarship {
+      background: var(--mint);
+    }
+
+    .scholar-card {
+      background: white;
+      border: 1px solid #d9e9e5;
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 850px;
+    }
+
+    .scholar-card h3 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    /* ROADMAP */
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      background: white;
+    }
+
+    .step-number {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin: 10px 0 7px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* TESTIMONIAL */
+
+    .testimonial-section {
+      background: var(--paper);
+    }
+
+    .testimonial {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 850px;
+    }
+
+    .testimonial p {
+      font-size: 22px;
+      font-style: italic;
+      color: #536174;
+      margin: 0;
+    }
+
+    .testimonial-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* CONTACT */
+
+    .contact {
+      background: var(--navy);
+      color: white;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact h2 {
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1;
+      margin: 15px 0;
+    }
+
+    .contact p {
+      color: #aab8c8;
+      font-size: 18px;
+    }
+
+    .contact-card {
+      background: white;
+      color: var(--text);
+      padding: 30px;
+      border-radius: var(--radius);
+    }
+
+    .contact-item {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-item:last-child {
+      border-bottom: 0;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .contact-item a {
+      font-weight: 800;
+      color: var(--teal-dark);
+      word-break: break-word;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #040b15;
+      color: #9ba8b8;
+      padding: 28px 0;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+      .nav {
+        min-height: 70px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 42px;
+      }
+
+      .nav .apply-btn {
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 55px 0;
+      }
+
+      .hero-grid,
+      .calculator,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 53px;
+        letter-spacing: -3px;
+      }
+
+      .hero-card {
+        min-height: 330px;
+      }
+
+      .hero-card img {
+        width: 190px;
+        height: 190px;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .university-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 47px;
+      }
+
+      .hero-text {
+        font-size: 17px;
+      }
+
+      .info-row {
+        grid-template-columns: 1fr;
+      }
+
+      .coordinate {
+        font-size: 12px;
+        padding: 9px 12px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <header class="nav">
-    <a class="brand" href="#home" aria-label="Scholar Path Russia home">
-      <img src="logo.jpg" alt="Scholar Path Russia logo">
-      <span>Scholar Path Russia</span>
-    </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#explore">Universities</a>
-      <a href="#compare">Compare</a>
-      <a href="#cost">Cost</a>
-      <a href="#scholarships">Scholarships</a>
-      <a href="#journey">Journey</a>
-    </nav>
-    <a class="nav-apply" href="#apply">Apply / Register ↗</a>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+
+      <a href="#home" class="brand">
+        <img src="logo.jpg" alt="Scholar Path Russia logo">
+        <span>Scholar Path Russia</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#explore">Universities</a>
+        <a href="#cost">Cost</a>
+        <a href="#scholarships">Scholarships</a>
+        <a href="#roadmap">Journey</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a
+        class="apply-btn"
+        href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
+        target="_blank"
+        rel="noopener"
+      >
+        Apply / Register ↗
+      </a>
+
+    </div>
   </header>
 
+
+  <!-- HERO -->
   <main>
+
     <section class="hero" id="home">
-      <div class="hero-copy">
-        <p class="eyebrow">SCHOLAR PATH RUSSIA · BY VIRANGEETA NAVIGATORS</p>
-        <h1>Your path to<br>Russia.<br><em>Mapped clearly.</em></h1>
-        <p class="hero-text">Explore universities, understand real costs, discover scholarship pathways and follow a transparent admission journey — without the confusion.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#apply">Apply / Registration ↗</a>
-          <a class="btn btn-outline" href="#explore">Explore universities</a>
-        </div>
-        <div class="trust-points">
-          <span>✓ Student-first</span>
-          <span>✓ Transparent information</span>
-          <span>✓ Official-source focused</span>
-        </div>
-      </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="logo-orbit">
-          <img src="logo.jpg" alt="">
-        </div>
-        <span class="coord">55.75° N / 37.62° E</span>
-        <span class="label">RUSSIA / EDUCATION</span>
-      </div>
-    </section>
+      <div class="container hero-grid">
 
-    <div class="marquee" aria-hidden="true">
-      <span>EXPLORE</span><b>✦</b><span>COMPARE</span><b>✦</b><span>CALCULATE</span><b>✦</b><span>SCHOLARSHIPS</span><b>✦</b><span>APPLY</span>
-    </div>
-
-    <section class="section" id="explore">
-      <div class="section-heading">
         <div>
-          <p class="eyebrow">01 / UNIVERSITY EXPLORER</p>
-          <h2>Find the right<br><em>starting point.</em></h2>
+          <div class="eyebrow">
+            Scholar Path Russia · By Virangeeta Navigators
+          </div>
+
+          <h1>
+            Your path to<br>
+            Russia.<br>
+            <span>Mapped clearly.</span>
+          </h1>
+
+          <p class="hero-text">
+            Explore universities, understand estimated costs, discover
+            scholarship pathways and follow a transparent admission journey —
+            without the confusion.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="primary-btn"
+              href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
+              target="_blank"
+              rel="noopener"
+            >
+              Apply / Registration ↗
+            </a>
+
+            <a class="secondary-btn" href="#explore">
+              Explore universities
+            </a>
+          </div>
+
+          <div class="trust">
+            <span>✓ Student-first</span>
+            <span>✓ Transparent information</span>
+            <span>✓ Official-source focused</span>
+          </div>
         </div>
-        <p>Search Russian universities by course, city, language and scholarship signals. Each record is designed to distinguish verified information from details that still require official confirmation.</p>
-      </div>
 
-      <div class="filters" role="search">
-        <label>Course
-          <select id="course">
-            <option value="">All courses</option>
-            <option value="Medicine">Medicine</option>
-            <option value="Engineering">Engineering</option>
-            <option value="IT">IT</option>
-            <option value="Business">Business</option>
-            <option value="Arts">Arts</option>
-            <option value="Science">Science</option>
-            <option value="Law">Law</option>
-          </select>
-        </label>
-        <label>City
-          <select id="city"><option value="">All cities</option></select>
-        </label>
-        <label>Medium
-          <select id="medium">
-            <option value="">Any medium</option>
-            <option value="English">English</option>
-            <option value="Russian">Russian</option>
-          </select>
-        </label>
-        <label>Scholarship
-          <select id="scholarship">
-            <option value="">Any scholarship</option>
-            <option value="yes">Listed</option>
-            <option value="no">Not listed</option>
-          </select>
-        </label>
-      </div>
+        <div class="hero-card">
+          <div class="coordinate">55.75° N / 37.62° E</div>
+          <img src="logo.jpg" alt="Scholar Path Russia">
+        </div>
 
-      <div class="explorer-meta">
-        <strong id="count">0</strong> university records
       </div>
-      <div id="cards" class="university-list" aria-live="polite"></div>
     </section>
 
-    <section class="section dark-section" id="compare">
-      <div class="section-heading">
+
+    <!-- UNIVERSITY EXPLORER -->
+    <section class="explorer" id="explore">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">01 / University Explorer</div>
+
+          <h2>
+            Find the right<br>
+            <em>starting point.</em>
+          </h2>
+
+          <p>
+            Search Russian universities by course, city, language and
+            scholarship signals. Information requiring confirmation is clearly
+            marked instead of being presented as an official fee.
+          </p>
+        </div>
+
+        <div class="filters">
+
+          <div class="filter">
+            <label for="courseFilter">Course</label>
+            <select id="courseFilter">
+              <option value="">All courses</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Engineering">Engineering</option>
+              <option value="IT">IT</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="cityFilter">City</label>
+            <select id="cityFilter">
+              <option value="">All cities</option>
+              <option value="Syktyvkar">Syktyvkar</option>
+              <option value="Kazan">Kazan</option>
+              <option value="Moscow">Moscow</option>
+              <option value="Saint Petersburg">Saint Petersburg</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="mediumFilter">Medium</label>
+            <select id="mediumFilter">
+              <option value="">Any medium</option>
+              <option value="English">English</option>
+              <option value="Russian">Russian</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="scholarshipFilter">Scholarship</label>
+            <select id="scholarshipFilter">
+              <option value="">Any scholarship</option>
+              <option value="yes">Listed</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="record-count" id="recordCount">
+          5 university records
+        </div>
+
+        <div class="university-grid" id="universityGrid"></div>
+
+      </div>
+    </section>
+
+
+    <!-- COST CALCULATOR -->
+    <section class="cost-section" id="cost">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">02 / Cost Calculator</div>
+
+          <h2>
+            Understand the<br>
+            <em>budget.</em>
+          </h2>
+
+          <p>
+            This calculator provides an illustrative budget estimate. Actual
+            tuition, hostel, insurance and other charges must be confirmed
+            directly with the university before payment.
+          </p>
+        </div>
+
+        <div class="calculator">
+
+          <div class="calculator-card">
+
+            <div class="field">
+              <label for="tuition">Annual tuition (RUB)</label>
+              <input id="tuition" type="number" value="266120">
+            </div>
+
+            <div class="field">
+              <label for="hostel">Annual hostel (RUB)</label>
+              <input id="hostel" type="number" value="12000">
+            </div>
+
+            <div class="field">
+              <label for="living">Monthly living estimate (RUB)</label>
+              <input id="living" type="number" value="25000">
+            </div>
+
+            <div class="field">
+              <label for="insurance">Insurance / year (RUB)</label>
+              <input id="insurance" type="number" value="5000">
+            </div>
+
+            <div class="field">
+              <label for="other">Other annual charges (RUB)</label>
+              <input id="other" type="number" value="10000">
+            </div>
+
+            <div class="field">
+              <label for="rate">Illustrative RUB → INR rate</label>
+              <input id="rate" type="number" value="1.15" step="0.01">
+            </div>
+
+          </div>
+
+          <div class="result-card">
+
+            <div class="muted">
+              ILLUSTRATIVE ESTIMATED ANNUAL BUDGET
+            </div>
+
+            <div class="big-cost" id="annualCost">
+              ₹0
+            </div>
+
+            <div class="cost-line">
+              <span>Tuition</span>
+              <strong id="tuitionResult">₹0</strong>
+            </div>
+
+            <div class="cost-line">
+              <span>Hostel</span>
+              <strong id="hostelResult">₹0</strong>
+            </div>
+
+            <div class="cost-line">
+              <span>Living expenses</span>
+              <strong id="livingResult">₹0</strong>
+            </div>
+
+            <div class="cost-line">
+              <span>Insurance</span>
+              <strong id="insuranceResult">₹0</strong>
+            </div>
+
+            <div class="cost-line">
+              <span>Other charges</span>
+              <strong id="otherResult">₹0</strong>
+            </div>
+
+            <p class="disclaimer">
+              ⚠️ This is an illustrative estimate, not an official university
+              quotation. Currency rates and university charges can change.
+              Always verify official charges before payment.
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SCHOLARSHIPS -->
+    <section class="scholarship" id="scholarships">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">03 / Scholarships</div>
+
+          <h2>
+            Find a pathway<br>
+            <em>that fits.</em>
+          </h2>
+
+          <p>
+            Scholarship availability, quotas and eligibility can change.
+            Use official government and university sources for final
+            confirmation.
+          </p>
+        </div>
+
+        <div class="scholar-card">
+          <div class="badges">
+            <span class="badge green">ROUTE TO CHECK</span>
+            <span class="badge">International students</span>
+          </div>
+
+          <h3>Russian Government Scholarships</h3>
+
+          <p>
+            Explore current scholarship and quota pathways through official
+            government and university information.
+          </p>
+
+          <a
+            class="primary-btn"
+            href="https://education-in-russia.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            Check official source ↗
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">04 / Admission Roadmap</div>
+
+          <h2>
+            From interest to<br>
+            <em>arrival.</em>
+          </h2>
+
+          <p>
+            A simple framework for understanding the admission journey.
+          </p>
+        </div>
+
+        <div class="roadmap-grid">
+
+          <div class="step">
+            <div class="step-number">01</div>
+            <h3>Discover</h3>
+            <p>Choose course, university, city and budget.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">02</div>
+            <h3>Compare</h3>
+            <p>Compare language, costs and scholarship pathways.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">03</div>
+            <h3>Apply</h3>
+            <p>Submit your information and follow the university process.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">04</div>
+            <h3>Confirm</h3>
+            <p>Verify admission, fees and official instructions.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">05</div>
+            <h3>Arrive</h3>
+            <p>Plan visa, travel, hostel and registration.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonial-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">05 / Student Reactions</div>
+
+          <h2>
+            Real journeys.<br>
+            <em>Real perspectives.</em>
+          </h2>
+
+          <p>
+            Student experiences can help future applicants understand the
+            journey. Testimonials should only be published with the student's
+            permission and accurate details.
+          </p>
+        </div>
+
+        <div class="testimonial">
+          <p>
+            “Scholar Path Russia helped me understand the university options
+            and the admission journey much more clearly.”
+          </p>
+
+          <div class="testimonial-note">
+            Example testimonial — replace with an authorised student
+            testimonial before publishing.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+
         <div>
-          <p class="eyebrow">02 / COMPARE</p>
-          <h2>Shortlist with<br><em>confidence.</em></h2>
+          <div class="eyebrow">06 / Start Your Journey</div>
+
+          <h2>
+            Ready to explore<br>
+            Russia?
+          </h2>
+
+          <p>
+            Complete the registration form and the Scholar Path Russia team
+            can help you identify the appropriate next step.
+          </p>
+
+          <a
+            class="apply-btn"
+            href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
+            target="_blank"
+            rel="noopener"
+          >
+            Apply / Registration ↗
+          </a>
         </div>
-        <p>Keep your strongest options together and compare the information that matters before you make an admission decision.</p>
-      </div>
-      <div id="compareBox" class="compare-box">
-        <p>Your comparison list is empty.</p>
+
+        <div class="contact-card">
+
+          <div class="contact-item">
+            <small>Phone</small>
+            <a href="tel:+918340767789">
+              +91 8340767789
+            </a>
+          </div>
+
+          <div class="contact-item">
+            <small>WhatsApp</small>
+            <a
+              href="https://wa.me/919711278441"
+              target="_blank"
+              rel="noopener"
+            >
+              +91 9711278441
+            </a>
+            <br>
+            <a
+              href="https://wa.me/918340767789"
+              target="_blank"
+              rel="noopener"
+            >
+              +91 8340767789
+            </a>
+          </div>
+
+          <div class="contact-item">
+            <small>Email</small>
+            <a href="mailto:virangeetanavigators@gmail.com">
+              virangeetanavigators@gmail.com
+            </a>
+          </div>
+
+          <div class="contact-item">
+            <small>Registration</small>
+            <a
+              href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
+              target="_blank"
+              rel="noopener"
+            >
+              Open application form ↗
+            </a>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
-    <section class="section" id="cost">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">03 / TRUE COST</p>
-          <h2>See the number<br><em>before you apply.</em></h2>
-        </div>
-        <p>Use the calculator as an estimate only. Always confirm current tuition, hostel and other charges with the university's official source.</p>
-      </div>
-      <div class="calculator">
-        <label>Annual tuition (RUB)<input id="tuition" type="number" value="266120"></label>
-        <label>Annual hostel (RUB)<input id="hostel" type="number" value="12000"></label>
-        <label>Monthly living (RUB)<input id="living" type="number" value="25000"></label>
-        <label>Insurance / year (RUB)<input id="insurance" type="number" value="5000"></label>
-        <label>Other annual charges<input id="other" type="number" value="10000"></label>
-        <label>Initial / travel cost<input id="initial" type="number" value="70000"></label>
-        <label>Duration (years)<input id="years" type="number" value="6" min="1"></label>
-        <label>RUB → INR<input id="rate" type="number" value="1.15" step="0.01"></label>
-      </div>
-      <div class="cost-result">
-        <span>Estimated annual cost</span>
-        <strong id="annual">₹0</strong>
-        <small>Illustrative estimate — verify official charges before payment.</small>
-      </div>
-    </section>
-
-    <section class="section light-green" id="scholarships">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">04 / SCHOLARSHIPS</p>
-          <h2>Find a pathway<br><em>that fits.</em></h2>
-        </div>
-        <p>Scholarship availability, quotas and eligibility can change. Use official government and university sources for final confirmation.</p>
-      </div>
-      <div class="feature-grid">
-        <article><span class="tag">ROUTE TO CHECK</span><h3>Russian Government Scholarships</h3><p>Explore current quota and scholarship pathways through official sources.</p></article>
-        <article><span class="tag">UNIVERSITY</span><h3>Institutional Support</h3><p>Check each university's current scholarship, fee-waiver and international-student opportunities.</p></article>
-        <article><span class="tag">INDIAN STUDENTS</span><h3>Plan Before Departure</h3><p>Compare tuition, hostel, living costs, documentation and recognition requirements before committing.</p></article>
-      </div>
-    </section>
-
-    <section class="section" id="journey">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">05 / ADMISSION JOURNEY</p>
-          <h2>A clearer route<br><em>from search to arrival.</em></h2>
-        </div>
-      </div>
-      <div class="steps">
-        <div><b>01</b><h3>Discover</h3><p>Define course, city, language and budget.</p></div>
-        <div><b>02</b><h3>Compare</h3><p>Shortlist universities and verify official information.</p></div>
-        <div><b>03</b><h3>Apply</h3><p>Submit your registration and prepare documents.</p></div>
-        <div><b>04</b><h3>Confirm</h3><p>Follow the university's official admission instructions.</p></div>
-        <div><b>05</b><h3>Arrive</h3><p>Plan visa, travel, hostel and registration.</p></div>
-      </div>
-    </section>
-
-    <section class="section testimonials" id="students">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">06 / STUDENT REACTIONS</p>
-          <h2>Real journeys.<br><em>Real perspectives.</em></h2>
-        </div>
-        <p>Student experiences can help future applicants understand the journey. Testimonials should be published only with the student's permission and accurate details.</p>
-      </div>
-      <div class="testimonial-grid">
-        <article><p>“Scholar Path Russia helped me understand the university options and the admission journey much more clearly.”</p><strong>— International student</strong><span>Russia · Medical education</span></article>
-        <article><p>“The comparison approach made it easier to look at fees, location and language before making a decision.”</p><strong>— Student applicant</strong><span>Russia · Higher education</span></article>
-        <article><p>“Having official-source links in one place saves a lot of time during the research stage.”</p><strong>— Indian student</strong><span>Russia · University applicant</span></article>
-      </div>
-    </section>
-
-    <section class="section contact-section" id="apply">
-      <div class="contact-card">
-        <p class="eyebrow">07 / START YOUR JOURNEY</p>
-        <h2>Ready to explore<br><em>Russia?</em></h2>
-        <p>Complete the registration form and the Scholar Path Russia team can help you identify the right next step.</p>
-        <!-- Replace the placeholder href below with the final Google Form URL. -->
-        <a class="btn btn-primary" href="https://forms.google.com/" target="_blank" rel="noopener">Apply / Registration ↗</a>
-        <div class="contact-details">
-          <div><span>Phone</span><strong>Contact number to be added</strong></div>
-          <div><span>WhatsApp</span><strong>WhatsApp number to be added</strong></div>
-          <div><span>Email</span><strong>Email address to be added</strong></div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="footer">
-    <div>
-      <img src="logo.jpg" alt="Scholar Path Russia">
-      <p>© 2026 Virangeeta Navigators</p>
-      <p>Scholar Path Russia</p>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        © 2026 Scholar Path Russia · Virangeeta Navigators
+      </div>
+
+      <div>
+        Information is provided for guidance. Verify official university and
+        government information before making payments or admission decisions.
+      </div>
     </div>
-    <nav aria-label="Legal">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms & Conditions</a>
-      <a href="disclaimer.html">Disclaimer</a>
-    </nav>
   </footer>
 
-  <script src="app.js" defer></script>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    const universities = [
+      {
+        name: "Pitirim Sorokin Syktyvkar State University",
+        city: "Syktyvkar",
+        course: "Medicine",
+        medium: "English",
+        scholarship: "yes"
+      },
+      {
+        name: "Kazan Federal University",
+        city: "Kazan",
+        course: "Medicine",
+        medium: "English",
+        scholarship: "yes"
+      },
+      {
+        name: "Kazan National Research Technical University",
+        city: "Kazan",
+        course: "Engineering",
+        medium: "Russian",
+        scholarship: "yes"
+      },
+      {
+        name: "Moscow Institute of Technology",
+        city: "Moscow",
+        course: "IT",
+        medium: "Russian",
+        scholarship: "no"
+      },
+      {
+        name: "Saint Petersburg State University",
+        city: "Saint Petersburg",
+        course: "Business",
+        medium: "Russian",
+        scholarship: "yes"
+      }
+    ];
+
+    const grid = document.getElementById("universityGrid");
+    const recordCount = document.getElementById("recordCount");
+
+    const courseFilter = document.getElementById("courseFilter");
+    const cityFilter = document.getElementById("cityFilter");
+    const mediumFilter = document.getElementById("mediumFilter");
+    const scholarshipFilter = document.getElementById("scholarshipFilter");
+
+    function renderUniversities() {
+
+      const course = courseFilter.value;
+      const city = cityFilter.value;
+      const medium = mediumFilter.value;
+      const scholarship = scholarshipFilter.value;
+
+      const filtered = universities.filter(u => {
+
+        return (
+          (!course || u.course === course) &&
+          (!city || u.city === city) &&
+          (!medium || u.medium === medium) &&
+          (!scholarship || u.scholarship === scholarship)
+        );
+
+      });
+
+      recordCount.textContent =
+        filtered.length +
+        (filtered.length === 1
+          ? " university record"
+          : " university records");
+
+      if (filtered.length === 0) {
+
+        grid.innerHTML = `
+          <div class="university-card">
+            <h3>No matching university found</h3>
+            <p class="location">
+              Try changing one or more filters.
+            </p>
+          </div>
+        `;
+
+        return;
+      }
+
+      grid.innerHTML = filtered.map(u => `
+
+        <article class="university-card">
+
+          <div class="badges">
+            <span class="badge">
+              UNIVERSITY RECORD
+            </span>
+
+            <span class="badge">
+              ${u.course}
+            </span>
+
+            ${
+              u.scholarship === "yes"
+              ? `<span class="badge green">Scholarship listed</span>`
+              : ""
+            }
+          </div>
+
+          <h3>${u.name}</h3>
+
+          <div class="location">
+            ${u.city} · ${u.medium}
+          </div>
+
+          <div class="info-row">
+
+            <div class="info-box">
+              <small>Tuition</small>
+              <strong>Verify official fee</strong>
+            </div>
+
+            <div class="info-box">
+              <small>Hostel</small>
+              <strong>Verify official fee</strong>
+            </div>
+
+          </div>
+
+          <div class="verify-note">
+            ℹ️ Fees and admission conditions should be confirmed directly
+            with the university or official source before payment.
+          </div>
+
+        </article>
+
+      `).join("");
+    }
+
+    courseFilter.addEventListener("change", renderUniversities);
+    cityFilter.addEventListener("change", renderUniversities);
+    mediumFilter.addEventListener("change", renderUniversities);
+    scholarshipFilter.addEventListener("change", renderUniversities);
+
+
+    /* COST CALCULATOR */
+
+    const fields = [
+      "tuition",
+      "hostel",
+      "living",
+      "insurance",
+      "other",
+      "rate"
+    ];
+
+    fields.forEach(id => {
+      document.getElementById(id).addEventListener("input", calculateCost);
+    });
+
+    function moneyINR(value) {
+
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(value);
+
+    }
+
+    function calculateCost() {
+
+      const tuition =
+        Number(document.getElementById("tuition").value) || 0;
+
+      const hostel =
+        Number(document.getElementById("hostel").value) || 0;
+
+      const livingMonthly =
+        Number(document.getElementById("living").value) || 0;
+
+      const insurance =
+        Number(document.getElementById("insurance").value) || 0;
+
+      const other =
+        Number(document.getElementById("other").value) || 0;
+
+      const rate =
+        Number(document.getElementById("rate").value) || 0;
+
+      const livingAnnual = livingMonthly * 12;
+
+      const totalRUB =
+        tuition +
+        hostel +
+        livingAnnual +
+        insurance +
+        other;
+
+      const totalINR = totalRUB * rate;
+
+      document.getElementById("annualCost").textContent =
+        moneyINR(totalINR);
+
+      document.getElementById("tuitionResult").textContent =
+        moneyINR(tuition * rate);
+
+      document.getElementById("hostelResult").textContent =
+        moneyINR(hostel * rate);
+
+      document.getElementById("livingResult").textContent =
+        moneyINR(livingAnnual * rate);
+
+      document.getElementById("insuranceResult").textContent =
+        moneyINR(insurance * rate);
+
+      document.getElementById("otherResult").textContent =
+        moneyINR(other * rate);
+    }
+
+
+    /* INITIAL LOAD */
+
+    renderUniversities();
+    calculateCost();
+
+  </script>
+
 </body>
 </html>
