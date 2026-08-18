@@ -1,1436 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description" content="Scholar Path Russia by Virangeeta Navigators — explore Russian universities, scholarships, estimated costs and admission pathways.">
-  <meta name="theme-color" content="#07111f">
-
-  <title>Scholar Path Russia | Virangeeta Navigators</title>
-
-  <style>
-    :root {
-      --navy: #07111f;
-      --teal: #117f76;
-      --teal-dark: #0b625c;
-      --mint: #eef9f6;
-      --paper: #f7f9fc;
-      --white: #ffffff;
-      --text: #0d1728;
-      --muted: #68778b;
-      --line: #dce3eb;
-      --soft: #eef2f6;
-      --shadow: 0 15px 45px rgba(7,17,31,.08);
-      --radius: 22px;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      background: var(--white);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.65;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* HEADER */
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 20px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover {
-      color: var(--teal);
-    }
-
-    .apply-btn,
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--teal);
-      color: white;
-      padding: 15px 23px;
-      border-radius: 14px;
-      font-weight: 800;
-      border: 0;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .apply-btn:hover,
-    .primary-btn:hover {
-      background: var(--teal-dark);
-      transform: translateY(-1px);
-    }
-
-    .secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 22px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* HERO */
-
-    .hero {
-      background:
-        radial-gradient(circle at 90% 20%, rgba(17,127,118,.12), transparent 30%),
-        linear-gradient(135deg, #f7f9fc, #ffffff);
-      padding: 85px 0 70px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      color: var(--teal);
-      font-weight: 800;
-      letter-spacing: 2.5px;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(48px, 7vw, 82px);
-      line-height: .98;
-      letter-spacing: -4px;
-      margin: 20px 0 28px;
-    }
-
-    h1 span {
-      color: var(--teal);
-    }
-
-    .hero-text {
-      color: var(--muted);
-      font-size: 20px;
-      max-width: 700px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
-    }
-
-    .trust {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 28px;
-    }
-
-    .trust span {
-      background: white;
-      border: 1px solid var(--line);
-      padding: 9px 15px;
-      border-radius: 999px;
-      color: #526174;
-      font-weight: 700;
-    }
-
-    .hero-card {
-      min-height: 420px;
-      background: var(--mint);
-      border: 1px solid #d7eae5;
-      border-radius: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      width: 330px;
-      height: 330px;
-      border: 1px solid #cce4df;
-      border-radius: 50%;
-    }
-
-    .hero-card img {
-      position: relative;
-      z-index: 2;
-      width: 250px;
-      height: 250px;
-      object-fit: contain;
-    }
-
-    .coordinate {
-      position: absolute;
-      right: 25px;
-      top: 25px;
-      z-index: 3;
-      background: white;
-      padding: 12px 18px;
-      border-radius: 14px;
-      box-shadow: 0 8px 25px rgba(0,0,0,.06);
-      font-weight: 700;
-      color: #526174;
-    }
-
-    /* GENERAL */
-
-    section {
-      padding: 90px 0;
-    }
-
-    .section-heading {
-      max-width: 760px;
-      margin-bottom: 40px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(36px, 5vw, 58px);
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin: 12px 0 18px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    /* UNIVERSITY EXPLORER */
-
-    .explorer {
-      background: var(--paper);
-    }
-
-    .filters {
-      background: white;
-      border: 1px solid var(--line);
-      padding: 25px;
-      border-radius: var(--radius);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 35px;
-      box-shadow: var(--shadow);
-    }
-
-    .filter label {
-      display: block;
-      font-size: 13px;
-      font-weight: 800;
-      color: #526174;
-      margin-bottom: 7px;
-    }
-
-    select,
-    input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: white;
-      font-size: 15px;
-      color: var(--text);
-      outline: none;
-    }
-
-    select:focus,
-    input:focus {
-      border-color: var(--teal);
-    }
-
-    .record-count {
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .university-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .university-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: 0 8px 30px rgba(7,17,31,.04);
-      transition: .2s;
-    }
-
-    .university-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 15px;
-    }
-
-    .badge {
-      background: var(--soft);
-      color: #536174;
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .badge.green {
-      background: #e3f5ef;
-      color: var(--teal-dark);
-    }
-
-    .university-card h3 {
-      font-size: 25px;
-      line-height: 1.15;
-      margin: 0 0 12px;
-    }
-
-    .location {
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .info-box {
-      background: var(--paper);
-      border-radius: 14px;
-      padding: 13px;
-    }
-
-    .info-box small {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .info-box strong {
-      display: block;
-      margin-top: 3px;
-    }
-
-    .verify-note {
-      margin-top: 17px;
-      font-size: 13px;
-      color: var(--muted);
-      padding-top: 15px;
-      border-top: 1px solid var(--line);
-    }
-
-    /* COST */
-
-    .cost-section {
-      background: white;
-    }
-
-    .calculator {
-      display: grid;
-      grid-template-columns: .85fr 1.15fr;
-      gap: 30px;
-      align-items: start;
-    }
-
-    .calculator-card,
-    .result-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .calculator-card {
-      background: var(--paper);
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    .field label {
-      display: block;
-      font-weight: 800;
-      margin-bottom: 7px;
-    }
-
-    .result-card {
-      background: var(--navy);
-      color: white;
-    }
-
-    .result-card .muted {
-      color: #aab8c8;
-    }
-
-    .big-cost {
-      font-size: clamp(38px, 6vw, 64px);
-      line-height: 1;
-      margin: 15px 0 25px;
-      color: white;
-    }
-
-    .cost-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,.12);
-    }
-
-    .disclaimer {
-      margin-top: 20px;
-      color: #aab8c8;
-      font-size: 13px;
-    }
-
-    /* SCHOLARSHIP */
-
-    .scholarship {
-      background: var(--mint);
-    }
-
-    .scholar-card {
-      background: white;
-      border: 1px solid #d9e9e5;
-      border-radius: var(--radius);
-      padding: 32px;
-      max-width: 850px;
-    }
-
-    .scholar-card h3 {
-      font-size: 30px;
-      margin: 10px 0;
-    }
-
-    /* ROADMAP */
-
-    .roadmap-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 22px;
-      background: white;
-    }
-
-    .step-number {
-      color: var(--teal);
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .step h3 {
-      margin: 10px 0 7px;
-    }
-
-    .step p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0;
-    }
-
-    /* TESTIMONIAL */
-
-    .testimonial-section {
-      background: var(--paper);
-    }
-
-    .testimonial {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 32px;
-      max-width: 850px;
-    }
-
-    .testimonial p {
-      font-size: 22px;
-      font-style: italic;
-      color: #536174;
-      margin: 0;
-    }
-
-    .testimonial-note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* CONTACT */
-
-    .contact {
-      background: var(--navy);
-      color: white;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: start;
-    }
-
-    .contact h2 {
-      font-size: clamp(38px, 5vw, 60px);
-      line-height: 1;
-      margin: 15px 0;
-    }
-
-    .contact p {
-      color: #aab8c8;
-      font-size: 18px;
-    }
-
-    .contact-card {
-      background: white;
-      color: var(--text);
-      padding: 30px;
-      border-radius: var(--radius);
-    }
-
-    .contact-item {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .contact-item:last-child {
-      border-bottom: 0;
-    }
-
-    .contact-item small {
-      display: block;
-      color: var(--muted);
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .contact-item a {
-      font-weight: 800;
-      color: var(--teal-dark);
-      word-break: break-word;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #040b15;
-      color: #9ba8b8;
-      padding: 28px 0;
-      font-size: 13px;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 850px) {
-      .nav {
-        min-height: 70px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .brand {
-        font-size: 17px;
-      }
-
-      .brand img {
-        width: 42px;
-        height: 42px;
-      }
-
-      .nav .apply-btn {
-        padding: 12px 14px;
-        font-size: 13px;
-      }
-
-      .hero {
-        padding: 55px 0;
-      }
-
-      .hero-grid,
-      .calculator,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 53px;
-        letter-spacing: -3px;
-      }
-
-      .hero-card {
-        min-height: 330px;
-      }
-
-      .hero-card img {
-        width: 190px;
-        height: 190px;
-      }
-
-      .filters {
-        grid-template-columns: 1fr;
-      }
-
-      .university-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .roadmap-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 65px 0;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        width: min(100% - 28px, 1120px);
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .hero-actions a {
-        width: 100%;
-      }
-
-      h1 {
-        font-size: 47px;
-      }
-
-      .hero-text {
-        font-size: 17px;
-      }
-
-      .info-row {
-        grid-template-columns: 1fr;
-      }
-
-      .coordinate {
-        font-size: 12px;
-        padding: 9px 12px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scholar Path Russia by Virangeeta Navigators — explore Russian universities, scholarships, costs and admission information.">
+<meta name="theme-color" content="#07111f">
+<title>Scholar Path Russia | Virangeeta Navigators</title>
+
+<style>
+:root{
+  --navy:#07111f;
+  --navy2:#0d1b2e;
+  --teal:#117f76;
+  --teal2:#0d6f68;
+  --mint:#eaf7f4;
+  --paper:#f7f9fc;
+  --white:#fff;
+  --text:#102033;
+  --muted:#68788b;
+  --line:#dce4eb;
+  --shadow:0 12px 40px rgba(7,17,31,.08);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--text);background:var(--white);
+  font-family:Inter,Arial,Helvetica,sans-serif;line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+.header{
+  position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
+}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:20px}
+.brand img{width:46px;height:46px;border-radius:12px;object-fit:cover}
+.navlinks{display:flex;gap:24px;font-weight:700;font-size:14px}
+.navlinks a:hover{color:var(--teal)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 18px;border-radius:12px;border:1px solid var(--teal);
+  background:var(--teal);color:white;font-weight:800;cursor:pointer
+}
+.btn.secondary{background:white;color:var(--text);border-color:var(--line)}
+.hero{
+  background:linear-gradient(135deg,#f7fbff,#eef8f6);
+  padding:78px 0 70px
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+.eyebrow{color:var(--teal);font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:13px}
+h1{font-size:clamp(42px,6vw,76px);line-height:.98;margin:18px 0 24px;letter-spacing:-3px}
+h1 span{color:var(--teal)}
+.hero-text{font-size:19px;color:var(--muted);max-width:720px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero-card{
+  min-height:360px;background:var(--mint);border:1px solid #d7eae5;
+  border-radius:38px;display:flex;align-items:center;justify-content:center;
+  padding:30px;box-shadow:var(--shadow)
+}
+.hero-card img{width:min(280px,80%);border-radius:24px;box-shadow:0 15px 35px rgba(0,0,0,.12)}
+.trust{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.trust span,.badge{
+  background:white;border:1px solid var(--line);border-radius:999px;
+  padding:7px 12px;font-size:12px;font-weight:800
+}
+section{padding:70px 0}
+.section-head{margin-bottom:30px}
+.section-head h2{font-size:40px;line-height:1.1;margin:8px 0}
+.section-head p{color:var(--muted);max-width:760px}
+.explorer{background:var(--paper)}
+.filters{
+  background:white;border:1px solid var(--line);padding:22px;border-radius:20px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:15px;box-shadow:var(--shadow)
+}
+.field label{display:block;font-size:12px;font-weight:900;margin-bottom:7px}
+select,input{
+  width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;
+  background:white;font-size:14px;outline:none
+}
+select:focus,input:focus{border-color:var(--teal)}
+.record-count{color:var(--muted);font-weight:800;margin:22px 0 15px}
+.university-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.university-card{
+  background:white;border:1px solid var(--line);border-radius:20px;padding:24px;
+  box-shadow:0 8px 30px rgba(7,17,31,.05);transition:.2s
+}
+.university-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}
+.badge{background:#f2f5f8;color:#536174;border:0}
+.badge.green{background:#e3f5ef;color:#087367}
+.university-card h3{font-size:23px;line-height:1.18;margin:0 0 8px}
+.location{color:var(--muted);font-weight:700;margin-bottom:18px}
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.info-box{background:#f7f9fc;border-radius:14px;padding:13px}
+.info-box small{display:block;color:#718094;font-weight:800;font-size:11px;text-transform:uppercase}
+.info-box strong{display:block;margin-top:4px}
+.card-note{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.card-actions a{font-size:12px;font-weight:900;color:var(--teal);border:1px solid #cde5e0;padding:8px 10px;border-radius:10px}
+.empty{
+  background:white;border:1px solid var(--line);border-radius:18px;padding:40px;
+  text-align:center;color:var(--muted)
+}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.stat{padding:24px;border:1px solid var(--line);border-radius:18px;background:white}
+.stat strong{font-size:34px;display:block;color:var(--teal)}
+.calculator{background:var(--navy);color:white}
+.calculator-card{background:#0d1b2e;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc-grid label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#c7d3df}
+.calc-grid input{background:white}
+.total{
+  margin-top:22px;padding:22px;border-radius:16px;background:#12243b;
+  border:1px solid rgba(255,255,255,.12)
+}
+.total strong{font-size:38px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.panel{border:1px solid var(--line);border-radius:20px;padding:26px;background:white}
+.panel h3{margin-top:0}
+footer{background:var(--navy);color:#d7e0e8;padding:45px 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+footer h3{color:white}
+.footer-link{display:block;margin:8px 0;color:#c8d4df}
+.loading{text-align:center;padding:50px;color:var(--muted)}
+.notice{font-size:12px;color:var(--muted);margin-top:10px}
+@media(max-width:900px){
+  .navlinks{display:none}
+  .hero-grid,.about-grid{grid-template-columns:1fr}
+  .filters{grid-template-columns:1fr 1fr}
+  .university-grid{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .container{width:min(100% - 22px,1180px)}
+  .hero{padding:55px 0}
+  h1{letter-spacing:-2px}
+  .filters,.calc-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .info-row{grid-template-columns:1fr}
+  section{padding:50px 0}
+}
+</style>
 </head>
 
 <body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#top">
+      <img src="logo.jpg" alt="Scholar Path Russia logo" onerror="this.style.display='none'">
+      <span>Scholar Path Russia</span>
+    </a>
+    <nav class="navlinks">
+      <a href="#universities">Universities</a>
+      <a href="#calculator">Cost</a>
+      <a href="#scholarships">Scholarships</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn" href="#contact">Apply / Register ↗</a>
+  </div>
+</header>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container nav">
-
-      <a href="#home" class="brand">
-        <img src="logo.jpg" alt="Scholar Path Russia logo">
-        <span>Scholar Path Russia</span>
-      </a>
-
-      <nav class="nav-links">
-        <a href="#explore">Universities</a>
-        <a href="#cost">Cost</a>
-        <a href="#scholarships">Scholarships</a>
-        <a href="#roadmap">Journey</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <a
-        class="apply-btn"
-        href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
-        target="_blank"
-        rel="noopener"
-      >
-        Apply / Register ↗
-      </a>
-
-    </div>
-  </header>
-
-
-  <!-- HERO -->
-  <main>
-
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-
-        <div>
-          <div class="eyebrow">
-            Scholar Path Russia · By Virangeeta Navigators
-          </div>
-
-          <h1>
-            Your path to<br>
-            Russia.<br>
-            <span>Mapped clearly.</span>
-          </h1>
-
-          <p class="hero-text">
-            Explore universities, understand estimated costs, discover
-            scholarship pathways and follow a transparent admission journey —
-            without the confusion.
-          </p>
-
-          <div class="hero-actions">
-            <a
-              class="primary-btn"
-              href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
-              target="_blank"
-              rel="noopener"
-            >
-              Apply / Registration ↗
-            </a>
-
-            <a class="secondary-btn" href="#explore">
-              Explore universities
-            </a>
-          </div>
-
-          <div class="trust">
-            <span>✓ Student-first</span>
-            <span>✓ Transparent information</span>
-            <span>✓ Official-source focused</span>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="coordinate">55.75° N / 37.62° E</div>
-          <img src="logo.jpg" alt="Scholar Path Russia">
-        </div>
-
+<main id="top">
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Scholar Path Russia · Virangeeta Navigators</div>
+      <h1>Find your <span>starting point.</span></h1>
+      <p class="hero-text">
+        Explore Russian universities, compare study options, understand estimated costs,
+        discover scholarship pathways and follow a transparent admission journey.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Apply / Registration ↗</a>
+        <a class="btn secondary" href="#universities">Explore universities</a>
       </div>
-    </section>
-
-
-    <!-- UNIVERSITY EXPLORER -->
-    <section class="explorer" id="explore">
-      <div class="container">
-
-        <div class="section-heading">
-          <div class="eyebrow">01 / University Explorer</div>
-
-          <h2>
-            Find the right<br>
-            <em>starting point.</em>
-          </h2>
-
-          <p>
-            Search Russian universities by course, city, language and
-            scholarship signals. Information requiring confirmation is clearly
-            marked instead of being presented as an official fee.
-          </p>
-        </div>
-
-        <div class="filters">
-
-          <div class="filter">
-            <label for="courseFilter">Course</label>
-            <select id="courseFilter">
-              <option value="">All courses</option>
-              <option value="Medicine">Medicine</option>
-              <option value="Engineering">Engineering</option>
-              <option value="IT">IT</option>
-              <option value="Business">Business</option>
-            </select>
-          </div>
-
-          <div class="filter">
-            <label for="cityFilter">City</label>
-            <select id="cityFilter">
-              <option value="">All cities</option>
-              <option value="Syktyvkar">Syktyvkar</option>
-              <option value="Kazan">Kazan</option>
-              <option value="Moscow">Moscow</option>
-              <option value="Saint Petersburg">Saint Petersburg</option>
-            </select>
-          </div>
-
-          <div class="filter">
-            <label for="mediumFilter">Medium</label>
-            <select id="mediumFilter">
-              <option value="">Any medium</option>
-              <option value="English">English</option>
-              <option value="Russian">Russian</option>
-            </select>
-          </div>
-
-          <div class="filter">
-            <label for="scholarshipFilter">Scholarship</label>
-            <select id="scholarshipFilter">
-              <option value="">Any scholarship</option>
-              <option value="yes">Listed</option>
-            </select>
-          </div>
-
-        </div>
-
-        <div class="record-count" id="recordCount">
-          5 university records
-        </div>
-
-        <div class="university-grid" id="universityGrid"></div>
-
-      </div>
-    </section>
-
-
-    <!-- COST CALCULATOR -->
-    <section class="cost-section" id="cost">
-      <div class="container">
-
-        <div class="section-heading">
-          <div class="eyebrow">02 / Cost Calculator</div>
-
-          <h2>
-            Understand the<br>
-            <em>budget.</em>
-          </h2>
-
-          <p>
-            This calculator provides an illustrative budget estimate. Actual
-            tuition, hostel, insurance and other charges must be confirmed
-            directly with the university before payment.
-          </p>
-        </div>
-
-        <div class="calculator">
-
-          <div class="calculator-card">
-
-            <div class="field">
-              <label for="tuition">Annual tuition (RUB)</label>
-              <input id="tuition" type="number" value="266120">
-            </div>
-
-            <div class="field">
-              <label for="hostel">Annual hostel (RUB)</label>
-              <input id="hostel" type="number" value="12000">
-            </div>
-
-            <div class="field">
-              <label for="living">Monthly living estimate (RUB)</label>
-              <input id="living" type="number" value="25000">
-            </div>
-
-            <div class="field">
-              <label for="insurance">Insurance / year (RUB)</label>
-              <input id="insurance" type="number" value="5000">
-            </div>
-
-            <div class="field">
-              <label for="other">Other annual charges (RUB)</label>
-              <input id="other" type="number" value="10000">
-            </div>
-
-            <div class="field">
-              <label for="rate">Illustrative RUB → INR rate</label>
-              <input id="rate" type="number" value="1.15" step="0.01">
-            </div>
-
-          </div>
-
-          <div class="result-card">
-
-            <div class="muted">
-              ILLUSTRATIVE ESTIMATED ANNUAL BUDGET
-            </div>
-
-            <div class="big-cost" id="annualCost">
-              ₹0
-            </div>
-
-            <div class="cost-line">
-              <span>Tuition</span>
-              <strong id="tuitionResult">₹0</strong>
-            </div>
-
-            <div class="cost-line">
-              <span>Hostel</span>
-              <strong id="hostelResult">₹0</strong>
-            </div>
-
-            <div class="cost-line">
-              <span>Living expenses</span>
-              <strong id="livingResult">₹0</strong>
-            </div>
-
-            <div class="cost-line">
-              <span>Insurance</span>
-              <strong id="insuranceResult">₹0</strong>
-            </div>
-
-            <div class="cost-line">
-              <span>Other charges</span>
-              <strong id="otherResult">₹0</strong>
-            </div>
-
-            <p class="disclaimer">
-              ⚠️ This is an illustrative estimate, not an official university
-              quotation. Currency rates and university charges can change.
-              Always verify official charges before payment.
-            </p>
-
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- SCHOLARSHIPS -->
-    <section class="scholarship" id="scholarships">
-      <div class="container">
-
-        <div class="section-heading">
-          <div class="eyebrow">03 / Scholarships</div>
-
-          <h2>
-            Find a pathway<br>
-            <em>that fits.</em>
-          </h2>
-
-          <p>
-            Scholarship availability, quotas and eligibility can change.
-            Use official government and university sources for final
-            confirmation.
-          </p>
-        </div>
-
-        <div class="scholar-card">
-          <div class="badges">
-            <span class="badge green">ROUTE TO CHECK</span>
-            <span class="badge">International students</span>
-          </div>
-
-          <h3>Russian Government Scholarships</h3>
-
-          <p>
-            Explore current scholarship and quota pathways through official
-            government and university information.
-          </p>
-
-          <a
-            class="primary-btn"
-            href="https://education-in-russia.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            Check official source ↗
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ROADMAP -->
-    <section id="roadmap">
-      <div class="container">
-
-        <div class="section-heading">
-          <div class="eyebrow">04 / Admission Roadmap</div>
-
-          <h2>
-            From interest to<br>
-            <em>arrival.</em>
-          </h2>
-
-          <p>
-            A simple framework for understanding the admission journey.
-          </p>
-        </div>
-
-        <div class="roadmap-grid">
-
-          <div class="step">
-            <div class="step-number">01</div>
-            <h3>Discover</h3>
-            <p>Choose course, university, city and budget.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">02</div>
-            <h3>Compare</h3>
-            <p>Compare language, costs and scholarship pathways.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">03</div>
-            <h3>Apply</h3>
-            <p>Submit your information and follow the university process.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">04</div>
-            <h3>Confirm</h3>
-            <p>Verify admission, fees and official instructions.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">05</div>
-            <h3>Arrive</h3>
-            <p>Plan visa, travel, hostel and registration.</p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- TESTIMONIALS -->
-    <section class="testimonial-section">
-      <div class="container">
-
-        <div class="section-heading">
-          <div class="eyebrow">05 / Student Reactions</div>
-
-          <h2>
-            Real journeys.<br>
-            <em>Real perspectives.</em>
-          </h2>
-
-          <p>
-            Student experiences can help future applicants understand the
-            journey. Testimonials should only be published with the student's
-            permission and accurate details.
-          </p>
-        </div>
-
-        <div class="testimonial">
-          <p>
-            “Scholar Path Russia helped me understand the university options
-            and the admission journey much more clearly.”
-          </p>
-
-          <div class="testimonial-note">
-            Example testimonial — replace with an authorised student
-            testimonial before publishing.
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="container contact-grid">
-
-        <div>
-          <div class="eyebrow">06 / Start Your Journey</div>
-
-          <h2>
-            Ready to explore<br>
-            Russia?
-          </h2>
-
-          <p>
-            Complete the registration form and the Scholar Path Russia team
-            can help you identify the appropriate next step.
-          </p>
-
-          <a
-            class="apply-btn"
-            href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
-            target="_blank"
-            rel="noopener"
-          >
-            Apply / Registration ↗
-          </a>
-        </div>
-
-        <div class="contact-card">
-
-          <div class="contact-item">
-            <small>Phone</small>
-            <a href="tel:+918340767789">
-              +91 8340767789
-            </a>
-          </div>
-
-          <div class="contact-item">
-            <small>WhatsApp</small>
-            <a
-              href="https://wa.me/919711278441"
-              target="_blank"
-              rel="noopener"
-            >
-              +91 9711278441
-            </a>
-            <br>
-            <a
-              href="https://wa.me/918340767789"
-              target="_blank"
-              rel="noopener"
-            >
-              +91 8340767789
-            </a>
-          </div>
-
-          <div class="contact-item">
-            <small>Email</small>
-            <a href="mailto:virangeetanavigators@gmail.com">
-              virangeetanavigators@gmail.com
-            </a>
-          </div>
-
-          <div class="contact-item">
-            <small>Registration</small>
-            <a
-              href="https://docs.google.com/forms/d/1lIqIdQQW00RfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform"
-              target="_blank"
-              rel="noopener"
-            >
-              Open application form ↗
-            </a>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-inner">
-      <div>
-        © 2026 Scholar Path Russia · Virangeeta Navigators
-      </div>
-
-      <div>
-        Information is provided for guidance. Verify official university and
-        government information before making payments or admission decisions.
+      <div class="trust">
+        <span>✓ Student-first</span>
+        <span>✓ Transparent information</span>
+        <span>✓ Official-source focused</span>
       </div>
     </div>
-  </footer>
+    <div class="hero-card">
+      <img src="logo.jpg" alt="Virangeeta Navigators" onerror="this.alt='Scholar Path Russia'">
+    </div>
+  </div>
+</section>
 
+<section id="universities" class="explorer">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">01 / University Explorer</div>
+      <h2>Search Russian universities.</h2>
+      <p>
+        The database is loaded from <b>data/universities.json</b>. This page does
+        <b>not</b> hard-code five universities: every valid record in the JSON database
+        is rendered automatically.
+      </p>
+    </div>
 
-  <!-- JAVASCRIPT -->
-  <script>
+    <div class="filters">
+      <div class="field">
+        <label for="courseFilter">COURSE / FIELD</label>
+        <select id="courseFilter"><option value="">All courses</option></select>
+      </div>
+      <div class="field">
+        <label for="cityFilter">CITY</label>
+        <select id="cityFilter"><option value="">All cities</option></select>
+      </div>
+      <div class="field">
+        <label for="mediumFilter">MEDIUM</label>
+        <select id="mediumFilter"><option value="">Any medium</option></select>
+      </div>
+      <div class="field">
+        <label for="scholarshipFilter">SCHOLARSHIP</label>
+        <select id="scholarshipFilter"><option value="">Any scholarship</option></select>
+      </div>
+    </div>
 
-    const universities = [
-      {
-        name: "Pitirim Sorokin Syktyvkar State University",
-        city: "Syktyvkar",
-        course: "Medicine",
-        medium: "English",
-        scholarship: "yes"
-      },
-      {
-        name: "Kazan Federal University",
-        city: "Kazan",
-        course: "Medicine",
-        medium: "English",
-        scholarship: "yes"
-      },
-      {
-        name: "Kazan National Research Technical University",
-        city: "Kazan",
-        course: "Engineering",
-        medium: "Russian",
-        scholarship: "yes"
-      },
-      {
-        name: "Moscow Institute of Technology",
-        city: "Moscow",
-        course: "IT",
-        medium: "Russian",
-        scholarship: "no"
-      },
-      {
-        name: "Saint Petersburg State University",
-        city: "Saint Petersburg",
-        course: "Business",
-        medium: "Russian",
-        scholarship: "yes"
+    <div class="field" style="margin-top:15px">
+      <input id="searchBox" type="search" placeholder="Search by university name, city, field or programme…">
+    </div>
+
+    <div id="recordCount" class="record-count">Loading universities…</div>
+    <div id="universityGrid" class="university-grid">
+      <div class="loading">Loading university database…</div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator" class="calculator">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow" style="color:#70d6cb">02 / Cost Calculator</div>
+      <h2>Estimate your annual budget.</h2>
+      <p style="color:#b8c7d5">Enter amounts in Russian rubles. The INR estimate uses the exchange rate you enter.</p>
+    </div>
+    <div class="calculator-card">
+      <div class="calc-grid">
+        <div><label>Tuition / year (RUB)</label><input id="tuition" type="number" min="0" value="0"></div>
+        <div><label>Hostel / year (RUB)</label><input id="hostel" type="number" min="0" value="0"></div>
+        <div><label>Living / month (RUB)</label><input id="living" type="number" min="0" value="0"></div>
+        <div><label>Insurance / year (RUB)</label><input id="insurance" type="number" min="0" value="0"></div>
+        <div><label>Other / year (RUB)</label><input id="other" type="number" min="0" value="0"></div>
+        <div><label>1 RUB in INR</label><input id="rate" type="number" min="0" step="0.0001" value="1.05"></div>
+      </div>
+      <div class="total">
+        <div>Estimated annual cost</div>
+        <strong id="annualCost">₹0</strong>
+        <div class="notice" style="color:#b8c7d5">This is an estimate, not an official fee quotation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scholarships">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">03 / Scholarships</div>
+      <h2>Scholarship pathways.</h2>
+      <p>Scholarship availability, eligibility and deadlines can change. Always confirm the current rules through the official university or government source.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong id="statUniversities">0</strong>University records loaded</div>
+      <div class="stat"><strong id="statScholarships">0</strong>Records marked with scholarship information</div>
+      <div class="stat"><strong>100%</strong>Official-source verification focus</div>
+    </div>
+  </div>
+</section>
+
+<section id="journey" style="background:var(--paper)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">04 / Admission Journey</div>
+      <h2>A simple path from search to admission.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="panel"><h3>01 · Explore</h3><p>Choose your field, city, language and scholarship preferences.</p></div>
+      <div class="panel"><h3>02 · Verify</h3><p>Check programme eligibility, tuition, hostel and admission requirements using official sources.</p></div>
+      <div class="panel"><h3>03 · Prepare</h3><p>Organise passport, academic documents, medical documents and other required materials.</p></div>
+      <div class="panel"><h3>04 · Apply</h3><p>Submit your application and follow the university or scholarship authority's instructions.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">05 / Contact</div>
+      <h2>Ready to start?</h2>
+      <p>Use the registration form below for Scholar Path Russia by Virangeeta Navigators.</p>
+    </div>
+    <div class="panel">
+      <h3>Apply / Register</h3>
+      <p>For admission guidance and registration, contact Scholar Path Russia.</p>
+      <a class="btn" href="https://docs.google.com/forms/d/11IqIdQWQ0RfnVPE1pR63_nSV4l0Rq_-b0JwnLPkS3M/viewform" target="_blank" rel="noopener noreferrer">Open Registration Form ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3>Scholar Path Russia</h3>
+      <p>by Virangeeta Navigators</p>
+      <p>Explore Russian universities with a transparent, official-source-focused approach.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <a class="footer-link" href="#universities">Universities</a>
+      <a class="footer-link" href="#calculator">Cost Calculator</a>
+      <a class="footer-link" href="#scholarships">Scholarships</a>
+    </div>
+    <div>
+      <h3>Important</h3>
+      <p style="font-size:12px">Fees, programmes, scholarships and admission conditions must be confirmed with the relevant official source before payment or application.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const DATA_URL = "./data/universities.json";
+  let universities = [];
+
+  const $ = id => document.getElementById(id);
+
+  function clean(v){
+    return v === null || v === undefined ? "" : String(v).trim();
+  }
+
+  function first(obj, keys){
+    for(const key of keys){
+      if(obj && obj[key] !== undefined && obj[key] !== null && clean(obj[key]) !== ""){
+        return obj[key];
       }
-    ];
-
-    const grid = document.getElementById("universityGrid");
-    const recordCount = document.getElementById("recordCount");
-
-    const courseFilter = document.getElementById("courseFilter");
-    const cityFilter = document.getElementById("cityFilter");
-    const mediumFilter = document.getElementById("mediumFilter");
-    const scholarshipFilter = document.getElementById("scholarshipFilter");
-
-    function renderUniversities() {
-
-      const course = courseFilter.value;
-      const city = cityFilter.value;
-      const medium = mediumFilter.value;
-      const scholarship = scholarshipFilter.value;
-
-      const filtered = universities.filter(u => {
-
-        return (
-          (!course || u.course === course) &&
-          (!city || u.city === city) &&
-          (!medium || u.medium === medium) &&
-          (!scholarship || u.scholarship === scholarship)
-        );
-
-      });
-
-      recordCount.textContent =
-        filtered.length +
-        (filtered.length === 1
-          ? " university record"
-          : " university records");
-
-      if (filtered.length === 0) {
-
-        grid.innerHTML = `
-          <div class="university-card">
-            <h3>No matching university found</h3>
-            <p class="location">
-              Try changing one or more filters.
-            </p>
-          </div>
-        `;
-
-        return;
-      }
-
-      grid.innerHTML = filtered.map(u => `
-
-        <article class="university-card">
-
-          <div class="badges">
-            <span class="badge">
-              UNIVERSITY RECORD
-            </span>
-
-            <span class="badge">
-              ${u.course}
-            </span>
-
-            ${
-              u.scholarship === "yes"
-              ? `<span class="badge green">Scholarship listed</span>`
-              : ""
-            }
-          </div>
-
-          <h3>${u.name}</h3>
-
-          <div class="location">
-            ${u.city} · ${u.medium}
-          </div>
-
-          <div class="info-row">
-
-            <div class="info-box">
-              <small>Tuition</small>
-              <strong>Verify official fee</strong>
-            </div>
-
-            <div class="info-box">
-              <small>Hostel</small>
-              <strong>Verify official fee</strong>
-            </div>
-
-          </div>
-
-          <div class="verify-note">
-            ℹ️ Fees and admission conditions should be confirmed directly
-            with the university or official source before payment.
-          </div>
-
-        </article>
-
-      `).join("");
     }
+    return "";
+  }
 
-    courseFilter.addEventListener("change", renderUniversities);
-    cityFilter.addEventListener("change", renderUniversities);
-    mediumFilter.addEventListener("change", renderUniversities);
-    scholarshipFilter.addEventListener("change", renderUniversities);
+  function asArray(v){
+    if(Array.isArray(v)) return v.map(clean).filter(Boolean);
+    if(!v) return [];
+    return String(v).split(/[,;|]/).map(s=>s.trim()).filter(Boolean);
+  }
 
+  function normalize(raw, index){
+    const fields = asArray(first(raw,["fields","field","categories"]));
+    const programs = asArray(first(raw,["programs","program","english_programs","russian_programs"]));
+    const combined = [...fields, ...programs];
 
-    /* COST CALCULATOR */
+    return {
+      id: clean(first(raw,["id"])) || String(index+1),
+      name: clean(first(raw,["name","university","universityName"])) || "University information pending",
+      city: clean(first(raw,["city","location"])) || "City / region to be verified",
+      region: clean(first(raw,["region"])),
+      country: clean(first(raw,["country"])) || "Russia",
+      category: clean(first(raw,["category","course","field"])) || (fields[0] || "Other"),
+      fields: combined,
+      medium: clean(first(raw,["medium","language","instructionMedium"])),
+      englishPrograms: clean(first(raw,["englishPrograms","english_programs"])),
+      russianPrograms: clean(first(raw,["russianPrograms","russian_programs"])),
+      scholarship: clean(first(raw,["scholarship","scholarships"])),
+      tuitionFee: clean(first(raw,["tuitionFee","tuition_fee","tuition","fee"])),
+      hostelFee: clean(first(raw,["hostelFee","hostel_fee","hostel","hostel_cost"])),
+      tuitionStatus: clean(first(raw,["tuitionStatus","tuition_status"])),
+      hostelStatus: clean(first(raw,["hostelStatus","hostel_status"])),
+      officialWebsite: clean(first(raw,["officialWebsite","official_website"])),
+      officialFeeSource: clean(first(raw,["officialFeeSource","official_fee_source"])),
+      officialSource: clean(first(raw,["officialSource","official_source"])),
+      studyInRussia: clean(first(raw,["studyInRussia","study_in_russia"])),
+      internationalStudents: clean(first(raw,["internationalStudents","international_students"])),
+      verification: clean(first(raw,["verificationStatus","verification_status"])),
+      lastVerified: clean(first(raw,["lastVerified","last_verified"])),
+      about: clean(first(raw,["about","description"]))
+    };
+  }
 
-    const fields = [
-      "tuition",
-      "hostel",
-      "living",
-      "insurance",
-      "other",
-      "rate"
-    ];
+  function safeUrl(url){
+    const s=clean(url);
+    if(!s) return "";
+    try{
+      const u=new URL(s,window.location.href);
+      return ["http:","https:"].includes(u.protocol) ? u.href : "";
+    }catch(e){ return ""; }
+  }
 
-    fields.forEach(id => {
-      document.getElementById(id).addEventListener("input", calculateCost);
+  function escapeHtml(value){
+    return clean(value).replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+
+  function optionValues(){
+    const courses = new Set();
+    const cities = new Set();
+    const mediums = new Set();
+
+    universities.forEach(u=>{
+      u.fields.forEach(x=>courses.add(x));
+      if(u.category) courses.add(u.category);
+      if(u.city && !u.city.includes("to be verified")) cities.add(u.city);
+      if(u.medium) mediums.add(u.medium);
     });
 
-    function moneyINR(value) {
+    fillSelect($("courseFilter"), [...courses].sort(), "All courses");
+    fillSelect($("cityFilter"), [...cities].sort(), "All cities");
+    fillSelect($("mediumFilter"), [...mediums].sort(), "Any medium");
+    fillSelect($("scholarshipFilter"), ["yes","no"].map(x=>x), "Any scholarship", x => x==="yes" ? "Scholarship information available" : "No scholarship information");
+  }
 
-      return new Intl.NumberFormat("en-IN", {
-        style: "currency",
-        currency: "INR",
-        maximumFractionDigits: 0
-      }).format(value);
+  function fillSelect(select, values, firstLabel, labelFn){
+    select.innerHTML = `<option value="">${escapeHtml(firstLabel)}</option>` +
+      values.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(labelFn ? labelFn(v) : v)}</option>`).join("");
+  }
 
+  function scholarshipYes(u){
+    const s = clean(u.scholarship).toLowerCase();
+    return !!s && !["none","no","n/a","not listed","not available",""].includes(s);
+  }
+
+  function getFiltered(){
+    const course = $("courseFilter").value.toLowerCase();
+    const city = $("cityFilter").value.toLowerCase();
+    const medium = $("mediumFilter").value.toLowerCase();
+    const scholarship = $("scholarshipFilter").value;
+    const search = $("searchBox").value.toLowerCase().trim();
+
+    return universities.filter(u=>{
+      const courseMatch = !course || [u.category,...u.fields].some(x=>clean(x).toLowerCase()===course);
+      const cityMatch = !city || clean(u.city).toLowerCase()===city;
+      const mediumMatch = !medium || clean(u.medium).toLowerCase()===medium;
+      const scholarshipMatch = !scholarship || (scholarship==="yes" ? scholarshipYes(u) : !scholarshipYes(u));
+      const haystack = [
+        u.name,u.city,u.region,u.category,u.medium,u.scholarship,
+        u.englishPrograms,u.russianPrograms,u.about,...u.fields
+      ].join(" ").toLowerCase();
+      const searchMatch = !search || haystack.includes(search);
+      return courseMatch && cityMatch && mediumMatch && scholarshipMatch && searchMatch;
+    });
+  }
+
+  function feeDisplay(fee,status){
+    if(fee) return escapeHtml(fee);
+    if(status) return escapeHtml(status);
+    return "Verify official fee";
+  }
+
+  function card(u){
+    const site = safeUrl(u.officialWebsite);
+    const feeSource = safeUrl(u.officialFeeSource);
+    const source = safeUrl(u.officialSource);
+    const study = safeUrl(u.studyInRussia);
+
+    const links = [
+      site ? `<a href="${escapeHtml(site)}" target="_blank" rel="noopener noreferrer">Official website ↗</a>` : "",
+      feeSource ? `<a href="${escapeHtml(feeSource)}" target="_blank" rel="noopener noreferrer">Official fee source ↗</a>` : "",
+      source ? `<a href="${escapeHtml(source)}" target="_blank" rel="noopener noreferrer">Verification source ↗</a>` : "",
+      study ? `<a href="${escapeHtml(study)}" target="_blank" rel="noopener noreferrer">Study in Russia ↗</a>` : ""
+    ].join("");
+
+    return `
+      <article class="university-card">
+        <div class="badges">
+          <span class="badge">UNIVERSITY RECORD</span>
+          <span class="badge">${escapeHtml(u.category)}</span>
+          ${scholarshipYes(u) ? '<span class="badge green">Scholarship information</span>' : ''}
+        </div>
+        <h3>${escapeHtml(u.name)}</h3>
+        <div class="location">${escapeHtml(u.city)}${u.region ? " · "+escapeHtml(u.region) : ""}${u.medium ? " · "+escapeHtml(u.medium) : ""}</div>
+
+        <div class="info-row">
+          <div class="info-box">
+            <small>Tuition</small>
+            <strong>${feeDisplay(u.tuitionFee,u.tuitionStatus)}</strong>
+          </div>
+          <div class="info-box">
+            <small>Hostel</small>
+            <strong>${feeDisplay(u.hostelFee,u.hostelStatus)}</strong>
+          </div>
+        </div>
+
+        <div class="card-note">
+          ${u.about ? escapeHtml(u.about) : "Fees and admission conditions should be confirmed directly with the university or official source before payment."}
+          ${u.lastVerified ? `<br><br><b>Database updated:</b> ${escapeHtml(u.lastVerified)}` : ""}
+        </div>
+
+        ${links ? `<div class="card-actions">${links}</div>` : ""}
+      </article>`;
+  }
+
+  function render(){
+    const filtered = getFiltered();
+    $("recordCount").textContent = `${filtered.length} ${filtered.length===1 ? "university record" : "university records"} shown`;
+    $("universityGrid").innerHTML = filtered.length
+      ? filtered.map(card).join("")
+      : `<div class="empty" style="grid-column:1/-1"><h3>No matching university found</h3><p>Try changing one or more filters or the search term.</p></div>`;
+  }
+
+  async function loadDatabase(){
+    try{
+      const response = await fetch(DATA_URL, {cache:"no-store"});
+      if(!response.ok) throw new Error("HTTP "+response.status);
+      const raw = await response.json();
+
+      const list = Array.isArray(raw) ? raw : (
+        Array.isArray(raw.universities) ? raw.universities :
+        Array.isArray(raw.data) ? raw.data : []
+      );
+
+      universities = list.map(normalize);
+      optionValues();
+      $("statUniversities").textContent = universities.length;
+      $("statScholarships").textContent = universities.filter(scholarshipYes).length;
+      render();
+
+      if(!universities.length) throw new Error("Database contains no university records.");
+    }catch(error){
+      console.error(error);
+      $("recordCount").textContent = "University database could not be loaded.";
+      $("universityGrid").innerHTML = `
+        <div class="empty" style="grid-column:1/-1">
+          <h3>University database unavailable</h3>
+          <p>Make sure <b>data/universities.json</b> exists in the repository and is valid JSON.</p>
+          <p>Error: ${escapeHtml(error.message)}</p>
+        </div>`;
     }
+  }
 
-    function calculateCost() {
+  ["courseFilter","cityFilter","mediumFilter","scholarshipFilter"].forEach(id=>{
+    $(id).addEventListener("change",render);
+  });
+  $("searchBox").addEventListener("input",render);
 
-      const tuition =
-        Number(document.getElementById("tuition").value) || 0;
-
-      const hostel =
-        Number(document.getElementById("hostel").value) || 0;
-
-      const livingMonthly =
-        Number(document.getElementById("living").value) || 0;
-
-      const insurance =
-        Number(document.getElementById("insurance").value) || 0;
-
-      const other =
-        Number(document.getElementById("other").value) || 0;
-
-      const rate =
-        Number(document.getElementById("rate").value) || 0;
-
-      const livingAnnual = livingMonthly * 12;
-
-      const totalRUB =
-        tuition +
-        hostel +
-        livingAnnual +
-        insurance +
-        other;
-
-      const totalINR = totalRUB * rate;
-
-      document.getElementById("annualCost").textContent =
-        moneyINR(totalINR);
-
-      document.getElementById("tuitionResult").textContent =
-        moneyINR(tuition * rate);
-
-      document.getElementById("hostelResult").textContent =
-        moneyINR(hostel * rate);
-
-      document.getElementById("livingResult").textContent =
-        moneyINR(livingAnnual * rate);
-
-      document.getElementById("insuranceResult").textContent =
-        moneyINR(insurance * rate);
-
-      document.getElementById("otherResult").textContent =
-        moneyINR(other * rate);
-    }
-
-
-    /* INITIAL LOAD */
-
-    renderUniversities();
-    calculateCost();
-
-  <script src="app.js"></script>
-
+  function calculateCost(){
+    const n=id=>Number($(id).value)||0;
+    const rub = n("tuition")+n("hostel")+(n("living")*12)+n("insurance")+n("other");
+    const inr = rub*n("rate");
+    $("annualCost").textContent = new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(inr);
+  }
+  ["tuition","hostel","living","insurance","other","rate"].forEach(id=>$(id).addEventListener("input",calculateCost));
+  calculateCost();
+  loadDatabase();
+})();
+</script>
 </body>
 </html>
