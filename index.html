@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Virangeeta Navigators — SchoolPath Russia. Explore Russian universities, compare costs, discover scholarship pathways and plan your admission journey.">
+<meta name="theme-color" content="#07111f">
+<title>Virangeeta Navigators | SchoolPath Russia</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#home"><img src="logo.jpg" alt="SchoolPath Russia by Virangeeta Navigators"></a>
+  <nav><a href="#explore">Universities</a><a href="#compare">Compare</a><a href="#cost">Cost</a><a href="#scholarships">Scholarships</a><a href="#roadmap">Roadmap</a></nav>
+  <a class="nav-btn" href="#explore">Start navigating →</a>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <span class="eyebrow">SCHOOLPATH RUSSIA · BY VIRANGEETA NAVIGATORS</span>
+    <h1>Your path to Russia.<br><em>Mapped clearly.</em></h1>
+    <p>Explore universities, understand real costs, discover scholarship pathways and follow a transparent admission journey — without the confusion.</p>
+    <div class="actions"><a class="btn primary" href="#explore">Explore universities ↗</a><a class="btn outline" href="#roadmap">See the journey</a></div>
+    <div class="micro"><span>✓ Student-first</span><span>✓ Transparent information</span><span>✓ Official-source focused</span></div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div>
+    <img src="logo.jpg" alt="" class="hero-logo">
+    <div class="coord c1">55.75° N / 37.62° E</div>
+    <div class="coord c2">RUSSIA / EDUCATION</div>
+  </div>
+</section>
+
+<section class="marquee"><span>EXPLORE</span><i>✦</i><span>COMPARE</span><i>✦</i><span>CALCULATE</span><i>✦</i><span>SCHOLARSHIPS</span><i>✦</i><span>APPLY</span></section>
+
+<section class="section" id="explore">
+  <div class="heading"><div><span class="eyebrow">01 / UNIVERSITY EXPLORER</span><h2>Find the right<br><em>starting point.</em></h2></div><p>Search by course, city, language and scholarship signals. Each record is designed to show what is known, what needs confirmation and when it was checked.</p></div>
+  <div class="filters">
+    <select id="course"><option value="">All courses</option><option>Medicine</option><option>Engineering</option><option>IT</option><option>Business</option></select>
+    <select id="city"><option value="">All cities</option><option>Syktyvkar</option><option>Kazan</option><option>Moscow</option><option>Saint Petersburg</option></select>
+    <select id="medium"><option value="">Any medium</option><option>English</option><option>Russian</option></select>
+    <select id="scholarship"><option value="">Any scholarship</option><option value="yes">Listed</option><option value="no">Not listed</option></select>
+  </div>
+  <div class="count"><b id="count">0</b> university records</div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="compare-section" id="compare">
+  <div class="section-inner"><span class="eyebrow">02 / COMPARE</span><h2>Shortlist with<br><em>confidence.</em></h2><p>Select up to three universities above.</p><div id="compareBox" class="compare-box">Your comparison will appear here.</div></div>
+</section>
+
+<section class="cost-section" id="cost">
+  <div class="section-inner"><div class="heading"><div><span class="eyebrow">03 / TRUE COST</span><h2>See the number<br><em>before the decision.</em></h2></div><p>Illustrative calculator. Replace inputs with the latest official figures before using an estimate for a financial decision.</p></div>
+  <div class="calculator"><div class="inputs">
+    <label>Annual tuition (RUB)<input id="tuition" type="number" value="266120"></label>
+    <label>Annual hostel (RUB)<input id="hostel" type="number" value="12000"></label>
+    <label>Monthly living (RUB)<input id="living" type="number" value="25000"></label>
+    <label>Insurance / year (RUB)<input id="insurance" type="number" value="5000"></label>
+    <label>Other annual charges<input id="other" type="number" value="10000"></label>
+    <label>Initial/travel costs<input id="initial" type="number" value="70000"></label>
+    <label>Duration (years)<input id="years" type="number" value="6"></label>
+    <label>RUB → INR<input id="rate" type="number" value="1.15" step="0.01"></label>
+  </div><div class="result"><small>ESTIMATED ANNUAL COST</small><strong id="annual">₹0</strong><div class="total"><span>ESTIMATED TOTAL</span><b id="total">₹0</b></div><p>Exchange rates and personal expenses change. Verify every figure.</p></div></div></div>
+</section>
+
+<section class="scholar" id="scholarships"><div class="section-inner"><div class="heading light"><div><span class="eyebrow">04 / SCHOLARSHIP NAVIGATOR</span><h2>Funding paths.<br><em>Clearly labelled.</em></h2></div><p>We distinguish possible routes from confirmed awards. No “guaranteed scholarship” language.</p></div>
+<div class="scholar-grid"><article><span class="tag green">ROUTE TO CHECK</span><h3>Russian Government Scholarship</h3><p>Explore government-supported routes and current calls for international students.</p></article><article><span class="tag yellow">CHECK ELIGIBILITY</span><h3>University Scholarships</h3><p>Institution-specific support can vary by university, course and year.</p></article><article><span class="tag gray">CONFIRM OFFICIALLY</span><h3>Regional & Special Programs</h3><p>Additional programs may appear under specific annual conditions.</p></article></div>
+</div></section>
+
+<section class="roadmap" id="roadmap"><div class="section-inner"><span class="eyebrow">05 / ADMISSION ROADMAP</span><h2>From curiosity<br>to <em>campus.</em></h2><div class="steps">
+<div><b>01</b><h3>Discover</h3><p>Define course, city and budget.</p></div><div><b>02</b><h3>Compare</h3><p>Evaluate universities side by side.</p></div><div><b>03</b><h3>Verify</h3><p>Check official requirements and fees.</p></div><div><b>04</b><h3>Apply</h3><p>Prepare documents and follow the correct route.</p></div><div><b>05</b><h3>Arrive</h3><p>Prepare for visa, travel and registration.</p></div>
+</div></div></section>
+
+<section class="trust"><div class="section-inner"><span class="eyebrow">06 / OUR STANDARD</span><h2>Trust isn't a slogan.<br><em>It's a system.</em></h2><div class="trust-grid">
+<div><b>01</b><h3>Official-source first</h3><p>University and government information should be the starting point for important claims.</p></div>
+<div><b>02</b><h3>Verification dates</h3><p>Records are designed to show when information was last checked.</p></div>
+<div><b>03</b><h3>Uncertainty is visible</h3><p>If something needs confirmation, we say so rather than turning an estimate into a promise.</p></div>
+<div><b>04</b><h3>Student-first decisions</h3><p>The goal is to help students and parents make informed choices.</p></div>
+</div></div></section>
+
+<section class="cta"><div><span class="eyebrow">VIRANGEETA NAVIGATORS</span><h2>Navigate your future.<br><em>Discover Russia.</em></h2></div><a class="btn dark" href="#home">Back to top ↑</a></section>
+</main>
+<footer><img src="logo.jpg" alt="Virangeeta Navigators logo"><span>© 2026 Virangeeta Navigators</span><span>SchoolPath Russia</span></footer>
+<script src="app.js"></script>
+</body>
+</html>
