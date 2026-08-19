@@ -166,7 +166,10 @@ let U=[], selected=[], cities=[];
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const scholarship=u=>u.openDoors==="Present"||u.scholarshipPathway==="Present"||String(u.scholarship||"").trim()!=="";
+const SCHOLARSHIP_UNIVERSITIES=["Far Eastern Federal University","Bauman Moscow State Technical University","First Moscow State Medical University","Sechenov First Moscow State Medical University","HSE University","ITMO University","Kazan (Volga region) Federal University","Kazan Federal University","MGIMO University","Moscow Institute of Physics and Technology","Moscow Polytechnic University","Moscow State University of Civil Engineering","National Research Lobachevsky State University of Nizhny Novgorod","National Research Nuclear University MEPhI","National Research Tomsk Polytechnic University","National Research Tomsk State University","Novosibirsk State University","Peoples' Friendship University of Russia named after Patrice Lumumba","Peoples’ Friendship University of Russia named after Patrice Lumumba","Peter the Great St. Petersburg Polytechnic University","Saint Petersburg Electrotechnical University “LETI”","Samara University","Siberian Federal University","Southern Federal University","University of Science and Technology MISIS","University of Tyumen","Ural Federal University named after the first President of Russia B.N. Yeltsin"];
+function scholarshipNameKey(v){return String(v||"").toLowerCase().replace(/ё/g,"е").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();}
+const SCHOLARSHIP_KEYS=SCHOLARSHIP_UNIVERSITIES.map(scholarshipNameKey);
+function scholarship(u){const n=scholarshipNameKey(u.name);const listed=SCHOLARSHIP_KEYS.some(k=>n===k||n.includes(k)||k.includes(n));return listed||String(u.openDoors||"").toLowerCase()==="present"||String(u.governmentScholarship||"").toLowerCase()==="present"||String(u.scholarshipPathway||"").toLowerCase()==="present";}
 const fee=(v,s)=>v?esc(v):(s?esc(s):"Not verified");
 
 async function load(){
