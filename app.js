@@ -233,37 +233,67 @@ Virangeeta Navigators
     */
 
     function getScholarship(u) {
-        const value = firstValue(u, [
+    const values = [
+        firstValue(u, [
             "scholarship",
             "scholarship_status",
             "scholarshipStatus"
-        ]);
+        ]),
+        firstValue(u, [
+            "openDoors"
+        ]),
+        firstValue(u, [
+            "scholarshipPathway"
+        ]),
+        firstValue(u, [
+            "governmentScholarship"
+        ])
+    ];
 
+    const positiveWords = [
+        "yes",
+        "available",
+        "listed",
+        "present",
+        "eligible",
+        "offered",
+        "provided",
+        "supported"
+    ];
+
+    const negativeWords = [
+        "no",
+        "none",
+        "not listed",
+        "not available",
+        "unavailable",
+        "n/a",
+        "not verified",
+        "unknown"
+    ];
+
+    for (const value of values) {
         const text = clean(value).toLowerCase();
 
         if (!text) {
-            return "no";
+            continue;
+        }
+
+        if (negativeWords.some(word => text === word)) {
+            continue;
         }
 
         if (
-            text === "yes" ||
-            text === "available" ||
-            text === "listed" ||
-            text.includes("scholarship")
+            positiveWords.some(word => text === word) ||
+            text.includes("scholarship") ||
+            text.includes("government") ||
+            text.includes("open door")
         ) {
             return "yes";
         }
+    }
 
-        if (
-            text === "none" ||
-            text === "no" ||
-            text === "not listed" ||
-            text === "n/a"
-        ) {
-            return "no";
-        }
-
-        return "no";
+    return "no";
     }
 
     /*
