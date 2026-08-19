@@ -162,34 +162,68 @@ Virangeeta Navigators
     ============================================================
     */
 
-    function getMedium(u) {
-        const value = [
-            firstValue(u, ["medium"]),
-            firstValue(u, ["english_programs"]),
-            firstValue(u, ["englishPrograms"]),
-            firstValue(u, ["language"])
-        ]
-            .join(" ")
-            .toLowerCase();
+    function getScholarship(u) {
+    const values = [
+        firstValue(u, [
+            "scholarship",
+            "scholarship_status",
+            "scholarshipStatus"
+        ]),
+        firstValue(u, [
+            "openDoors"
+        ]),
+        firstValue(u, [
+            "scholarshipPathway"
+        ]),
+        firstValue(u, [
+            "governmentScholarship"
+        ])
+    ];
 
-        if (value.includes("english")) {
-            return "English";
+    const positiveWords = [
+        "yes",
+        "available",
+        "listed",
+        "present",
+        "eligible",
+        "offered",
+        "provided",
+        "supported"
+    ];
+
+    const negativeWords = [
+        "no",
+        "none",
+        "not listed",
+        "not available",
+        "unavailable",
+        "n/a",
+        "not verified",
+        "unknown"
+    ];
+
+    for (const value of values) {
+        const text = clean(value).toLowerCase();
+
+        if (!text) {
+            continue;
         }
 
-        if (value.includes("russian")) {
-            return "Russian";
+        if (negativeWords.some(word => text === word)) {
+            continue;
         }
 
         if (
-            value.includes("programme-specific") ||
-            value.includes("program-specific")
+            positiveWords.some(word => text === word) ||
+            text.includes("scholarship") ||
+            text.includes("government") ||
+            text.includes("open door")
         ) {
-            return "Programme-specific";
+            return "yes";
         }
+    }
 
-        return clean(
-            firstValue(u, ["medium", "language"])
-        ) || "Check official source";
+    return "no";
     }
 
     /*
@@ -709,7 +743,7 @@ Virangeeta Navigators
             u.scholarship === "yes"
                 ? `
                     <span class="badge green">
-                        Scholarship listed
+                        Scholarship available 
                     </span>
                   `
                 : "";
