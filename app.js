@@ -162,7 +162,13 @@ Virangeeta Navigators
     ============================================================
     */
 
-    function getScholarship(u) {
+    /*
+=============================================================
+SCHOLARSHIP STATUS
+=============================================================
+*/
+
+function getScholarship(u) {
     const values = [
         firstValue(u, [
             "scholarship",
@@ -170,13 +176,16 @@ Virangeeta Navigators
             "scholarshipStatus"
         ]),
         firstValue(u, [
-            "openDoors"
+            "openDoors",
+            "open_doors"
         ]),
         firstValue(u, [
-            "scholarshipPathway"
+            "scholarshipPathway",
+            "scholarship_pathway"
         ]),
         firstValue(u, [
-            "governmentScholarship"
+            "governmentScholarship",
+            "government_scholarship"
         ])
     ];
 
@@ -199,7 +208,8 @@ Virangeeta Navigators
         "unavailable",
         "n/a",
         "not verified",
-        "unknown"
+        "unknown",
+        "pending"
     ];
 
     for (const value of values) {
@@ -209,23 +219,34 @@ Virangeeta Navigators
             continue;
         }
 
-        if (negativeWords.some(word => text === word)) {
+        // Explicit negative information takes priority.
+        if (
+            negativeWords.some(word => text === word) ||
+            negativeWords.some(word => text.includes(word))
+        ) {
             continue;
         }
 
+        // Explicit positive status.
         if (
-            positiveWords.some(word => text === word) ||
+            positiveWords.some(word => text === word)
+        ) {
+            return "yes";
+        }
+
+        // Scholarship pathway information.
+        if (
+            text.includes("scholarship pathway") ||
             text.includes("scholarship") ||
-            text.includes("government") ||
-            text.includes("open door")
+            text.includes("open doors") ||
+            text.includes("government scholarship")
         ) {
             return "yes";
         }
     }
 
     return "no";
-    }
-
+}
     /*
     ============================================================
     SCHOLARSHIP
