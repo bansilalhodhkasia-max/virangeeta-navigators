@@ -1,2410 +1,2581 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    <title>Scholar Path Russia | Study • Compare • Decide</title>
 
-  <meta
-    name="description"
-    content="Scholar Path Russia — research, compare and understand Russian universities, admissions, fees, scholarships and student life."
-  >
+    <meta
+        name="description"
+        content="Scholar Path Russia — research Russian universities, compare programmes, understand costs, explore scholarships and build your application path."
+    >
 
-  <meta
-    name="theme-color"
-    content="#071a2b"
-  >
+    <meta name="theme-color" content="#071c2b">
 
-  <title>Scholar Path Russia | Study • Compare • Decide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="icon" href="logo.jpg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="styles.css">
-
-  <style>
-    /* =========================================================
-       SCHOLAR PATH RUSSIA
-       SAFE BASE LAYOUT
-       ========================================================= */
-
-    :root {
-      --navy: #071a2b;
-      --navy-2: #0b2638;
-      --teal: #16a995;
-      --teal-dark: #087c70;
-      --cream: #f6f7f3;
-      --white: #ffffff;
-      --text: #102131;
-      --muted: #687681;
-      --line: #e3e8e6;
-      --shadow: 0 18px 55px rgba(7, 26, 43, .10);
-      --radius: 24px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--cream);
-      color: var(--text);
-      font-family: "DM Sans", Arial, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 36px));
-      margin: 0 auto;
-    }
-
-    /* =========================================================
-       TOP BAR
-       ========================================================= */
-
-    .topbar {
-      background: var(--navy);
-      color: #dce9ed;
-      font-size: 12px;
-      min-height: 34px;
-      display: flex;
-      align-items: center;
-    }
-
-    .topbar-inner {
-      width: min(1180px, calc(100% - 36px));
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .topbar span {
-      opacity: .9;
-    }
-
-    .dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #27c7ae;
-      margin-right: 7px;
-    }
-
-    /* =========================================================
-       HEADER
-       ========================================================= */
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.97);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-    }
-
-    .nav {
-      min-height: 76px;
-      width: min(1180px, calc(100% - 36px));
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 220px;
-    }
-
-    .brand-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      object-fit: contain;
-      background: white;
-      border: 1px solid #e3e3df;
-    }
-
-    .brand-fallback {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--teal), #087c70);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 16px;
-    }
-
-    .brand-name {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.1;
-    }
-
-    .brand-sub {
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: #758189;
-      margin-top: 3px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .nav-links a:hover {
-      color: var(--teal-dark);
-    }
-
-    .nav-cta {
-      background: var(--navy);
-      color: white !important;
-      padding: 11px 17px;
-      border-radius: 12px;
-    }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      color: white;
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(22,169,149,.35),
-          transparent 32%
-        ),
-        linear-gradient(
-          135deg,
-          #061827 0%,
-          #09283b 55%,
-          #075c5a 100%
-        );
-      padding: 95px 0 90px;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 480px;
-      height: 480px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 50%;
-      right: -180px;
-      top: -170px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      width: min(1180px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.07);
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      letter-spacing: 1.7px;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 {
-      max-width: 760px;
-      margin: 0;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(42px, 6vw, 78px);
-      line-height: 1.02;
-      letter-spacing: -2px;
-    }
-
-    .hero h1 span {
-      color: #6fe2d1;
-    }
-
-    .hero-text {
-      max-width: 690px;
-      color: #d1dfe4;
-      font-size: 18px;
-      margin: 24px 0 30px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: 0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 20px;
-      border-radius: 13px;
-      font-weight: 700;
-      transition: .2s ease;
-    }
-
-    .btn-primary {
-      background: #20b39f;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      background: #29c3ae;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.08);
-      color: white;
-      border: 1px solid rgba(255,255,255,.18);
-    }
-
-    .hero-panel {
-      margin-top: 50px;
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 24px;
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 25px 70px rgba(0,0,0,.15);
-    }
-
-    .hero-panel-title {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 25px;
-      margin-bottom: 5px;
-    }
-
-    .hero-panel-sub {
-      color: #bdd0d6;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-
-    .search-row {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr auto;
-      gap: 10px;
-    }
-
-    .search-row input,
-    .search-row select {
-      min-height: 50px;
-      border: 0;
-      border-radius: 12px;
-      padding: 0 15px;
-      outline: none;
-      background: white;
-      color: var(--text);
-    }
-
-    /* =========================================================
-       TRUST STRIP
-       ========================================================= */
-
-    .trust-strip {
-      background: white;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .trust-item {
-      padding: 22px;
-      text-align: center;
-      border-right: 1px solid var(--line);
-    }
-
-    .trust-item:last-child {
-      border-right: 0;
-    }
-
-    .trust-item strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .trust-item span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    /* =========================================================
-       SECTION
-       ========================================================= */
-
-    .section {
-      padding: 90px 0;
-    }
-
-    .section-light {
-      background: var(--cream);
-    }
-
-    .section-white {
-      background: white;
-    }
-
-    .section-dark {
-      background: var(--navy);
-      color: white;
-    }
-
-    .section-label {
-      color: var(--teal-dark);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 11px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .section-dark .section-label {
-      color: #51d4c0;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.1;
-      margin: 0 0 14px;
-      letter-spacing: -1px;
-    }
-
-    .section-description {
-      max-width: 730px;
-      color: var(--muted);
-      margin: 0 0 40px;
-    }
-
-    .section-dark .section-description {
-      color: #bdced5;
-    }
-
-    /* =========================================================
-       FEATURE CARDS
-       ========================================================= */
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .feature-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      min-height: 235px;
-      box-shadow: 0 8px 30px rgba(7,26,43,.04);
-      transition: .25s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-
-    .feature-icon {
-      width: 45px;
-      height: 45px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      background: #e4f7f3;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    .feature-card h3 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 23px;
-      margin: 0 0 10px;
-    }
-
-    .feature-card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0 0 18px;
-    }
-
-    .feature-link {
-      color: var(--teal-dark);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    /* =========================================================
-       UNIVERSITY EXPLORER
-       ========================================================= */
-
-    .explorer {
-      background: var(--navy);
-      color: white;
-      padding: 32px;
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .explorer h3 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 30px;
-      margin: 0;
-    }
-
-    .explorer p {
-      color: #c5d5db;
-      margin-top: 5px;
-    }
-
-    .explorer-form {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr auto;
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    .explorer-form input,
-    .explorer-form select {
-      width: 100%;
-      min-height: 52px;
-      padding: 0 15px;
-      border: 0;
-      border-radius: 12px;
-      outline: none;
-      background: white;
-    }
-
-    .explorer-message {
-      display: none;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.08);
-      color: #d9e7eb;
-      font-size: 14px;
-    }
-
-    /* =========================================================
-       TOOLS
-       ========================================================= */
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .tool-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 24px;
-    }
-
-    .tool-card h3 {
-      margin-top: 0;
-      font-family: "Playfair Display", Georgia, serif;
-    }
-
-    .tool-card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .tool-button {
-      margin-top: 10px;
-      border: 0;
-      background: #e4f7f3;
-      color: var(--teal-dark);
-      padding: 10px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    /* =========================================================
-       AI
-       ========================================================= */
-
-    .ai-box {
-      background: white;
-      color: var(--text);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .ai-title {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 20px;
-    }
-
-    .ai-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: linear-gradient(135deg,#19b39f,#0c8074);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-size: 23px;
-    }
-
-    .ai-title h3 {
-      margin: 0;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 25px;
-    }
-
-    .ai-title p {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .ai-form {
-      display: grid;
-      gap: 12px;
-    }
-
-    .ai-form select,
-    .ai-form textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px;
-      outline: none;
-    }
-
-    .ai-form textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .ai-answer {
-      margin-top: 18px;
-      background: #f0faf8;
-      border: 1px solid #d5eee9;
-      border-radius: 15px;
-      padding: 18px;
-      color: #29444c;
-      min-height: 60px;
-    }
-
-    /* =========================================================
-       VERIFICATION
-       ========================================================= */
-
-    .verification-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .verification-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 30px;
-    }
-
-    .verification-card h3 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 25px;
-    }
-
-    .verification-card li {
-      margin: 12px 0;
-      color: var(--muted);
-    }
-
-    .verification-card li::marker {
-      color: var(--teal);
-    }
-
-    /* =========================================================
-       FAQ
-       ========================================================= */
-
-    .faq {
-      display: grid;
-      gap: 10px;
-    }
-
-    .faq details {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      padding: 18px 20px;
-    }
-
-    .faq summary {
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .faq p {
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    /* =========================================================
-       CTA
-       ========================================================= */
-
-    .cta {
-      text-align: center;
-      color: white;
-      background:
-        radial-gradient(circle at 15% 30%, rgba(255,255,255,.08), transparent 25%),
-        linear-gradient(135deg, #075c5a, #0c988b);
-      padding: 95px 20px;
-    }
-
-    .cta h2 {
-      max-width: 850px;
-      margin: 0 auto 15px;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(36px, 5vw, 60px);
-      line-height: 1.05;
-    }
-
-    .cta p {
-      max-width: 650px;
-      margin: 0 auto 28px;
-      color: #d9efeb;
-    }
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    footer {
-      background: #04131f;
-      color: white;
-      padding: 60px 0 25px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 35px;
-    }
-
-    .footer-brand p {
-      color: #aebec5;
-      max-width: 370px;
-      font-size: 14px;
-    }
-
-    footer h4 {
-      margin-top: 0;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 19px;
-    }
-
-    footer a {
-      display: block;
-      color: #aebec5;
-      margin: 9px 0;
-      font-size: 13px;
-    }
-
-    footer a:hover {
-      color: white;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.1);
-      margin-top: 40px;
-      padding-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: #81939b;
-      font-size: 11px;
-    }
-
-    /* =========================================================
-       MOBILE
-       ========================================================= */
-
-    @media (max-width: 900px) {
-
-      .nav-links {
-        display: none;
-      }
-
-      .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .tools-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .search-row,
-      .explorer-form {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .verification-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-
-      .container,
-      .nav,
-      .hero-content,
-      .topbar-inner {
-        width: min(100% - 24px, 1180px);
-      }
-
-      .topbar-inner {
-        font-size: 10px;
-      }
-
-      .topbar-inner span:last-child {
-        display: none;
-      }
-
-      .brand {
-        min-width: auto;
-      }
-
-      .brand-logo,
-      .brand-fallback {
-        width: 42px;
-        height: 42px;
-      }
-
-      .brand-name {
-        font-size: 15px;
-      }
-
-      .brand-sub {
-        font-size: 7px;
-      }
-
-      .nav {
-        min-height: 66px;
-      }
-
-      .nav-cta {
-        padding: 9px 11px;
-        font-size: 11px;
-      }
-
-      .hero {
-        padding: 65px 0 60px;
-      }
-
-      .hero h1 {
-        font-size: 44px;
-      }
-
-      .hero-text {
-        font-size: 15px;
-      }
-
-      .hero-panel {
-        padding: 17px;
-      }
-
-      .search-row,
-      .explorer-form {
-        grid-template-columns: 1fr;
-      }
-
-      .trust-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .trust-item {
-        border-bottom: 1px solid var(--line);
-      }
-
-      .section {
-        padding: 65px 0;
-      }
-
-      .feature-grid,
-      .tools-grid,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-card {
-        min-height: auto;
-      }
-
-      .explorer {
-        padding: 22px;
-      }
-
-      .verification-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- =======================================================
-       TOP BAR
-       ======================================================= -->
+<!-- =========================================================
+     TOP INFORMATION BAR
+========================================================= -->
 
-  <div class="topbar">
+<div class="topbar">
     <div class="topbar-inner">
-      <span>
-        <span class="dot"></span>
-        Independent student guidance platform
-      </span>
 
-      <span>
-        Source-first information · Information can change
-      </span>
+        <div class="topbar-left">
+            <span class="status-dot"></span>
+            <span>Independent student guidance platform</span>
+        </div>
+
+        <div class="topbar-right">
+            <span>Source-first information</span>
+            <span>Information changes — verify before applying</span>
+        </div>
+
     </div>
-  </div>
+</div>
 
 
-  <!-- =======================================================
-       HEADER
-       ======================================================= -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-  <header class="site-header">
+<header class="site-header" id="siteHeader">
 
-    <nav class="nav">
+    <div class="header-inner">
 
-      <a href="#home" class="brand">
+        <a href="#home" class="brand">
 
-        <img
-          src="logo.jpg"
-          alt="Scholar Path Russia logo"
-          class="brand-logo"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+            <div class="brand-logo">
+                <img
+                    src="logo.png"
+                    alt="Scholar Path Russia logo"
+                    onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');"
+                >
+                <span class="logo-fallback-text">SP</span>
+            </div>
+
+            <div class="brand-text">
+                <strong>Scholar Path Russia</strong>
+                <small>STUDY • COMPARE • DECIDE</small>
+            </div>
+
+        </a>
+
+
+        <!-- Desktop Navigation -->
+
+        <nav class="desktop-nav">
+
+            <a href="#universities">Universities</a>
+
+            <a href="#match">Match</a>
+
+            <a href="#budget">Budget</a>
+
+            <a href="#compare">Compare</a>
+
+            <a href="#gallery">Gallery</a>
+
+            <a href="#faq">FAQ</a>
+
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+
+        <a href="#universities" class="header-cta">
+            Find a University
+        </a>
+
+
+        <!-- Mobile Menu Button -->
+
+        <button
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
         >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-        <span
-          class="brand-fallback"
-          style="display:none;"
-        >
-          SP
-        </span>
-
-        <span>
-          <span class="brand-name">
-            Scholar Path Russia
-          </span>
-
-          <span class="brand-sub">
-            STUDY · COMPARE · DECIDE
-          </span>
-        </span>
-
-      </a>
+    </div>
 
 
-      <div class="nav-links">
+    <!-- Mobile Navigation -->
 
-        <a href="#universities">
-          Universities
-        </a>
+    <nav class="mobile-nav" id="mobileNav">
 
-        <a href="#tools">
-          Explore
-        </a>
+        <a href="#universities">Universities</a>
 
-        <a href="#ai">
-          AI Assistant
-        </a>
+        <a href="#match">University Match</a>
 
-        <a href="#verification">
-          Verification
-        </a>
+        <a href="#budget">Budget Calculator</a>
 
-        <a href="#faq">
-          FAQ
-        </a>
+        <a href="#compare">Compare</a>
 
-        <a
-          href="#universities"
-          class="nav-cta"
-        >
-          Find a University
-        </a>
+        <a href="#application-path">Application Path</a>
 
-      </div>
+        <a href="#scholarships">Scholarships</a>
+
+        <a href="#cities">Cities</a>
+
+        <a href="#gallery">Gallery</a>
+
+        <a href="#faq">FAQ</a>
+
+        <a href="#contact">Contact</a>
 
     </nav>
 
-  </header>
+</header>
 
 
-  <main id="home">
 
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
+<main id="home">
 
-    <section class="hero">
 
-      <div class="hero-content">
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-background"></div>
+
+    <div class="hero-content">
 
         <div class="eyebrow">
-          ● A clearer way to study in Russia
+            <span class="eyebrow-dot"></span>
+            A clearer way to study in Russia
         </div>
 
         <h1>
-          Don't just choose a university.
-          <span>Understand it.</span>
+            Don't just choose a university.
+            <span>Choose your path.</span>
         </h1>
 
-        <p class="hero-text">
-          Research Russian universities, compare programmes,
-          understand real costs, explore scholarships and verify
-          important information before you make a decision.
+        <p class="hero-description">
+            Research Russian universities, compare programmes and costs,
+            explore scholarships and understand your application path —
+            with information designed around real student decisions.
         </p>
+
+
+        <!-- Hero Search -->
+
+        <div class="hero-search-card">
+
+            <div class="hero-search-title">
+
+                <div>
+                    <span class="mini-label">SOURCE-FIRST</span>
+                    <h2>University Discovery</h2>
+                </div>
+
+                <div class="hero-search-badge">
+                    136+ records
+                </div>
+
+            </div>
+
+
+            <form id="heroSearchForm" class="hero-search-form">
+
+                <div class="search-input-wrapper">
+
+                    <input
+                        type="text"
+                        id="heroSearchInput"
+                        placeholder="Search a university, city or programme..."
+                        autocomplete="off"
+                    >
+
+                    <button type="submit">
+                        →
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div class="hero-quick-grid">
+
+                <button
+                    type="button"
+                    class="hero-topic"
+                    data-scroll="#universities"
+                    data-field="Medicine"
+                >
+                    <strong>MBBS</strong>
+                    <small>Medical programmes</small>
+                </button>
+
+                <button
+                    type="button"
+                    class="hero-topic"
+                    data-scroll="#budget"
+                >
+                    <strong>Fees</strong>
+                    <small>Understand the real cost</small>
+                </button>
+
+                <button
+                    type="button"
+                    class="hero-topic"
+                    data-scroll="#scholarships"
+                >
+                    <strong>Scholarships</strong>
+                    <small>Funding pathways</small>
+                </button>
+
+                <button
+                    type="button"
+                    class="hero-topic"
+                    data-scroll="#documents"
+                >
+                    <strong>Documents</strong>
+                    <small>Application checklist</small>
+                </button>
+
+            </div>
+
+        </div>
+
 
         <div class="hero-actions">
 
-          <a
-            href="#universities"
-            class="btn btn-primary"
-          >
-            Explore Universities →
-          </a>
+            <a href="#universities" class="button button-primary">
+                Explore Universities →
+            </a>
 
-          <a
-            href="#verification"
-            class="btn btn-secondary"
-          >
-            How We Verify Information
-          </a>
+            <a href="#verification" class="button button-secondary">
+                How We Verify Information
+            </a>
 
         </div>
 
+    </div>
 
-        <div class="hero-panel">
+</section>
 
-          <div class="hero-panel-title">
-            University Discovery
-          </div>
 
-          <div class="hero-panel-sub">
-            Search by university, programme or city.
-          </div>
 
-          <form
-            class="search-row"
-            id="heroSearchForm"
-          >
+<!-- =========================================================
+     PRINCIPLES STRIP
+========================================================= -->
 
-            <input
-              id="heroUniversity"
-              type="text"
-              placeholder="Search a university..."
-            >
+<section class="principles-strip">
 
-            <select id="heroProgramme">
-              <option value="">
-                Programme
-              </option>
+    <div class="principle">
+        <strong>Official sources first</strong>
+        <span>Wherever available</span>
+    </div>
 
-              <option value="medicine">
-                General Medicine / MBBS
-              </option>
+    <div class="principle">
+        <strong>No artificial guarantees</strong>
+        <span>Facts over marketing</span>
+    </div>
 
-              <option value="engineering">
-                Engineering
-              </option>
+    <div class="principle">
+        <strong>Student-focused</strong>
+        <span>Built for real decisions</span>
+    </div>
 
-              <option value="it">
-                IT / Computer Science
-              </option>
+    <div class="principle">
+        <strong>Information can change</strong>
+        <span>Always verify current rules</span>
+    </div>
 
-              <option value="business">
-                Business
-              </option>
+</section>
 
-              <option value="other">
-                Other
-              </option>
-            </select>
 
-            <input
-              id="heroCity"
-              type="text"
-              placeholder="City"
-            >
 
-            <button
-              class="btn btn-primary"
-              type="submit"
-            >
-              Search →
-            </button>
+<!-- =========================================================
+     EXPLORE INTELLIGENTLY
+========================================================= -->
 
-          </form>
+<section class="section light-section" id="explore">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">EXPLORE INTELLIGENTLY</div>
+
+            <h2>
+                Everything a student should know
+                before applying.
+            </h2>
+
+            <p>
+                Scholar Path Russia is designed as a decision platform —
+                not another website filled with generic university advertisements.
+            </p>
 
         </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         TRUST STRIP
-         ===================================================== -->
-
-    <section class="trust-strip">
-
-      <div class="container trust-grid">
-
-        <div class="trust-item">
-          <strong>Official sources first</strong>
-          <span>Wherever available</span>
-        </div>
-
-        <div class="trust-item">
-          <strong>No artificial guarantees</strong>
-          <span>Facts over marketing</span>
-        </div>
-
-        <div class="trust-item">
-          <strong>Student-focused</strong>
-          <span>Built for real decisions</span>
-        </div>
-
-        <div class="trust-item">
-          <strong>Information can change</strong>
-          <span>Verify current requirements</span>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FEATURES
-         ===================================================== -->
-
-    <section
-      class="section section-light"
-      id="tools"
-    >
-
-      <div class="container">
-
-        <div class="section-label">
-          Explore intelligently
-        </div>
-
-        <h2 class="section-title">
-          Everything a student should know before applying.
-        </h2>
-
-        <p class="section-description">
-          Scholar Path Russia is being built as a decision platform —
-          not another website filled with generic university
-          advertisements.
-        </p>
 
 
         <div class="feature-grid">
 
-          <article class="feature-card">
+            <!-- University Match -->
 
-            <div class="feature-icon">🎓</div>
+            <article class="feature-card">
 
-            <h3>
-              Find the right university
-            </h3>
+                <div class="feature-icon">🎓</div>
 
-            <p>
-              Compare programmes, cities, tuition,
-              accommodation, scholarships and student
-              considerations.
-            </p>
+                <h3>Find the right university</h3>
 
-            <a
-              href="#universities"
-              class="feature-link"
-            >
-              Use University Match →
-            </a>
+                <p>
+                    Compare programme, city, tuition, accommodation,
+                    scholarship opportunities and student considerations.
+                </p>
 
-          </article>
+                <a href="#match" class="feature-link">
+                    Use University Match →
+                </a>
+
+            </article>
 
 
-          <article class="feature-card">
+            <!-- Budget -->
 
-            <div class="feature-icon">💰</div>
+            <article class="feature-card">
 
-            <h3>
-              Understand the real cost
-            </h3>
+                <div class="feature-icon">💰</div>
 
-            <p>
-              Separate tuition, hostel, insurance,
-              living expenses, registration and other
-              known costs.
-            </p>
+                <h3>Understand the real cost</h3>
 
-            <a
-              href="#budget"
-              class="feature-link"
-            >
-              Calculate Cost →
-            </a>
+                <p>
+                    Separate tuition, hostel, insurance, living expenses,
+                    registration and other known costs.
+                </p>
 
-          </article>
+                <a href="#budget" class="feature-link">
+                    Calculate Cost →
+                </a>
+
+            </article>
 
 
-          <article class="feature-card">
+            <!-- Profile -->
 
-            <div class="feature-icon">🏛️</div>
+            <article class="feature-card">
 
-            <h3>
-              University profile
-            </h3>
+                <div class="feature-icon">🏛️</div>
 
-            <p>
-              Discover programme structure, location,
-              facilities, history, official links and
-              student services.
-            </p>
+                <h3>University profile</h3>
 
-            <a
-              href="#universities"
-              class="feature-link"
-            >
-              Explore Profiles →
-            </a>
+                <p>
+                    Discover programme structure, location, history,
+                    official links, verification and available information.
+                </p>
 
-          </article>
+                <a href="#universities" class="feature-link">
+                    Explore Profiles →
+                </a>
+
+            </article>
 
 
-          <article class="feature-card">
+            <!-- Scholarships -->
 
-            <div class="feature-icon">🎓</div>
+            <article class="feature-card">
 
-            <h3>
-              Scholarship pathways
-            </h3>
+                <div class="feature-icon">🎓</div>
 
-            <p>
-              Understand available scholarship routes,
-              eligibility, coverage and application
-              requirements.
-            </p>
+                <h3>Scholarship pathways</h3>
 
-            <a
-              href="#scholarships"
-              class="feature-link"
-            >
-              Get Guidance →
-            </a>
+                <p>
+                    Understand available scholarship routes,
+                    eligibility, coverage and application requirements.
+                </p>
 
-          </article>
+                <a href="#scholarships" class="feature-link">
+                    Get Guidance →
+                </a>
+
+            </article>
 
 
-          <article class="feature-card">
+            <!-- Documents -->
 
-            <div class="feature-icon">📋</div>
+            <article class="feature-card">
 
-            <h3>
-              Admission documents
-            </h3>
+                <div class="feature-icon">📋</div>
 
-            <p>
-              Build a practical checklist for identity,
-              academic, language, medical and programme
-              documents.
-            </p>
+                <h3>Admission documents</h3>
 
-            <a
-              href="#documents"
-              class="feature-link"
-            >
-              View Checklist →
-            </a>
+                <p>
+                    Build a practical checklist for identity, academic,
+                    language, medical and programme-specific documents.
+                </p>
 
-          </article>
+                <a href="#documents" class="feature-link">
+                    View Checklist →
+                </a>
+
+            </article>
 
 
-          <article class="feature-card">
+            <!-- Cities -->
 
-            <div class="feature-icon">🌍</div>
+            <article class="feature-card">
 
-            <h3>
-              Choose the right city
-            </h3>
+                <div class="feature-icon">🌍</div>
 
-            <p>
-              Think beyond the university: climate,
-              transportation, cost of living, student
-              population and lifestyle.
-            </p>
+                <h3>Choose the right city</h3>
 
-            <a
-              href="#cities"
-              class="feature-link"
-            >
-              Explore Cities →
-            </a>
+                <p>
+                    Think beyond the university: climate, transportation,
+                    cost of living, student population and lifestyle.
+                </p>
 
-          </article>
+                <a href="#cities" class="feature-link">
+                    Explore Cities →
+                </a>
+
+            </article>
 
         </div>
 
-      </div>
+    </div>
 
-    </section>
+</section>
 
 
-    <!-- =====================================================
-         UNIVERSITY EXPLORER
-         ===================================================== -->
 
-    <section
-      class="section section-white"
-      id="universities"
-    >
+<!-- =========================================================
+     UNIVERSITY DATABASE
+========================================================= -->
 
-      <div class="container">
+<section class="section white-section" id="universities">
 
-        <div class="section-label">
-          University database
-        </div>
+    <div class="container">
 
-        <h2 class="section-title">
-          Find a university that fits your priorities.
-        </h2>
+        <div class="section-heading">
 
-        <p class="section-description">
-          Search the growing Scholar Path Russia university
-          database by university, programme and city.
-        </p>
-
-
-        <div class="explorer">
-
-          <h3>
-            University Explorer
-          </h3>
-
-          <p>
-            Search by university, programme or city.
-          </p>
-
-          <form
-            class="explorer-form"
-            id="universitySearchForm"
-          >
-
-            <input
-              id="universitySearch"
-              type="text"
-              placeholder="University name..."
-            >
-
-            <select id="programmeSearch">
-
-              <option value="">
-                Programme
-              </option>
-
-              <option value="medicine">
-                General Medicine / MBBS
-              </option>
-
-              <option value="engineering">
-                Engineering
-              </option>
-
-              <option value="it">
-                IT / Computer Science
-              </option>
-
-              <option value="business">
-                Business
-              </option>
-
-              <option value="other">
-                Other
-              </option>
-
-            </select>
-
-
-            <input
-              id="citySearch"
-              type="text"
-              placeholder="City"
-            >
-
-
-            <button
-              class="btn btn-primary"
-              type="submit"
-            >
-              Search →
-            </button>
-
-          </form>
-
-
-          <div
-            class="explorer-message"
-            id="explorerMessage"
-          >
-            Search ready. University information will appear
-            here as the verified database grows.
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         TOOLS
-         ===================================================== -->
-
-    <section
-      class="section section-light"
-      id="budget"
-    >
-
-      <div class="container">
-
-        <div class="section-label">
-          Student tools
-        </div>
-
-        <h2 class="section-title">
-          Useful tools for a real decision.
-        </h2>
-
-        <p class="section-description">
-          These tools are designed to help students understand
-          the practical side of studying abroad.
-        </p>
-
-
-        <div class="tools-grid">
-
-          <article class="tool-card">
-
-            <h3>
-              💰 Budget Calculator
-            </h3>
-
-            <p>
-              Estimate tuition, accommodation, living costs
-              and other expenses.
-            </p>
-
-            <button
-              class="tool-button"
-              type="button"
-              onclick="openBudgetCalculator()"
-            >
-              Open Calculator
-            </button>
-
-          </article>
-
-
-          <article class="tool-card">
-
-            <h3>
-              ⚖️ University Match
-            </h3>
-
-            <p>
-              Compare your priorities with university
-              characteristics.
-            </p>
-
-            <button
-              class="tool-button"
-              type="button"
-              onclick="scrollToSection('universities')"
-            >
-              Start Matching
-            </button>
-
-          </article>
-
-
-          <article
-            class="tool-card"
-            id="scholarships"
-          >
-
-            <h3>
-              🎓 Scholarship Guide
-            </h3>
-
-            <p>
-              Understand scholarship routes, eligibility
-              and what is actually covered.
-            </p>
-
-            <button
-              class="tool-button"
-              type="button"
-              onclick="showComingSoon('Scholarship Guide')"
-            >
-              Explore Guide
-            </button>
-
-          </article>
-
-
-          <article
-            class="tool-card"
-            id="documents"
-          >
-
-            <h3>
-              📋 Document Checklist
-            </h3>
-
-            <p>
-              Prepare the academic, identity, medical and
-              programme documents you may need.
-            </p>
-
-            <button
-              class="tool-button"
-              type="button"
-              onclick="showComingSoon('Document Checklist')"
-            >
-              Open Checklist
-            </button>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         AI ASSISTANT
-         ===================================================== -->
-
-    <section
-      class="section section-dark"
-      id="ai"
-    >
-
-      <div class="container">
-
-        <div class="section-label">
-          Scholar Path AI
-        </div>
-
-        <h2 class="section-title">
-          Ask before you decide.
-        </h2>
-
-        <p class="section-description">
-          Ask questions about universities, admissions, fees,
-          scholarships, accommodation and documents.
-        </p>
-
-
-        <div class="ai-box">
-
-          <div class="ai-title">
-
-            <div class="ai-icon">
-              ✦
+            <div class="eyebrow">
+                UNIVERSITY DATABASE
             </div>
+
+            <h2>
+                Find a university that fits
+                your priorities.
+            </h2>
+
+            <p>
+                Search the university database by institution,
+                programme, city, study field, language and scholarship information.
+            </p>
+
+        </div>
+
+
+        <!-- Search Panel -->
+
+        <div class="university-search-panel">
+
+            <div class="search-panel-heading">
+
+                <div>
+                    <span class="mini-label">UNIVERSITY EXPLORER</span>
+
+                    <h3>Search the database</h3>
+
+                    <p>
+                        Search by university, programme, city or study goal.
+                    </p>
+                </div>
+
+                <div class="database-count">
+                    <strong id="databaseCount">—</strong>
+                    <span>universities</span>
+                </div>
+
+            </div>
+
+
+            <form id="universitySearchForm">
+
+                <div class="search-fields">
+
+                    <div class="form-group large">
+
+                        <label for="universitySearch">
+                            University
+                        </label>
+
+                        <input
+                            type="text"
+                            id="universitySearch"
+                            placeholder="University name..."
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="programmeFilter">
+                            Programme / Field
+                        </label>
+
+                        <select id="programmeFilter">
+
+                            <option value="">
+                                All programmes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="cityFilter">
+                            City
+                        </label>
+
+                        <select id="cityFilter">
+
+                            <option value="">
+                                All cities
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="languageFilter">
+                            Language
+                        </label>
+
+                        <select id="languageFilter">
+
+                            <option value="">
+                                Any language
+                            </option>
+
+                            <option value="English">
+                                English
+                            </option>
+
+                            <option value="Russian">
+                                Russian
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="advanced-filters">
+
+                    <label class="checkbox-filter">
+
+                        <input
+                            type="checkbox"
+                            id="verifiedOnly"
+                        >
+
+                        <span>
+                            Show verified information only
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-filter">
+
+                        <input
+                            type="checkbox"
+                            id="openDoorsOnly"
+                        >
+
+                        <span>
+                            Open Doors listed
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-filter">
+
+                        <input
+                            type="checkbox"
+                            id="scholarshipOnly"
+                        >
+
+                        <span>
+                            Scholarship pathway listed
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="search-panel-actions">
+
+                    <button
+                        type="submit"
+                        class="button button-primary"
+                    >
+                        Search Universities →
+                    </button>
+
+                    <button
+                        type="button"
+                        id="resetUniversitySearch"
+                        class="button button-light"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div
+                class="search-status"
+                id="universitySearchStatus"
+            >
+                Loading university database...
+            </div>
+
+        </div>
+
+
+        <!-- Featured Universities -->
+
+        <div class="subsection-heading">
 
             <div>
+                <span class="mini-label">
+                    START HERE
+                </span>
 
-              <h3>
-                AI University Assistant
-              </h3>
+                <h3>Featured university profiles</h3>
 
-              <p>
-                Answers should be checked against current
-                official sources.
-              </p>
+                <p>
+                    A small starting selection. Search above to explore the full database.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div
+            class="university-grid"
+            id="featuredUniversities"
+        >
+            <!-- app.js fills this -->
+        </div>
+
+
+        <!-- Search Results -->
+
+        <div
+            class="search-results-section"
+            id="searchResultsSection"
+            hidden
+        >
+
+            <div class="subsection-heading">
+
+                <div>
+                    <span class="mini-label">
+                        SEARCH RESULTS
+                    </span>
+
+                    <h3 id="searchResultsTitle">
+                        Universities
+                    </h3>
+                </div>
 
             </div>
 
-          </div>
+            <div
+                class="university-grid"
+                id="universityResults"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-          <form
-            class="ai-form"
-            id="aiForm"
-          >
 
-            <select id="aiUniversity">
+<!-- =========================================================
+     UNIVERSITY MATCH
+========================================================= -->
 
-              <option value="">
-                Select a university
-              </option>
+<section class="section dark-section" id="match">
 
-              <option>
-                Pitirim Sorokin Syktyvkar State University
-              </option>
+    <div class="container">
 
-              <option>
-                Bashkir State University
-              </option>
+        <div class="section-heading dark-heading">
 
-              <option>
-                Sechenov University
-              </option>
+            <div class="eyebrow">
+                UNIVERSITY MATCH
+            </div>
 
-              <option>
-                Kazan Federal University
-              </option>
+            <h2>
+                Tell us what matters.
+                We'll narrow the path.
+            </h2>
 
-            </select>
+            <p>
+                A simple decision tool for students who do not know
+                where to begin.
+            </p>
+
+        </div>
 
 
-            <textarea
-              id="aiQuestion"
-              placeholder="Example: What should I verify before applying to this university?"
-            ></textarea>
+        <div class="tool-card match-card">
+
+            <div class="tool-card-header">
+
+                <div class="tool-icon">
+                    ✦
+                </div>
+
+                <div>
+                    <h3>University Match</h3>
+
+                    <p>
+                        Select your priorities.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="match-form">
+
+                <div class="match-question">
+
+                    <label>
+                        What do you want to study?
+                    </label>
+
+                    <select id="matchField">
+
+                        <option value="">
+                            Select programme
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="match-question">
+
+                    <label>
+                        Preferred language
+                    </label>
+
+                    <select id="matchLanguage">
+
+                        <option value="">
+                            Any language
+                        </option>
+
+                        <option value="English">
+                            English
+                        </option>
+
+                        <option value="Russian">
+                            Russian
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="match-question">
+
+                    <label>
+                        Budget preference
+                    </label>
+
+                    <select id="matchBudget">
+
+                        <option value="">
+                            Any budget
+                        </option>
+
+                        <option value="low">
+                            Lower / cost-conscious
+                        </option>
+
+                        <option value="medium">
+                            Moderate
+                        </option>
+
+                        <option value="high">
+                            Higher budget
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="match-question">
+
+                    <label>
+                        Scholarship important?
+                    </label>
+
+                    <select id="matchScholarship">
+
+                        <option value="">
+                            Not sure
+                        </option>
+
+                        <option value="yes">
+                            Yes
+                        </option>
+
+                        <option value="no">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="button button-primary full-width"
+                    id="runMatch"
+                >
+                    Find My Universities →
+                </button>
+
+            </div>
+
+
+            <div
+                class="match-results"
+                id="matchResults"
+            >
+                <div class="empty-tool-state">
+                    Select your preferences and start your match.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     BUDGET CALCULATOR
+========================================================= -->
+
+<section class="section light-section" id="budget">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                COST PLANNER
+            </div>
+
+            <h2>
+                Calculate the real cost
+                before you apply.
+            </h2>
+
+            <p>
+                Build your own estimate for tuition, hostel,
+                living expenses and other costs.
+            </p>
+
+        </div>
+
+
+        <div class="calculator-layout">
+
+            <!-- Calculator -->
+
+            <div class="calculator-card">
+
+                <div class="calculator-header">
+
+                    <div class="tool-icon">
+                        ₽
+                    </div>
+
+                    <div>
+                        <h3>Russia Study Budget Calculator</h3>
+
+                        <p>
+                            Enter your estimated annual expenses.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="calculator-fields">
+
+                    <div class="calculator-field">
+
+                        <label for="calcTuition">
+                            Tuition / year (RUB)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="calcTuition"
+                            min="0"
+                            placeholder="e.g. 400000"
+                        >
+
+                    </div>
+
+
+                    <div class="calculator-field">
+
+                        <label for="calcHostel">
+                            Hostel / year (RUB)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="calcHostel"
+                            min="0"
+                            placeholder="e.g. 30000"
+                        >
+
+                    </div>
+
+
+                    <div class="calculator-field">
+
+                        <label for="calcFood">
+                            Food / year (RUB)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="calcFood"
+                            min="0"
+                            placeholder="e.g. 180000"
+                        >
+
+                    </div>
+
+
+                    <div class="calculator-field">
+
+                        <label for="calcTransport">
+                            Transport / year (RUB)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="calcTransport"
+                            min="0"
+                            placeholder="e.g. 30000"
+                        >
+
+                    </div>
+
+
+                    <div class="calculator-field">
+
+                        <label for="calcInsurance">
+                            Insurance / year (RUB)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="calcInsurance"
+                            min="0"
+                            placeholder="e.g. 10000"
+                        >
+
+                    </div>
+
+
+                    <div class="calculator-field">
+
+                        <label for="calcOther">
+                            Other expenses / year (RUB)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="calcOther"
+                            min="0"
+                            placeholder="e.g. 25000"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="calculator-actions">
+
+                    <button
+                        type="button"
+                        id="calculateBudget"
+                        class="button button-primary"
+                    >
+                        Calculate Total
+                    </button>
+
+                    <button
+                        type="button"
+                        id="resetBudget"
+                        class="button button-light"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Result -->
+
+            <div class="budget-result-card">
+
+                <span class="mini-label">
+                    ESTIMATED COST
+                </span>
+
+                <div
+                    class="budget-total"
+                    id="budgetTotal"
+                >
+                    ₽ 0
+                </div>
+
+                <p>
+                    Estimated annual cost
+                </p>
+
+
+                <div class="budget-breakdown">
+
+                    <div>
+                        <span>Tuition</span>
+                        <strong id="resultTuition">₽ 0</strong>
+                    </div>
+
+                    <div>
+                        <span>Hostel</span>
+                        <strong id="resultHostel">₽ 0</strong>
+                    </div>
+
+                    <div>
+                        <span>Living & other</span>
+                        <strong id="resultLiving">₽ 0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="budget-five-year">
+
+                    <span>
+                        Simple 5-year estimate
+                    </span>
+
+                    <strong id="budgetFiveYear">
+                        ₽ 0
+                    </strong>
+
+                </div>
+
+
+                <div class="calculator-note">
+                    Estimates are planning tools, not guaranteed prices.
+                    Always verify current university and official costs.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     APPLICATION PATH
+========================================================= -->
+
+<section class="section white-section" id="application-path">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                APPLICATION PATH
+            </div>
+
+            <h2>
+                Know what to do next.
+            </h2>
+
+            <p>
+                Build a practical route from choosing a programme
+                to arriving at your university.
+            </p>
+
+        </div>
+
+
+        <div class="path-selector">
+
+            <button
+                type="button"
+                class="path-option active"
+                data-path="mbbs"
+            >
+                <strong>MBBS / Medicine</strong>
+                <span>Medical student path</span>
+            </button>
 
 
             <button
-              class="btn btn-primary"
-              type="submit"
+                type="button"
+                class="path-option"
+                data-path="engineering"
             >
-              ✦ Ask Scholar Path AI
+                <strong>Engineering / IT</strong>
+                <span>Technical programmes</span>
             </button>
 
-          </form>
 
-
-          <div
-            class="ai-answer"
-            id="aiAnswer"
-          >
-            Select a university and ask your question.
-          </div>
+            <button
+                type="button"
+                class="path-option"
+                data-path="other"
+            >
+                <strong>Other programmes</strong>
+                <span>General admission route</span>
+            </button>
 
         </div>
 
-      </div>
 
-    </section>
+        <div class="application-timeline" id="applicationTimeline">
 
+            <!-- app.js fills this -->
 
-    <!-- =====================================================
-         VERIFICATION
-         ===================================================== -->
-
-    <section
-      class="section section-light"
-      id="verification"
-    >
-
-      <div class="container">
-
-        <div class="section-label">
-          Our principle
         </div>
 
-        <h2 class="section-title">
-          Trust should be built from evidence.
-        </h2>
 
-        <p class="section-description">
-          Scholar Path Russia should never depend on exaggerated
-          claims simply to make a university look attractive.
-        </p>
+        <div class="path-disclaimer">
+            Exact admission requirements, deadlines, visa rules and
+            document requirements must be checked against the current
+            official university and government sources.
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SCHOLARSHIPS
+========================================================= -->
+
+<section class="section light-section" id="scholarships">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                SCHOLARSHIP PATHWAYS
+            </div>
+
+            <h2>
+                Understand your funding options.
+            </h2>
+
+            <p>
+                Scholarships can have different eligibility,
+                coverage and application routes. Do not treat every
+                scholarship as the same.
+            </p>
+
+        </div>
+
+
+        <div class="scholarship-grid">
+
+            <article class="scholarship-card">
+
+                <div class="scholarship-number">
+                    01
+                </div>
+
+                <h3>
+                    Russian Government Scholarship
+                </h3>
+
+                <p>
+                    Explore the government scholarship route and
+                    verify current eligibility, coverage and application
+                    procedure from official sources.
+                </p>
+
+                <a
+                    href="https://education-in-russia.com/"
+                    target="_blank"
+                    rel="noopener"
+                    class="feature-link"
+                >
+                    Official scholarship platform →
+                </a>
+
+            </article>
+
+
+            <article class="scholarship-card">
+
+                <div class="scholarship-number">
+                    02
+                </div>
+
+                <h3>
+                    Open Doors
+                </h3>
+
+                <p>
+                    Some universities in the database are marked as
+                    having an Open Doors presence. Always check the
+                    current competition and subject list.
+                </p>
+
+                <a
+                    href="https://od.globaluni.ru/"
+                    target="_blank"
+                    rel="noopener"
+                    class="feature-link"
+                >
+                    Open Doors →
+                </a>
+
+            </article>
+
+
+            <article class="scholarship-card">
+
+                <div class="scholarship-number">
+                    03
+                </div>
+
+                <h3>
+                    University-specific funding
+                </h3>
+
+                <p>
+                    Universities may have their own funding,
+                    discounts or competitions. Check the individual
+                    university profile and official source.
+                </p>
+
+                <a
+                    href="#universities"
+                    class="feature-link"
+                >
+                    Search universities →
+                </a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DOCUMENT CHECKLIST
+========================================================= -->
+
+<section class="section white-section" id="documents">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                ADMISSION DOCUMENTS
+            </div>
+
+            <h2>
+                Build your document checklist.
+            </h2>
+
+            <p>
+                Requirements vary by programme and university.
+                Use this as a planning checklist, then verify the
+                exact official requirements.
+            </p>
+
+        </div>
+
+
+        <div class="document-checklist">
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Valid passport</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Academic certificates / marksheets</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Passport-size photographs</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Application form</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Programme-specific documents</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Medical documents where required</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Language documentation where required</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>Visa-related documents</span>
+            </label>
+
+            <label class="document-item">
+                <input type="checkbox">
+                <span>University invitation / admission document</span>
+            </label>
+
+        </div>
+
+
+        <div class="checklist-progress">
+
+            <div class="progress-top">
+                <span>Your checklist</span>
+                <strong id="checklistProgress">0%</strong>
+            </div>
+
+            <div class="progress-bar">
+                <div id="checklistProgressBar"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CITY EXPLORER
+========================================================= -->
+
+<section class="section dark-section" id="cities">
+
+    <div class="container">
+
+        <div class="section-heading dark-heading">
+
+            <div class="eyebrow">
+                RUSSIA CITY EXPLORER
+            </div>
+
+            <h2>
+                The city matters too.
+            </h2>
+
+            <p>
+                Explore cities represented in the university database.
+            </p>
+
+        </div>
+
+
+        <div class="city-search">
+
+            <input
+                type="text"
+                id="citySearch"
+                placeholder="Search a city..."
+            >
+
+            <button
+                type="button"
+                id="clearCitySearch"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
+        <div
+            class="city-grid"
+            id="cityGrid"
+        >
+            <!-- app.js fills cities -->
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     COMPARE UNIVERSITIES
+========================================================= -->
+
+<section class="section white-section" id="compare">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                COMPARE
+            </div>
+
+            <h2>
+                Compare universities side by side.
+            </h2>
+
+            <p>
+                Select up to three universities and compare the
+                information available in the database.
+            </p>
+
+        </div>
+
+
+        <div class="compare-selector-grid">
+
+            <div class="compare-selector">
+
+                <label for="compareOne">
+                    University 1
+                </label>
+
+                <select id="compareOne">
+
+                    <option value="">
+                        Select university
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="compare-selector">
+
+                <label for="compareTwo">
+                    University 2
+                </label>
+
+                <select id="compareTwo">
+
+                    <option value="">
+                        Select university
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="compare-selector">
+
+                <label for="compareThree">
+                    University 3
+                </label>
+
+                <select id="compareThree">
+
+                    <option value="">
+                        Select university
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="runCompare"
+            class="button button-primary"
+        >
+            Compare Universities →
+        </button>
+
+
+        <div
+            class="comparison-container"
+            id="comparisonContainer"
+        >
+
+            <div class="empty-tool-state">
+                Select universities above to compare them.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     AI ASSISTANT
+========================================================= -->
+
+<section class="section ai-section" id="ai">
+
+    <div class="container">
+
+        <div class="section-heading dark-heading">
+
+            <div class="eyebrow">
+                SCHOLAR PATH AI
+            </div>
+
+            <h2>
+                Ask before you decide.
+            </h2>
+
+            <p>
+                Ask questions about universities, admissions,
+                fees, scholarships, accommodation and documents.
+            </p>
+
+        </div>
+
+
+        <div class="ai-card">
+
+            <div class="ai-header">
+
+                <div class="ai-icon">
+                    ✦
+                </div>
+
+                <div>
+                    <h3>
+                        AI University Assistant
+                    </h3>
+
+                    <p>
+                        Answers should be checked against current official sources.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="ai-form">
+
+                <div class="form-group">
+
+                    <label for="aiUniversity">
+                        Select university
+                    </label>
+
+                    <select id="aiUniversity">
+
+                        <option value="">
+                            Select a university
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="aiQuestion">
+                        Your question
+                    </label>
+
+                    <textarea
+                        id="aiQuestion"
+                        rows="5"
+                        placeholder="Example: What should I verify before applying to this university?"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="ai-topic-buttons">
+
+                    <button
+                        type="button"
+                        data-ai-topic="Admission"
+                    >
+                        Admission
+                    </button>
+
+                    <button
+                        type="button"
+                        data-ai-topic="Fees"
+                    >
+                        Fees
+                    </button>
+
+                    <button
+                        type="button"
+                        data-ai-topic="Scholarships"
+                    >
+                        Scholarships
+                    </button>
+
+                    <button
+                        type="button"
+                        data-ai-topic="Hostel"
+                    >
+                        Hostel
+                    </button>
+
+                    <button
+                        type="button"
+                        data-ai-topic="Documents"
+                    >
+                        Documents
+                    </button>
+
+                    <button
+                        type="button"
+                        data-ai-topic="Pros & Checks"
+                    >
+                        Pros & Checks
+                    </button>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="askAI"
+                    class="button button-primary full-width"
+                >
+                    ✦ Ask Scholar Path AI
+                </button>
+
+            </div>
+
+
+            <div
+                class="ai-response"
+                id="aiResponse"
+            >
+
+                <strong>
+                    Scholar Path AI
+                </strong>
+
+                <p>
+                    Select a university and ask your question.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     VERIFICATION
+========================================================= -->
+
+<section class="section light-section" id="verification">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                OUR PRINCIPLE
+            </div>
+
+            <h2>
+                Trust should be built from evidence.
+            </h2>
+
+            <p>
+                Scholar Path Russia should never depend on exaggerated
+                claims simply to make a university look attractive.
+            </p>
+
+        </div>
 
 
         <div class="verification-grid">
 
-          <article class="verification-card">
+            <article class="verification-card">
 
-            <h3>
-              What we want to show
-            </h3>
+                <h3>
+                    What we want to show
+                </h3>
 
-            <ul>
+                <p>
+                    Important university claims should have a clear
+                    source or clearly stated verification status.
+                </p>
 
-              <li>
-                Official university information
-              </li>
+                <ul>
+                    <li>Official university information</li>
+                    <li>Official programme information</li>
+                    <li>Published fee information</li>
+                    <li>Official scholarship information</li>
+                    <li>Official regulatory information where applicable</li>
+                </ul>
 
-              <li>
-                Official programme information
-              </li>
-
-              <li>
-                Published fee information
-              </li>
-
-              <li>
-                Official scholarship information
-              </li>
-
-              <li>
-                Official regulatory information where applicable
-              </li>
-
-              <li>
-                Source and verification date wherever practical
-              </li>
-
-            </ul>
-
-          </article>
+            </article>
 
 
-          <article class="verification-card">
+            <article class="verification-card">
 
-            <h3>
-              What we will never do
-            </h3>
+                <h3>
+                    What we will never do
+                </h3>
 
-            <ul>
+                <p>
+                    We will not convert uncertain information into
+                    confident marketing statements.
+                </p>
 
-              <li>
-                No invented rankings
-              </li>
+                <ul>
+                    <li>No invented rankings</li>
+                    <li>No invented recognition claims</li>
+                    <li>No fake approval badges</li>
+                    <li>No guaranteed admission promises</li>
+                    <li>No guaranteed licensing or exam outcomes</li>
+                </ul>
 
-              <li>
-                No invented recognition claims
-              </li>
-
-              <li>
-                No fake approval badges
-              </li>
-
-              <li>
-                No guaranteed admission promises
-              </li>
-
-              <li>
-                No guaranteed licensing or examination outcomes
-              </li>
-
-              <li>
-                No presenting outdated information as current
-              </li>
-
-            </ul>
-
-          </article>
+            </article>
 
         </div>
 
-      </div>
 
-    </section>
+        <div class="verification-note">
 
+            <strong>
+                Verification status matters.
+            </strong>
 
-    <!-- =====================================================
-         CITIES
-         ===================================================== -->
-
-    <section
-      class="section section-white"
-      id="cities"
-    >
-
-      <div class="container">
-
-        <div class="section-label">
-          Student life
-        </div>
-
-        <h2 class="section-title">
-          The city matters too.
-        </h2>
-
-        <p class="section-description">
-          A university decision is also a decision about the
-          city where you will live, study and build your life.
-        </p>
-
-
-        <div class="feature-grid">
-
-          <article class="feature-card">
-            <div class="feature-icon">🌡️</div>
-            <h3>Climate</h3>
             <p>
-              Understand seasonal conditions and what living
-              there may actually feel like.
+                A field marked “Not verified” means Scholar Path Russia
+                has not represented that information as verified.
+                Always open the official source before making a decision.
             </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">🚇</div>
-            <h3>Transport</h3>
-            <p>
-              Explore practical transportation and connectivity
-              considerations.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">🏠</div>
-            <h3>Living costs</h3>
-            <p>
-              Separate university costs from everyday living
-              expenses.
-            </p>
-          </article>
 
         </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FAQ
-         ===================================================== -->
-
-    <section
-      class="section section-light"
-      id="faq"
-    >
-
-      <div class="container">
-
-        <div class="section-label">
-          Frequently asked questions
-        </div>
-
-        <h2 class="section-title">
-          Important questions, answered clearly.
-        </h2>
-
-        <p class="section-description">
-          Short answers for students and parents.
-        </p>
-
-
-        <div class="faq">
-
-          <details>
-            <summary>
-              What does Scholar Path Russia provide?
-            </summary>
-
-            <p>
-              A student-focused platform for researching,
-              comparing and understanding Russian universities,
-              programmes, costs, scholarships and related
-              admission information.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Are scholarships guaranteed?
-            </summary>
-
-            <p>
-              No. Scholarship availability, eligibility,
-              selection and coverage depend on the applicable
-              official programme and current rules.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Can university fees change?
-            </summary>
-
-            <p>
-              Yes. Fees and other conditions can change by
-              academic year. Students should verify current
-              official information before making a decision.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Is medical recognition permanent?
-            </summary>
-
-            <p>
-              Recognition and professional eligibility can
-              depend on the country, programme, graduation year
-              and current regulations. Always verify with the
-              relevant official authority.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Why does Scholar Path Russia show verification notes?
-            </summary>
-
-            <p>
-              Because important education claims should be
-              traceable to an appropriate official or published
-              source whenever possible.
-            </p>
-          </details>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CTA
-         ===================================================== -->
-
-    <section class="cta">
-
-      <h2>
-        Your university decision deserves more than a brochure.
-      </h2>
-
-      <p>
-        Research carefully. Compare honestly. Verify before
-        you apply. Build your path with confidence.
-      </p>
-
-      <a
-        href="#universities"
-        class="btn btn-primary"
-      >
-        Start Exploring →
-      </a>
-
-    </section>
-
-  </main>
-
-
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
-
-  <footer>
-
-    <div class="container footer-grid">
-
-      <div class="footer-brand">
-
-        <div class="brand">
-
-          <img
-            src="logo.jpg"
-            alt="Scholar Path Russia logo"
-            class="brand-logo"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
-          >
-
-          <span
-            class="brand-fallback"
-            style="display:none;"
-          >
-            SP
-          </span>
-
-          <span>
-
-            <span class="brand-name">
-              Scholar Path Russia
-            </span>
-
-            <span class="brand-sub">
-              STUDY · COMPARE · DECIDE
-            </span>
-
-          </span>
-
-        </div>
-
-
-        <p>
-          A student-focused platform designed to make
-          researching Russian higher education clearer,
-          more transparent and easier to understand.
-        </p>
-
-      </div>
-
-
-      <div>
-
-        <h4>
-          Explore
-        </h4>
-
-        <a href="#universities">
-          Universities
-        </a>
-
-        <a href="#scholarships">
-          Scholarships
-        </a>
-
-        <a href="#budget">
-          Budget
-        </a>
-
-        <a href="#cities">
-          Student Life
-        </a>
-
-      </div>
-
-
-      <div>
-
-        <h4>
-          Student Tools
-        </h4>
-
-        <a href="#ai">
-          AI Assistant
-        </a>
-
-        <a href="#universities">
-          University Explorer
-        </a>
-
-        <a href="#faq">
-          FAQ
-        </a>
-
-        <a href="#verification">
-          Verification
-        </a>
-
-      </div>
-
-
-      <div>
-
-        <h4>
-          Important
-        </h4>
-
-        <a href="#verification">
-          Information Policy
-        </a>
-
-        <a href="#verification">
-          Disclaimer
-        </a>
-
-        <a href="#verification">
-          Source Verification
-        </a>
-
-      </div>
 
     </div>
 
+</section>
 
-    <div class="container footer-bottom">
 
-      <span>
-        © 2026 Scholar Path Russia. All rights reserved.
-      </span>
 
-      <span>
-        Information may change. Always verify current official requirements.
-      </span>
+<!-- =========================================================
+     GALLERY
+========================================================= -->
+
+<section class="section white-section" id="gallery">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="eyebrow">
+                STUDENT LIFE
+            </div>
+
+            <h2>
+                See the journey beyond the brochure.
+            </h2>
+
+            <p>
+                University life includes academics, cities, culture,
+                accommodation and everyday student experiences.
+            </p>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item large">
+                <div class="gallery-placeholder">
+                    <span>Russia</span>
+                    <strong>University Life</strong>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span>Campus</span>
+                    <strong>Student Experience</strong>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span>City</span>
+                    <strong>Explore Russia</strong>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <span>Community</span>
+                    <strong>International Students</strong>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
-  </footer>
+</section>
 
 
-  <!-- =======================================================
-       SAFE PAGE FUNCTIONS
-       These ensure basic interactions work even if app.js
-       has an unrelated error.
-       ======================================================= -->
 
-  <script>
+<!-- =========================================================
+     FAQ
+========================================================= -->
 
-    function scrollToSection(id) {
-      const element = document.getElementById(id);
+<section class="section light-section" id="faq">
 
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    }
+    <div class="container">
 
+        <div class="section-heading">
 
-    function showComingSoon(name) {
+            <div class="eyebrow">
+                FREQUENTLY ASKED QUESTIONS
+            </div>
 
-      alert(
-        name +
-        " is being prepared. The verified version will be added here."
-      );
+            <h2>
+                Important questions, answered clearly.
+            </h2>
 
-    }
+            <p>
+                Short answers for students and parents.
+            </p>
 
+        </div>
 
-    function openBudgetCalculator() {
 
-      const tuition =
-        prompt("Annual tuition fee (RUB):", "266120");
+        <div class="faq-list">
 
-      if (tuition === null) return;
+            <details class="faq-item">
 
-      const hostel =
-        prompt("Annual hostel/accommodation cost (RUB):", "12000");
+                <summary>
+                    What does Scholar Path Russia provide?
+                    <span>+</span>
+                </summary>
 
-      if (hostel === null) return;
+                <div class="faq-answer">
+                    <p>
+                        Scholar Path Russia is designed as a student
+                        decision platform for researching Russian
+                        universities, programmes, costs, scholarships,
+                        cities, documents and application pathways.
+                    </p>
+                </div>
 
-      const living =
-        prompt("Estimated annual living expenses (RUB):", "180000");
+            </details>
 
-      if (living === null) return;
 
-      const other =
-        prompt("Other annual expenses (RUB):", "10000");
+            <details class="faq-item">
 
-      if (other === null) return;
+                <summary>
+                    Are scholarships guaranteed?
+                    <span>+</span>
+                </summary>
 
-      const total =
-        Number(tuition || 0) +
-        Number(hostel || 0) +
-        Number(living || 0) +
-        Number(other || 0);
+                <div class="faq-answer">
+                    <p>
+                        No. Scholarship eligibility, selection and
+                        availability depend on the relevant official
+                        programme and current rules.
+                    </p>
+                </div>
 
-      alert(
-        "Estimated annual budget: " +
-        total.toLocaleString("en-IN") +
-        " RUB"
-      );
+            </details>
 
-    }
 
+            <details class="faq-item">
 
-    /* HERO SEARCH */
+                <summary>
+                    Can university fees change?
+                    <span>+</span>
+                </summary>
 
-    const heroSearchForm =
-      document.getElementById("heroSearchForm");
+                <div class="faq-answer">
+                    <p>
+                        Yes. Fees and other costs can change. The
+                        database therefore displays verification status
+                        and official sources wherever available.
+                    </p>
+                </div>
 
-    if (heroSearchForm) {
+            </details>
 
-      heroSearchForm.addEventListener(
-        "submit",
-        function(event) {
 
-          event.preventDefault();
+            <details class="faq-item">
 
-          const university =
-            document.getElementById("heroUniversity").value.trim();
+                <summary>
+                    Is information about medical recognition permanent?
+                    <span>+</span>
+                </summary>
 
-          const city =
-            document.getElementById("heroCity").value.trim();
+                <div class="faq-answer">
+                    <p>
+                        No assumption should be made from a general
+                        website statement. Students should verify the
+                        current requirements of the relevant regulator
+                        before choosing a medical programme.
+                    </p>
+                </div>
 
-          const programme =
-            document.getElementById("heroProgramme").value;
+            </details>
 
-          const target =
-            document.getElementById("universitySearch");
 
-          if (target) {
-            target.value = university;
-          }
+            <details class="faq-item">
 
-          const cityTarget =
-            document.getElementById("citySearch");
+                <summary>
+                    Why does Scholar Path Russia show verification notes?
+                    <span>+</span>
+                </summary>
 
-          if (cityTarget) {
-            cityTarget.value = city;
-          }
+                <div class="faq-answer">
+                    <p>
+                        Because transparent uncertainty is better than
+                        an invented certainty. If something has not been
+                        verified, the website should say so.
+                    </p>
+                </div>
 
-          const programmeTarget =
-            document.getElementById("programmeSearch");
+            </details>
 
-          if (programmeTarget) {
-            programmeTarget.value = programme;
-          }
 
-          scrollToSection("universities");
+            <details class="faq-item">
 
-        }
-      );
+                <summary>
+                    Can I contact Scholar Path Russia for application guidance?
+                    <span>+</span>
+                </summary>
 
-    }
+                <div class="faq-answer">
+                    <p>
+                        Yes. Use the contact and application form below.
+                        The final form connection will be configured in
+                        the JavaScript file.
+                    </p>
+                </div>
 
+            </details>
 
-    /* UNIVERSITY SEARCH */
+        </div>
 
-    const universitySearchForm =
-      document.getElementById("universitySearchForm");
+    </div>
 
-    if (universitySearchForm) {
+</section>
 
-      universitySearchForm.addEventListener(
-        "submit",
-        function(event) {
 
-          event.preventDefault();
 
-          const university =
-            document.getElementById("universitySearch").value.trim();
+<!-- =========================================================
+     CONTACT / GOOGLE FORM
+========================================================= -->
 
-          const programme =
-            document.getElementById("programmeSearch").value;
+<section class="section contact-section" id="contact">
 
-          const city =
-            document.getElementById("citySearch").value.trim();
+    <div class="container">
 
-          const message =
-            document.getElementById("explorerMessage");
+        <div class="contact-layout">
 
-          if (!message) return;
+            <div class="contact-copy">
 
-          message.style.display = "block";
+                <div class="eyebrow">
+                    START YOUR JOURNEY
+                </div>
 
-          let text =
-            "University search ready.";
+                <h2>
+                    Your university decision
+                    deserves more than a brochure.
+                </h2>
 
-          if (university) {
-            text +=
-              " Searching for \"" +
-              university +
-              "\".";
-          }
+                <p>
+                    Research carefully. Compare honestly.
+                    Verify before you apply. Build your path with confidence.
+                </p>
 
-          if (programme) {
-            text +=
-              " Programme: " +
-              programme +
-              ".";
-          }
 
-          if (city) {
-            text +=
-              " City: " +
-              city +
-              ".";
-          }
+                <div class="contact-actions">
 
-          message.textContent = text;
+                    <a
+                        href="#universities"
+                        class="button button-primary"
+                    >
+                        Start Exploring →
+                    </a>
 
-        }
-      );
+                    <a
+                        href="#application-path"
+                        class="button button-secondary"
+                    >
+                        See Application Path
+                    </a>
 
-    }
+                </div>
 
+            </div>
 
-    /* =====================================================
-       AI
-       ===================================================== */
 
-    const aiForm =
-      document.getElementById("aiForm");
+            <!-- Contact Form -->
 
-    if (aiForm) {
+            <div class="contact-form-card">
 
-      aiForm.addEventListener(
-        "submit",
-        async function(event) {
+                <div class="contact-form-heading">
 
-          event.preventDefault();
+                    <div class="tool-icon">
+                        ✉
+                    </div>
 
-          const university =
-            document.getElementById("aiUniversity").value;
+                    <div>
+                        <h3>
+                            Request guidance
+                        </h3>
 
-          const question =
-            document.getElementById("aiQuestion").value.trim();
+                        <p>
+                            Tell us what you are looking for.
+                        </p>
+                    </div>
 
-          const answer =
-            document.getElementById("aiAnswer");
+                </div>
 
-          if (!answer) return;
 
-          if (!university || !question) {
+                <!--
+                    GOOGLE FORM CONNECTION
 
-            answer.textContent =
-              "Please select a university and enter your question.";
+                    app.js will use the configured Google Form URL.
 
-            return;
-          }
+                    Replace the placeholder in app.js later with
+                    your actual Google Form URL.
+                -->
 
-          answer.textContent =
-            "Preparing your question for Scholar Path AI…";
+                <form
+                    id="contactForm"
+                    class="contact-form"
+                >
 
-          try {
+                    <div class="form-two-columns">
 
-            const response =
-              await fetch(
-                "/api/college-ai",
-                {
-                  method: "POST",
+                        <div class="form-group">
 
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
+                            <label for="contactName">
+                                Full name
+                            </label>
 
-                  body: JSON.stringify({
-                    university: university,
-                    question: question
-                  })
-                }
-              );
+                            <input
+                                type="text"
+                                id="contactName"
+                                required
+                                placeholder="Your name"
+                            >
 
+                        </div>
 
-            if (!response.ok) {
-              throw new Error(
-                "AI service unavailable"
-              );
-            }
 
+                        <div class="form-group">
 
-            const data =
-              await response.json();
+                            <label for="contactWhatsApp">
+                                WhatsApp
+                            </label>
 
+                            <input
+                                type="tel"
+                                id="contactWhatsApp"
+                                placeholder="+91..."
+                            >
 
-            answer.textContent =
-              data.answer ||
-              data.response ||
-              data.message ||
-              "The AI assistant did not return an answer.";
+                        </div>
 
-          }
+                    </div>
 
-          catch (error) {
 
-            answer.innerHTML =
-              "<strong>Scholar Path AI</strong><br><br>" +
-              "The AI service is temporarily unavailable. " +
-              "Please try again shortly. " +
-              "Important: always verify university information " +
-              "against current official sources.";
+                    <div class="form-group">
 
-          }
+                        <label for="contactEmail">
+                            Email
+                        </label>
 
-        }
-      );
+                        <input
+                            type="email"
+                            id="contactEmail"
+                            required
+                            placeholder="you@example.com"
+                        >
 
-    }
+                    </div>
 
-  </script>
 
+                    <div class="form-two-columns">
 
-  <!-- Existing project JavaScript -->
-  <script src="app.js"></script>
+                        <div class="form-group">
+
+                            <label for="contactProgramme">
+                                Programme
+                            </label>
+
+                            <select id="contactProgramme">
+
+                                <option value="">
+                                    Select programme
+                                </option>
+
+                                <option>
+                                    Medicine / MBBS
+                                </option>
+
+                                <option>
+                                    Dentistry
+                                </option>
+
+                                <option>
+                                    Pharmacy
+                                </option>
+
+                                <option>
+                                    Engineering
+                                </option>
+
+                                <option>
+                                    IT / Computer Science
+                                </option>
+
+                                <option>
+                                    Business / Economics
+                                </option>
+
+                                <option>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contactCountry">
+                                Country
+                            </label>
+
+                            <input
+                                type="text"
+                                id="contactCountry"
+                                placeholder="India"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="contactMessage">
+                            What do you need help with?
+                        </label>
+
+                        <textarea
+                            id="contactMessage"
+                            rows="4"
+                            placeholder="Tell us about your university, scholarship or application question..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary full-width"
+                    >
+                        Submit Request →
+                    </button>
+
+
+                    <div
+                        id="contactFormMessage"
+                        class="form-message"
+                    ></div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER CTA
+========================================================= -->
+
+<section class="footer-cta">
+
+    <div class="container">
+
+        <div class="footer-cta-content">
+
+            <div class="eyebrow">
+                SCHOLAR PATH RUSSIA
+            </div>
+
+            <h2>
+                Study with information.
+                Decide with confidence.
+            </h2>
+
+            <p>
+                Research carefully. Compare honestly.
+                Verify before you apply.
+            </p>
+
+            <a
+                href="#universities"
+                class="button button-white"
+            >
+                Explore Universities →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="#home" class="brand footer-brand-link">
+
+                    <div class="brand-logo">
+
+                        <img
+                            src="logo.png"
+                            alt="Scholar Path Russia"
+                            onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');"
+                        >
+
+                        <span class="logo-fallback-text">
+                            SP
+                        </span>
+
+                    </div>
+
+                    <div class="brand-text">
+                        <strong>Scholar Path Russia</strong>
+                        <small>STUDY • COMPARE • DECIDE</small>
+                    </div>
+
+                </a>
+
+
+                <p>
+                    A student-focused platform designed to make
+                    researching Russian higher education clearer,
+                    more transparent and easier to understand.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="#universities">
+                    Universities
+                </a>
+
+                <a href="#match">
+                    University Match
+                </a>
+
+                <a href="#budget">
+                    Budget Calculator
+                </a>
+
+                <a href="#compare">
+                    Compare
+                </a>
+
+                <a href="#cities">
+                    Cities
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Student Tools
+                </h4>
+
+                <a href="#application-path">
+                    Application Path
+                </a>
+
+                <a href="#documents">
+                    Documents
+                </a>
+
+                <a href="#scholarships">
+                    Scholarships
+                </a>
+
+                <a href="#ai">
+                    AI Assistant
+                </a>
+
+                <a href="#faq">
+                    FAQ
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Important
+                </h4>
+
+                <a href="#verification">
+                    Verification
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+                <a href="#contact">
+                    Request Guidance
+                </a>
+
+                <a href="#faq">
+                    Information Policy
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © <span id="currentYear">2026</span>
+                Scholar Path Russia. All rights reserved.
+            </span>
+
+            <span>
+                Information may change. Always verify current official requirements.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     UNIVERSITY MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="universityModal"
+    aria-hidden="true"
+>
+
+    <div class="modal-overlay" data-close-modal></div>
+
+    <div
+        class="modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalUniversityName"
+    >
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeUniversityModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div id="universityModalBody">
+
+            <!-- app.js fills profile -->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+>
+</div>
+
+
+
+<!-- =========================================================
+     FLOATING CONTACT BUTTON
+========================================================= -->
+
+<div class="floating-contact">
+
+    <a
+        href="#contact"
+        class="floating-contact-button"
+        aria-label="Contact Scholar Path Russia"
+    >
+        ✉
+    </a>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="app.js"></script>
 
 </body>
 </html>
