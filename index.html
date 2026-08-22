@@ -1,1345 +1,2410 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1.0"
->
-
-<title>
-Scholar Path Russia | Study in Russia | Virangeeta Navigators
-</title>
-
-<meta
-  name="description"
-  content="Scholar Path Russia by Virangeeta Navigators helps students explore Russian universities, compare programmes, estimate study costs, understand scholarships and make informed decisions."
->
-
-<meta
-  name="author"
-  content="Virangeeta Navigators"
->
-
-<meta
-  name="robots"
-  content="index,follow,max-image-preview:large"
->
-
-<link
-  rel="icon"
-  type="image/jpeg"
-  href="logo.jpg"
->
-
-<meta
-  property="og:title"
-  content="Scholar Path Russia | Virangeeta Navigators"
->
-
-<meta
-  property="og:description"
-  content="Study • Compare • Decide — source-first university information for students."
->
-
-<meta
-  property="og:image"
-  content="logo.jpg"
->
-
-<meta
-  name="theme-color"
-  content="#07111f"
->
-
-<style>
-
-/* =========================================================
-   SCHOLAR PATH RUSSIA
-   COMPLETE WEBSITE SYSTEM
-========================================================= */
-
-:root{
-  --navy:#07111f;
-  --navy2:#0d1b2e;
-  --teal:#117f76;
-  --teal2:#0a655e;
-  --mint:#eaf7f4;
-  --paper:#f6f8fb;
-  --white:#ffffff;
-  --text:#102033;
-  --muted:#68788b;
-  --line:#dce4eb;
-  --gold:#c99a3d;
-  --danger:#a43a3a;
-  --shadow:0 15px 50px rgba(7,17,31,.09);
-  --radius:20px;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
-  color:var(--text);
-  background:#fff;
-  line-height:1.6;
-}
-
-body.modal-open{
-  overflow:hidden;
-}
-
-img{
-  max-width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.container{
-  width:min(1200px,calc(100% - 30px));
-  margin:auto;
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(255,255,255,.96);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-
-.nav{
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-.brand img{
-  width:46px;
-  height:46px;
-  object-fit:contain;
-  border-radius:12px;
-}
-
-.brand small{
-  display:block;
-  color:var(--muted);
-  font-size:8px;
-  letter-spacing:1.8px;
-  margin-top:1px;
-}
-
-.navlinks{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  font-size:12px;
-  font-weight:800;
-}
-
-.navlinks a:hover{
-  color:var(--teal);
-}
-
-.mobile-menu{
-  display:none;
-  border:1px solid var(--line);
-  background:#fff;
-  width:42px;
-  height:42px;
-  border-radius:11px;
-  font-size:20px;
-}
-
-.mobile-nav{
-  display:none;
-  padding:12px 0 18px;
-  border-top:1px solid var(--line);
-}
-
-.mobile-nav.open{
-  display:block;
-}
-
-.mobile-nav a{
-  display:block;
-  padding:10px 0;
-  font-size:13px;
-  font-weight:800;
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  border:1px solid var(--teal);
-  background:var(--teal);
-  color:#fff;
-  border-radius:11px;
-  padding:11px 16px;
-  font-weight:800;
-  cursor:pointer;
-  transition:.2s ease;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
-  background:var(--teal2);
-}
-
-.btn.secondary{
-  background:#fff;
-  color:var(--text);
-  border-color:var(--line);
-}
-
-.btn.dark{
-  background:var(--navy);
-  border-color:var(--navy);
-}
-
-.btn.gold{
-  background:var(--gold);
-  border-color:var(--gold);
-}
-
-.btn.small{
-  padding:8px 11px;
-  font-size:11px;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-  background:
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(17,127,118,.12),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #f7fbff,
-      #eef8f6
-    );
-  padding:78px 0 70px;
-}
-
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:50px;
-  align-items:center;
-}
-
-.eyebrow{
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:900;
-  color:var(--teal);
-}
-
-h1{
-  font-size:
-    clamp(44px,6vw,78px);
-  line-height:.97;
-  letter-spacing:-4px;
-  margin:16px 0;
-}
-
-h1 span{
-  color:var(--teal);
-}
-
-.lead{
-  font-size:18px;
-  color:var(--muted);
-  max-width:720px;
-}
-
-.actions{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  margin-top:24px;
-}
-
-.trust{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:22px;
-}
-
-.pill,
-.badge{
-  display:inline-flex;
-  align-items:center;
-  border-radius:999px;
-  background:#fff;
-  border:1px solid var(--line);
-  padding:6px 10px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.green{
-  background:#e3f5ef;
-  color:#087367;
-  border:0;
-}
-
-.hero-card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:28px;
-  padding:28px;
-  box-shadow:var(--shadow);
-}
-
-.hero-logo{
-  width:125px;
-  height:125px;
-  object-fit:contain;
-  display:block;
-  margin:0 auto 20px;
-}
-
-.hero-card h2{
-  text-align:center;
-  margin:0 0 8px;
-}
-
-.hero-card p{
-  text-align:center;
-  color:var(--muted);
-}
-
-/* =========================================================
-   GENERAL
-========================================================= */
-
-section{
-  padding:70px 0;
-}
-
-.paper{
-  background:var(--paper);
-}
-
-.head{
-  margin-bottom:28px;
-}
-
-.head h2{
-  font-size:
-    clamp(30px,4vw,44px);
-  line-height:1.05;
-  margin:8px 0;
-  letter-spacing:-1.5px;
-}
-
-.head p{
-  color:var(--muted);
-  max-width:850px;
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-.grid4{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.panel{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px;
-  box-shadow:var(--shadow);
-}
-
-.mini{
-  font-size:12px;
-  color:var(--muted);
-}
-
-.big{
-  font-size:34px;
-  font-weight:900;
-  color:var(--teal);
-}
-
-/* =========================================================
-   UNIVERSITY EXPLORER
-========================================================= */
-
-.filters{
-  display:grid;
-  grid-template-columns:
-    repeat(4,1fr);
-  gap:10px;
-  background:#fff;
-  border:1px solid var(--line);
-  padding:17px;
-  border-radius:20px;
-  box-shadow:var(--shadow);
-}
-
-.search{
-  margin-top:10px;
-}
-
-label{
-  display:block;
-  font-size:10px;
-  font-weight:900;
-  margin-bottom:5px;
-  letter-spacing:.3px;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:12px;
-  background:#fff;
-  color:var(--text);
-  outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--teal);
-  box-shadow:
-    0 0 0 3px
-    rgba(17,127,118,.08);
-}
-
-.explorer-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-top:18px;
-}
-
-.featured-label{
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1px;
-  color:var(--teal);
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:
-    repeat(2,1fr);
-  gap:18px;
-  margin-top:17px;
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:
-    0 7px 30px
-    rgba(7,17,31,.05);
-  transition:.2s ease;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  box-shadow:var(--shadow);
-}
-
-.card-image{
-  width:100%;
-  height:180px;
-  border-radius:15px;
-  object-fit:cover;
-  background:var(--mint);
-  margin-bottom:15px;
-}
-
-.card-logo{
-  width:55px;
-  height:55px;
-  border-radius:13px;
-  object-fit:contain;
-  border:1px solid var(--line);
-  background:#fff;
-}
-
-.card-top{
-  display:flex;
-  gap:13px;
-  align-items:center;
-}
-
-.card h3{
-  margin:8px 0 3px;
-  line-height:1.2;
-}
-
-.loc{
-  color:var(--muted);
-  font-size:13px;
-  font-weight:700;
-}
-
-.badges{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-}
-
-.info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:14px;
-}
-
-.ibox{
-  background:var(--paper);
-  border-radius:11px;
-  padding:11px;
-}
-
-.ibox small{
-  display:block;
-  color:#728094;
-  font-size:9px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-.ibox strong{
-  display:block;
-  margin-top:3px;
-  font-size:12px;
-}
-
-.note{
-  margin-top:13px;
-  padding-top:13px;
-  border-top:1px solid var(--line);
-  font-size:12px;
-  color:var(--muted);
-}
-
-.card-actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:15px;
-}
-
-.card-actions .btn{
-  font-size:11px;
-}
-
-.hidden-university{
-  display:none;
-}
-
-.show-all .hidden-university{
-  display:block;
-}
-
-#showMoreUniversities{
-  display:block;
-  margin:25px auto 0;
-}
-
-/* =========================================================
-   MATCH
-========================================================= */
-
-.match{
-  background:var(--navy);
-  color:#fff;
-  border-radius:26px;
-  padding:26px;
-}
-
-.match-grid{
-  display:grid;
-  grid-template-columns:
-    repeat(3,1fr);
-  gap:11px;
-}
-
-.match input,
-.match select{
-  background:#12243b;
-  color:#fff;
-  border-color:#2b4058;
-}
-
-.score{
-  font-size:60px;
-  font-weight:900;
-  color:#70d6cb;
-  line-height:1;
-}
-
-.result-list{
-  display:grid;
-  gap:10px;
-  margin-top:17px;
-}
-
-.result{
-  background:#12243b;
-  border:1px solid #263d57;
-  padding:14px;
-  border-radius:13px;
-}
-
-/* =========================================================
-   MAP
-========================================================= */
-
-.map{
-  position:relative;
-  min-height:530px;
-  border-radius:25px;
-  background:
-    linear-gradient(
-      145deg,
-      #eef4f8,
-      #e5f3ef
-    );
-  overflow:hidden;
-  border:1px solid var(--line);
-}
-
-.map:before{
-  content:"RUSSIA";
-  position:absolute;
-  inset:45% 0 auto;
-  text-align:center;
-  font-size:72px;
-  font-weight:900;
-  letter-spacing:15px;
-  color:
-    rgba(17,127,118,.08);
-}
-
-.pin{
-  position:absolute;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:var(--teal);
-  border:3px solid #fff;
-  box-shadow:
-    0 4px 14px
-    rgba(0,0,0,.2);
-  cursor:pointer;
-}
-
-.pin span{
-  display:none;
-  position:absolute;
-  left:17px;
-  top:-9px;
-  white-space:nowrap;
-  background:var(--navy);
-  color:#fff;
-  padding:5px 8px;
-  border-radius:7px;
-  font-size:10px;
-}
-
-.pin:hover span{
-  display:block;
-}
-
-/* =========================================================
-   COMPARISON
-========================================================= */
-
-.compare-table{
-  overflow:auto;
-}
-
-.compare-table table{
-  border-collapse:collapse;
-  min-width:750px;
-  width:100%;
-}
-
-.compare-table th,
-.compare-table td{
-  padding:11px;
-  border-bottom:1px solid var(--line);
-  text-align:left;
-}
-
-.compare-table th{
-  background:var(--paper);
-}
-
-/* =========================================================
-   CALCULATOR
-========================================================= */
-
-.calc{
-  background:var(--navy);
-  color:#fff;
-  border-radius:25px;
-  padding:25px;
-}
-
-.calc input{
-  background:#12243b;
-  color:#fff;
-  border-color:#2b4058;
-}
-
-.total{
-  margin-top:18px;
-  background:#12243b;
-  padding:18px;
-  border-radius:14px;
-}
-
-.total strong{
-  display:block;
-  font-size:38px;
-  margin-top:4px;
-}
-
-/* =========================================================
-   GUIDES
-========================================================= */
-
-.article{
-  min-height:190px;
-}
-
-.article h3{
-  margin:8px 0;
-}
-
-.article a{
-  color:var(--teal);
-  font-weight:900;
-}
-
-/* =========================================================
-   TRACKER
-========================================================= */
-
-.tracker{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:22px;
-}
-
-.status-grid{
-  display:grid;
-  grid-template-columns:
-    repeat(6,1fr);
-  gap:8px;
-  margin-top:18px;
-}
-
-.status{
-  padding:12px 8px;
-  border-radius:11px;
-  background:#f1f4f7;
-  text-align:center;
-  font-size:10px;
-  font-weight:900;
-  border:0;
-}
-
-.status.done{
-  background:#dff3ee;
-  color:#087367;
-}
-
-.status.current{
-  background:#d9e8ff;
-  color:#1b4f9a;
-}
-
-/* =========================================================
-   GALLERY
-========================================================= */
-
-.gallery{
-  display:grid;
-  grid-template-columns:
-    repeat(4,1fr);
-  gap:12px;
-}
-
-.gallery-item{
-  position:relative;
-  overflow:hidden;
-  border-radius:16px;
-  background:var(--mint);
-  min-height:180px;
-}
-
-.gallery-item:first-child{
-  grid-column:span 2;
-  grid-row:span 2;
-}
-
-.gallery-item img{
-  width:100%;
-  height:100%;
-  min-height:180px;
-  object-fit:cover;
-  display:block;
-  transition:.35s ease;
-}
-
-.gallery-item:hover img{
-  transform:scale(1.05);
-}
-
-.gallery-caption{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:25px 13px 12px;
-  color:#fff;
-  font-weight:800;
-  font-size:12px;
-  background:
-    linear-gradient(
-      transparent,
-      rgba(0,0,0,.7)
-    );
-}
-
-/* =========================================================
-   TESTIMONIALS
-========================================================= */
-
-.testimonial{
-  position:relative;
-}
-
-.quote{
-  font-size:30px;
-  color:var(--teal);
-  font-weight:900;
-}
-
-.testimonial p{
-  color:var(--muted);
-}
-
-.student{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  margin-top:15px;
-}
-
-.student-avatar{
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  background:var(--mint);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  color:var(--teal);
-}
-
-/* =========================================================
-   FAQ
-========================================================= */
-
-.faq{
-  display:grid;
-  gap:10px;
-}
-
-.faq-item{
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-  overflow:hidden;
-}
-
-.faq-question{
-  width:100%;
-  text-align:left;
-  border:0;
-  background:#fff;
-  padding:17px;
-  font-weight:900;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.faq-answer{
-  display:none;
-  padding:0 17px 17px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.faq-item.open .faq-answer{
-  display:block;
-}
-
-/* =========================================================
-   AI ASSISTANT
-========================================================= */
-
-.ai-section{
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(17,127,118,.22),
-      transparent 35%
-    ),
-    var(--navy);
-  color:#fff;
-}
-
-.ai-box{
-  background:#0d1b2e;
-  border:1px solid #263d57;
-  border-radius:25px;
-  padding:24px;
-}
-
-.ai-box input,
-.ai-box select,
-.ai-box textarea{
-  background:#12243b;
-  color:#fff;
-  border-color:#2b4058;
-}
-
-.ai-result{
-  margin-top:18px;
-  padding:18px;
-  border-radius:15px;
-  background:#12243b;
-  border:1px solid #263d57;
-  min-height:70px;
-}
-
-.ai-result strong{
-  color:#70d6cb;
-}
-
-.ai-questions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
-.ai-question-btn{
-  border:1px solid #39536e;
-  background:#10243a;
-  color:#fff;
-  border-radius:999px;
-  padding:7px 11px;
-  font-size:10px;
-  cursor:pointer;
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:
-    rgba(3,10,18,.72);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  z-index:3000;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modalbox{
-  width:min(920px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:24px;
-  padding:25px;
-}
-
-.close{
-  float:right;
-  border:0;
-  background:#eef2f6;
-  border-radius:10px;
-  width:38px;
-  height:38px;
-  font-size:20px;
-}
-
-.modal-logo{
-  width:75px;
-  height:75px;
-  object-fit:contain;
-  border-radius:15px;
-  border:1px solid var(--line);
-}
-
-.modal-head{
-  display:flex;
-  gap:16px;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-.whatsapp-float{
-  position:fixed;
-  right:20px;
-  bottom:22px;
-  z-index:2500;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#25d366;
-  color:#fff;
-  font-size:28px;
-  box-shadow:
-    0 8px 28px
-    rgba(0,0,0,.22);
-}
-
-.whatsapp-float:hover{
-  transform:scale(1.06);
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-  background:var(--navy);
-  color:#d8e1e9;
-  padding:50px 0;
-}
-
-.footer{
-  display:grid;
-  grid-template-columns:
-    2fr 1fr 1fr;
-  gap:25px;
-}
-
-.footer a{
-  display:block;
-  color:#c8d4df;
-  margin:7px 0;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:950px){
-
-  .navlinks{
-    display:none;
-  }
-
-  .mobile-menu{
-    display:block;
-  }
-
-  .hero-grid,
-  .grid2{
-    grid-template-columns:1fr;
-  }
-
-  .filters{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
-
-  .grid3,
-  .grid4{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .match-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .status-grid{
-    grid-template-columns:
-      repeat(3,1fr);
-  }
-
-  .gallery{
-    grid-template-columns:1fr 1fr;
-  }
-
-}
-
-@media(max-width:600px){
-
-  .container{
-    width:calc(100% - 20px);
-  }
-
-  section{
-    padding:55px 0;
-  }
-
-  h1{
-    font-size:48px;
-    letter-spacing:-2.5px;
-  }
-
-  .filters,
-  .match-grid,
-  .grid3,
-  .grid4{
-    grid-template-columns:1fr;
-  }
-
-  .info{
-    grid-template-columns:1fr;
-  }
-
-  .status-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .gallery{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .gallery-item:first-child{
-    grid-column:span 2;
-  }
-
-  .hero{
-    padding:55px 0;
-  }
-
-  .brand span{
-    font-size:13px;
-  }
-
-  .header .btn{
-    display:none;
-  }
-
-  .footer{
-    grid-template-columns:1fr;
-  }
-
-}
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed var(--line);
-  border-radius:18px;
-  background:#fff;
-}
-
-/* =========================================================
-   HIGHLIGHT
-========================================================= */
-
-.highlight-box{
-  background:
-    linear-gradient(
-      135deg,
-      var(--mint),
-      #fff
-    );
-  border:1px solid #d7eae5;
-  border-radius:22px;
-  padding:23px;
-}
-
-/* =========================================================
-   SOURCE NOTICE
-========================================================= */
-
-.source-notice{
-  background:#f4f8f7;
-  border-left:4px solid var(--teal);
-  padding:14px 16px;
-  border-radius:10px;
-  color:#50616f;
-  font-size:12px;
-  margin-top:20px;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Scholar Path Russia — research, compare and understand Russian universities, admissions, fees, scholarships and student life."
+  >
+
+  <meta
+    name="theme-color"
+    content="#071a2b"
+  >
+
+  <title>Scholar Path Russia | Study • Compare • Decide</title>
+
+  <link rel="icon" href="logo.jpg">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* =========================================================
+       SCHOLAR PATH RUSSIA
+       SAFE BASE LAYOUT
+       ========================================================= */
+
+    :root {
+      --navy: #071a2b;
+      --navy-2: #0b2638;
+      --teal: #16a995;
+      --teal-dark: #087c70;
+      --cream: #f6f7f3;
+      --white: #ffffff;
+      --text: #102131;
+      --muted: #687681;
+      --line: #e3e8e6;
+      --shadow: 0 18px 55px rgba(7, 26, 43, .10);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--text);
+      font-family: "DM Sans", Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       TOP BAR
+       ========================================================= */
+
+    .topbar {
+      background: var(--navy);
+      color: #dce9ed;
+      font-size: 12px;
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 36px));
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .topbar span {
+      opacity: .9;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #27c7ae;
+      margin-right: 7px;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 76px;
+      width: min(1180px, calc(100% - 36px));
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: contain;
+      background: white;
+      border: 1px solid #e3e3df;
+    }
+
+    .brand-fallback {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--teal), #087c70);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .brand-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #758189;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-dark);
+    }
+
+    .nav-cta {
+      background: var(--navy);
+      color: white !important;
+      padding: 11px 17px;
+      border-radius: 12px;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(22,169,149,.35),
+          transparent 32%
+        ),
+        linear-gradient(
+          135deg,
+          #061827 0%,
+          #09283b 55%,
+          #075c5a 100%
+        );
+      padding: 95px 0 90px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+      right: -180px;
+      top: -170px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.07);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: #6fe2d1;
+    }
+
+    .hero-text {
+      max-width: 690px;
+      color: #d1dfe4;
+      font-size: 18px;
+      margin: 24px 0 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 13px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      background: #20b39f;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #29c3ae;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .hero-panel {
+      margin-top: 50px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 24px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 25px 70px rgba(0,0,0,.15);
+    }
+
+    .hero-panel-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .hero-panel-sub {
+      color: #bdd0d6;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr auto;
+      gap: 10px;
+    }
+
+    .search-row input,
+    .search-row select {
+      min-height: 50px;
+      border: 0;
+      border-radius: 12px;
+      padding: 0 15px;
+      outline: none;
+      background: white;
+      color: var(--text);
+    }
+
+    /* =========================================================
+       TRUST STRIP
+       ========================================================= */
+
+    .trust-strip {
+      background: white;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .trust-item {
+      padding: 22px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .trust-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* =========================================================
+       SECTION
+       ========================================================= */
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-light {
+      background: var(--cream);
+    }
+
+    .section-white {
+      background: white;
+    }
+
+    .section-dark {
+      background: var(--navy);
+      color: white;
+    }
+
+    .section-label {
+      color: var(--teal-dark);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-dark .section-label {
+      color: #51d4c0;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.1;
+      margin: 0 0 14px;
+      letter-spacing: -1px;
+    }
+
+    .section-description {
+      max-width: 730px;
+      color: var(--muted);
+      margin: 0 0 40px;
+    }
+
+    .section-dark .section-description {
+      color: #bdced5;
+    }
+
+    /* =========================================================
+       FEATURE CARDS
+       ========================================================= */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      min-height: 235px;
+      box-shadow: 0 8px 30px rgba(7,26,43,.04);
+      transition: .25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #e4f7f3;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 23px;
+      margin: 0 0 10px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 18px;
+    }
+
+    .feature-link {
+      color: var(--teal-dark);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       UNIVERSITY EXPLORER
+       ========================================================= */
+
+    .explorer {
+      background: var(--navy);
+      color: white;
+      padding: 32px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .explorer h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .explorer p {
+      color: #c5d5db;
+      margin-top: 5px;
+    }
+
+    .explorer-form {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr auto;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .explorer-form input,
+    .explorer-form select {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 15px;
+      border: 0;
+      border-radius: 12px;
+      outline: none;
+      background: white;
+    }
+
+    .explorer-message {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      color: #d9e7eb;
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       TOOLS
+       ========================================================= */
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .tool-card h3 {
+      margin-top: 0;
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .tool-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tool-button {
+      margin-top: 10px;
+      border: 0;
+      background: #e4f7f3;
+      color: var(--teal-dark);
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       AI
+       ========================================================= */
+
+    .ai-box {
+      background: white;
+      color: var(--text);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .ai-title {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 20px;
+    }
+
+    .ai-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg,#19b39f,#0c8074);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 23px;
+    }
+
+    .ai-title h3 {
+      margin: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 25px;
+    }
+
+    .ai-title p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .ai-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ai-form select,
+    .ai-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      outline: none;
+    }
+
+    .ai-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .ai-answer {
+      margin-top: 18px;
+      background: #f0faf8;
+      border: 1px solid #d5eee9;
+      border-radius: 15px;
+      padding: 18px;
+      color: #29444c;
+      min-height: 60px;
+    }
+
+    /* =========================================================
+       VERIFICATION
+       ========================================================= */
+
+    .verification-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .verification-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .verification-card h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 25px;
+    }
+
+    .verification-card li {
+      margin: 12px 0;
+      color: var(--muted);
+    }
+
+    .verification-card li::marker {
+      color: var(--teal);
+    }
+
+    /* =========================================================
+       FAQ
+       ========================================================= */
+
+    .faq {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq details {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 18px 20px;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .faq p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    /* =========================================================
+       CTA
+       ========================================================= */
+
+    .cta {
+      text-align: center;
+      color: white;
+      background:
+        radial-gradient(circle at 15% 30%, rgba(255,255,255,.08), transparent 25%),
+        linear-gradient(135deg, #075c5a, #0c988b);
+      padding: 95px 20px;
+    }
+
+    .cta h2 {
+      max-width: 850px;
+      margin: 0 auto 15px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.05;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 28px;
+      color: #d9efeb;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      background: #04131f;
+      color: white;
+      padding: 60px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    .footer-brand p {
+      color: #aebec5;
+      max-width: 370px;
+      font-size: 14px;
+    }
+
+    footer h4 {
+      margin-top: 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 19px;
+    }
+
+    footer a {
+      display: block;
+      color: #aebec5;
+      margin: 9px 0;
+      font-size: 13px;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      margin-top: 40px;
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #81939b;
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-row,
+      .explorer-form {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .verification-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .container,
+      .nav,
+      .hero-content,
+      .topbar-inner {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .topbar-inner {
+        font-size: 10px;
+      }
+
+      .topbar-inner span:last-child {
+        display: none;
+      }
+
+      .brand {
+        min-width: auto;
+      }
+
+      .brand-logo,
+      .brand-fallback {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .brand-sub {
+        font-size: 7px;
+      }
+
+      .nav {
+        min-height: 66px;
+      }
+
+      .nav-cta {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 65px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      .hero-panel {
+        padding: 17px;
+      }
+
+      .search-row,
+      .explorer-form {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .trust-item {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+
+      .feature-grid,
+      .tools-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        min-height: auto;
+      }
+
+      .explorer {
+        padding: 22px;
+      }
+
+      .verification-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
-<body id="top">
+<body>
 
-<!-- =======================================================
-HEADER
-======================================================= -->
+  <!-- =======================================================
+       TOP BAR
+       ======================================================= -->
 
-<header class="header">
-
-  <div class="container nav">
-
-    <a
-      class="brand"
-      href="#top"
-    >
-
-      <img
-        src="logo.jpg"
-        alt="Scholar Path Russia logo"
-        onerror="this.style.display='none'"
-      >
-
+  <div class="topbar">
+    <div class="topbar-inner">
       <span>
-        Scholar Path Russia
-        <small>
-          BY VIRANGEETA NAVIGATORS
-        </small>
+        <span class="dot"></span>
+        Independent student guidance platform
       </span>
 
-    </a>
+      <span>
+        Source-first information · Information can change
+      </span>
+    </div>
+  </div>
 
-    <nav class="navlinks">
 
-      <a href="#universities">
-        Universities
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="site-header">
+
+    <nav class="nav">
+
+      <a href="#home" class="brand">
+
+        <img
+          src="logo.jpg"
+          alt="Scholar Path Russia logo"
+          class="brand-logo"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+        >
+
+        <span
+          class="brand-fallback"
+          style="display:none;"
+        >
+          SP
+        </span>
+
+        <span>
+          <span class="brand-name">
+            Scholar Path Russia
+          </span>
+
+          <span class="brand-sub">
+            STUDY · COMPARE · DECIDE
+          </span>
+        </span>
+
       </a>
 
-      <a href="#match">
-        Match
-      </a>
 
-      <a href="#calculator">
-        Budget
-      </a>
+      <div class="nav-links">
 
-      <a href="#compare">
-        Compare
-      </a>
+        <a href="#universities">
+          Universities
+        </a>
 
-      <a href="#gallery">
-        Gallery
-      </a>
+        <a href="#tools">
+          Explore
+        </a>
 
-      <a href="#faq">
-        FAQ
-      </a>
+        <a href="#ai">
+          AI Assistant
+        </a>
 
-      <a href="#contact">
-        Contact
-      </a>
+        <a href="#verification">
+          Verification
+        </a>
+
+        <a href="#faq">
+          FAQ
+        </a>
+
+        <a
+          href="#universities"
+          class="nav-cta"
+        >
+          Find a University
+        </a>
+
+      </div>
 
     </nav>
 
-    
+  </header>
+
+
+  <main id="home">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          ● A clearer way to study in Russia
+        </div>
+
+        <h1>
+          Don't just choose a university.
+          <span>Understand it.</span>
+        </h1>
+
+        <p class="hero-text">
+          Research Russian universities, compare programmes,
+          understand real costs, explore scholarships and verify
+          important information before you make a decision.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="#universities"
+            class="btn btn-primary"
+          >
+            Explore Universities →
+          </a>
+
+          <a
+            href="#verification"
+            class="btn btn-secondary"
+          >
+            How We Verify Information
+          </a>
+
+        </div>
+
+
+        <div class="hero-panel">
+
+          <div class="hero-panel-title">
+            University Discovery
+          </div>
+
+          <div class="hero-panel-sub">
+            Search by university, programme or city.
+          </div>
+
+          <form
+            class="search-row"
+            id="heroSearchForm"
+          >
+
+            <input
+              id="heroUniversity"
+              type="text"
+              placeholder="Search a university..."
+            >
+
+            <select id="heroProgramme">
+              <option value="">
+                Programme
+              </option>
+
+              <option value="medicine">
+                General Medicine / MBBS
+              </option>
+
+              <option value="engineering">
+                Engineering
+              </option>
+
+              <option value="it">
+                IT / Computer Science
+              </option>
+
+              <option value="business">
+                Business
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+            </select>
+
+            <input
+              id="heroCity"
+              type="text"
+              placeholder="City"
+            >
+
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              Search →
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TRUST STRIP
+         ===================================================== -->
+
+    <section class="trust-strip">
+
+      <div class="container trust-grid">
+
+        <div class="trust-item">
+          <strong>Official sources first</strong>
+          <span>Wherever available</span>
+        </div>
+
+        <div class="trust-item">
+          <strong>No artificial guarantees</strong>
+          <span>Facts over marketing</span>
+        </div>
+
+        <div class="trust-item">
+          <strong>Student-focused</strong>
+          <span>Built for real decisions</span>
+        </div>
+
+        <div class="trust-item">
+          <strong>Information can change</strong>
+          <span>Verify current requirements</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FEATURES
+         ===================================================== -->
+
+    <section
+      class="section section-light"
+      id="tools"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          Explore intelligently
+        </div>
+
+        <h2 class="section-title">
+          Everything a student should know before applying.
+        </h2>
+
+        <p class="section-description">
+          Scholar Path Russia is being built as a decision platform —
+          not another website filled with generic university
+          advertisements.
+        </p>
+
+
+        <div class="feature-grid">
+
+          <article class="feature-card">
+
+            <div class="feature-icon">🎓</div>
+
+            <h3>
+              Find the right university
+            </h3>
+
+            <p>
+              Compare programmes, cities, tuition,
+              accommodation, scholarships and student
+              considerations.
+            </p>
+
+            <a
+              href="#universities"
+              class="feature-link"
+            >
+              Use University Match →
+            </a>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-icon">💰</div>
+
+            <h3>
+              Understand the real cost
+            </h3>
+
+            <p>
+              Separate tuition, hostel, insurance,
+              living expenses, registration and other
+              known costs.
+            </p>
+
+            <a
+              href="#budget"
+              class="feature-link"
+            >
+              Calculate Cost →
+            </a>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-icon">🏛️</div>
+
+            <h3>
+              University profile
+            </h3>
+
+            <p>
+              Discover programme structure, location,
+              facilities, history, official links and
+              student services.
+            </p>
+
+            <a
+              href="#universities"
+              class="feature-link"
+            >
+              Explore Profiles →
+            </a>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-icon">🎓</div>
+
+            <h3>
+              Scholarship pathways
+            </h3>
+
+            <p>
+              Understand available scholarship routes,
+              eligibility, coverage and application
+              requirements.
+            </p>
+
+            <a
+              href="#scholarships"
+              class="feature-link"
+            >
+              Get Guidance →
+            </a>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-icon">📋</div>
+
+            <h3>
+              Admission documents
+            </h3>
+
+            <p>
+              Build a practical checklist for identity,
+              academic, language, medical and programme
+              documents.
+            </p>
+
+            <a
+              href="#documents"
+              class="feature-link"
+            >
+              View Checklist →
+            </a>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-icon">🌍</div>
+
+            <h3>
+              Choose the right city
+            </h3>
+
+            <p>
+              Think beyond the university: climate,
+              transportation, cost of living, student
+              population and lifestyle.
+            </p>
+
+            <a
+              href="#cities"
+              class="feature-link"
+            >
+              Explore Cities →
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         UNIVERSITY EXPLORER
+         ===================================================== -->
+
+    <section
+      class="section section-white"
+      id="universities"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          University database
+        </div>
+
+        <h2 class="section-title">
+          Find a university that fits your priorities.
+        </h2>
+
+        <p class="section-description">
+          Search the growing Scholar Path Russia university
+          database by university, programme and city.
+        </p>
+
+
+        <div class="explorer">
+
+          <h3>
+            University Explorer
+          </h3>
+
+          <p>
+            Search by university, programme or city.
+          </p>
+
+          <form
+            class="explorer-form"
+            id="universitySearchForm"
+          >
+
+            <input
+              id="universitySearch"
+              type="text"
+              placeholder="University name..."
+            >
+
+            <select id="programmeSearch">
+
+              <option value="">
+                Programme
+              </option>
+
+              <option value="medicine">
+                General Medicine / MBBS
+              </option>
+
+              <option value="engineering">
+                Engineering
+              </option>
+
+              <option value="it">
+                IT / Computer Science
+              </option>
+
+              <option value="business">
+                Business
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+
+            <input
+              id="citySearch"
+              type="text"
+              placeholder="City"
+            >
+
+
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              Search →
+            </button>
+
+          </form>
+
+
+          <div
+            class="explorer-message"
+            id="explorerMessage"
+          >
+            Search ready. University information will appear
+            here as the verified database grows.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TOOLS
+         ===================================================== -->
+
+    <section
+      class="section section-light"
+      id="budget"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          Student tools
+        </div>
+
+        <h2 class="section-title">
+          Useful tools for a real decision.
+        </h2>
+
+        <p class="section-description">
+          These tools are designed to help students understand
+          the practical side of studying abroad.
+        </p>
+
+
+        <div class="tools-grid">
+
+          <article class="tool-card">
+
+            <h3>
+              💰 Budget Calculator
+            </h3>
+
+            <p>
+              Estimate tuition, accommodation, living costs
+              and other expenses.
+            </p>
+
+            <button
+              class="tool-button"
+              type="button"
+              onclick="openBudgetCalculator()"
+            >
+              Open Calculator
+            </button>
+
+          </article>
+
+
+          <article class="tool-card">
+
+            <h3>
+              ⚖️ University Match
+            </h3>
+
+            <p>
+              Compare your priorities with university
+              characteristics.
+            </p>
+
+            <button
+              class="tool-button"
+              type="button"
+              onclick="scrollToSection('universities')"
+            >
+              Start Matching
+            </button>
+
+          </article>
+
+
+          <article
+            class="tool-card"
+            id="scholarships"
+          >
+
+            <h3>
+              🎓 Scholarship Guide
+            </h3>
+
+            <p>
+              Understand scholarship routes, eligibility
+              and what is actually covered.
+            </p>
+
+            <button
+              class="tool-button"
+              type="button"
+              onclick="showComingSoon('Scholarship Guide')"
+            >
+              Explore Guide
+            </button>
+
+          </article>
+
+
+          <article
+            class="tool-card"
+            id="documents"
+          >
+
+            <h3>
+              📋 Document Checklist
+            </h3>
+
+            <p>
+              Prepare the academic, identity, medical and
+              programme documents you may need.
+            </p>
+
+            <button
+              class="tool-button"
+              type="button"
+              onclick="showComingSoon('Document Checklist')"
+            >
+              Open Checklist
+            </button>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         AI ASSISTANT
+         ===================================================== -->
+
+    <section
+      class="section section-dark"
+      id="ai"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          Scholar Path AI
+        </div>
+
+        <h2 class="section-title">
+          Ask before you decide.
+        </h2>
+
+        <p class="section-description">
+          Ask questions about universities, admissions, fees,
+          scholarships, accommodation and documents.
+        </p>
+
+
+        <div class="ai-box">
+
+          <div class="ai-title">
+
+            <div class="ai-icon">
+              ✦
+            </div>
+
+            <div>
+
+              <h3>
+                AI University Assistant
+              </h3>
+
+              <p>
+                Answers should be checked against current
+                official sources.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <form
+            class="ai-form"
+            id="aiForm"
+          >
+
+            <select id="aiUniversity">
+
+              <option value="">
+                Select a university
+              </option>
+
+              <option>
+                Pitirim Sorokin Syktyvkar State University
+              </option>
+
+              <option>
+                Bashkir State University
+              </option>
+
+              <option>
+                Sechenov University
+              </option>
+
+              <option>
+                Kazan Federal University
+              </option>
+
+            </select>
+
+
+            <textarea
+              id="aiQuestion"
+              placeholder="Example: What should I verify before applying to this university?"
+            ></textarea>
+
+
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              ✦ Ask Scholar Path AI
+            </button>
+
+          </form>
+
+
+          <div
+            class="ai-answer"
+            id="aiAnswer"
+          >
+            Select a university and ask your question.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VERIFICATION
+         ===================================================== -->
+
+    <section
+      class="section section-light"
+      id="verification"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          Our principle
+        </div>
+
+        <h2 class="section-title">
+          Trust should be built from evidence.
+        </h2>
+
+        <p class="section-description">
+          Scholar Path Russia should never depend on exaggerated
+          claims simply to make a university look attractive.
+        </p>
+
+
+        <div class="verification-grid">
+
+          <article class="verification-card">
+
+            <h3>
+              What we want to show
+            </h3>
+
+            <ul>
+
+              <li>
+                Official university information
+              </li>
+
+              <li>
+                Official programme information
+              </li>
+
+              <li>
+                Published fee information
+              </li>
+
+              <li>
+                Official scholarship information
+              </li>
+
+              <li>
+                Official regulatory information where applicable
+              </li>
+
+              <li>
+                Source and verification date wherever practical
+              </li>
+
+            </ul>
+
+          </article>
+
+
+          <article class="verification-card">
+
+            <h3>
+              What we will never do
+            </h3>
+
+            <ul>
+
+              <li>
+                No invented rankings
+              </li>
+
+              <li>
+                No invented recognition claims
+              </li>
+
+              <li>
+                No fake approval badges
+              </li>
+
+              <li>
+                No guaranteed admission promises
+              </li>
+
+              <li>
+                No guaranteed licensing or examination outcomes
+              </li>
+
+              <li>
+                No presenting outdated information as current
+              </li>
+
+            </ul>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CITIES
+         ===================================================== -->
+
+    <section
+      class="section section-white"
+      id="cities"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          Student life
+        </div>
+
+        <h2 class="section-title">
+          The city matters too.
+        </h2>
+
+        <p class="section-description">
+          A university decision is also a decision about the
+          city where you will live, study and build your life.
+        </p>
+
+
+        <div class="feature-grid">
+
+          <article class="feature-card">
+            <div class="feature-icon">🌡️</div>
+            <h3>Climate</h3>
+            <p>
+              Understand seasonal conditions and what living
+              there may actually feel like.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🚇</div>
+            <h3>Transport</h3>
+            <p>
+              Explore practical transportation and connectivity
+              considerations.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🏠</div>
+            <h3>Living costs</h3>
+            <p>
+              Separate university costs from everyday living
+              expenses.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FAQ
+         ===================================================== -->
+
+    <section
+      class="section section-light"
+      id="faq"
+    >
+
+      <div class="container">
+
+        <div class="section-label">
+          Frequently asked questions
+        </div>
+
+        <h2 class="section-title">
+          Important questions, answered clearly.
+        </h2>
+
+        <p class="section-description">
+          Short answers for students and parents.
+        </p>
+
+
+        <div class="faq">
+
+          <details>
+            <summary>
+              What does Scholar Path Russia provide?
+            </summary>
+
+            <p>
+              A student-focused platform for researching,
+              comparing and understanding Russian universities,
+              programmes, costs, scholarships and related
+              admission information.
+            </p>
+          </details>
+
+
+          <details>
+            <summary>
+              Are scholarships guaranteed?
+            </summary>
+
+            <p>
+              No. Scholarship availability, eligibility,
+              selection and coverage depend on the applicable
+              official programme and current rules.
+            </p>
+          </details>
+
+
+          <details>
+            <summary>
+              Can university fees change?
+            </summary>
+
+            <p>
+              Yes. Fees and other conditions can change by
+              academic year. Students should verify current
+              official information before making a decision.
+            </p>
+          </details>
+
+
+          <details>
+            <summary>
+              Is medical recognition permanent?
+            </summary>
+
+            <p>
+              Recognition and professional eligibility can
+              depend on the country, programme, graduation year
+              and current regulations. Always verify with the
+              relevant official authority.
+            </p>
+          </details>
+
+
+          <details>
+            <summary>
+              Why does Scholar Path Russia show verification notes?
+            </summary>
+
+            <p>
+              Because important education claims should be
+              traceable to an appropriate official or published
+              source whenever possible.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CTA
+         ===================================================== -->
+
+    <section class="cta">
+
+      <h2>
+        Your university decision deserves more than a brochure.
+      </h2>
+
+      <p>
+        Research carefully. Compare honestly. Verify before
+        you apply. Build your path with confidence.
+      </p>
+
+      <a
+        href="#universities"
+        class="btn btn-primary"
+      >
+        Start Exploring →
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <div class="brand">
+
+          <img
+            src="logo.jpg"
+            alt="Scholar Path Russia logo"
+            class="brand-logo"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+          >
+
+          <span
+            class="brand-fallback"
+            style="display:none;"
+          >
+            SP
+          </span>
+
+          <span>
+
+            <span class="brand-name">
+              Scholar Path Russia
+            </span>
+
+            <span class="brand-sub">
+              STUDY · COMPARE · DECIDE
+            </span>
+
+          </span>
+
+        </div>
+
+
+        <p>
+          A student-focused platform designed to make
+          researching Russian higher education clearer,
+          more transparent and easier to understand.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Explore
+        </h4>
+
+        <a href="#universities">
+          Universities
+        </a>
+
+        <a href="#scholarships">
+          Scholarships
+        </a>
+
+        <a href="#budget">
+          Budget
+        </a>
+
+        <a href="#cities">
+          Student Life
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Student Tools
+        </h4>
+
+        <a href="#ai">
+          AI Assistant
+        </a>
+
+        <a href="#universities">
+          University Explorer
+        </a>
+
+        <a href="#faq">
+          FAQ
+        </a>
+
+        <a href="#verification">
+          Verification
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Important
+        </h4>
+
+        <a href="#verification">
+          Information Policy
+        </a>
+
+        <a href="#verification">
+          Disclaimer
+        </a>
+
+        <a href="#verification">
+          Source Verification
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+      <span>
+        © 2026 Scholar Path Russia. All rights reserved.
+      </span>
+
+      <span>
+        Information may change. Always verify current official requirements.
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       SAFE PAGE FUNCTIONS
+       These ensure basic interactions work even if app.js
+       has an unrelated error.
+       ======================================================= -->
+
+  <script>
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+
+
+    function showComingSoon(name) {
+
+      alert(
+        name +
+        " is being prepared. The verified version will be added here."
+      );
+
+    }
+
+
+    function openBudgetCalculator() {
+
+      const tuition =
+        prompt("Annual tuition fee (RUB):", "266120");
+
+      if (tuition === null) return;
+
+      const hostel =
+        prompt("Annual hostel/accommodation cost (RUB):", "12000");
+
+      if (hostel === null) return;
+
+      const living =
+        prompt("Estimated annual living expenses (RUB):", "180000");
+
+      if (living === null) return;
+
+      const other =
+        prompt("Other annual expenses (RUB):", "10000");
+
+      if (other === null) return;
+
+      const total =
+        Number(tuition || 0) +
+        Number(hostel || 0) +
+        Number(living || 0) +
+        Number(other || 0);
+
+      alert(
+        "Estimated annual budget: " +
+        total.toLocaleString("en-IN") +
+        " RUB"
+      );
+
+    }
+
+
+    /* HERO SEARCH */
+
+    const heroSearchForm =
+      document.getElementById("heroSearchForm");
+
+    if (heroSearchForm) {
+
+      heroSearchForm.addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+          const university =
+            document.getElementById("heroUniversity").value.trim();
+
+          const city =
+            document.getElementById("heroCity").value.trim();
+
+          const programme =
+            document.getElementById("heroProgramme").value;
+
+          const target =
+            document.getElementById("universitySearch");
+
+          if (target) {
+            target.value = university;
+          }
+
+          const cityTarget =
+            document.getElementById("citySearch");
+
+          if (cityTarget) {
+            cityTarget.value = city;
+          }
+
+          const programmeTarget =
+            document.getElementById("programmeSearch");
+
+          if (programmeTarget) {
+            programmeTarget.value = programme;
+          }
+
+          scrollToSection("universities");
+
+        }
+      );
+
+    }
+
+
+    /* UNIVERSITY SEARCH */
+
+    const universitySearchForm =
+      document.getElementById("universitySearchForm");
+
+    if (universitySearchForm) {
+
+      universitySearchForm.addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+          const university =
+            document.getElementById("universitySearch").value.trim();
+
+          const programme =
+            document.getElementById("programmeSearch").value;
+
+          const city =
+            document.getElementById("citySearch").value.trim();
+
+          const message =
+            document.getElementById("explorerMessage");
+
+          if (!message) return;
+
+          message.style.display = "block";
+
+          let text =
+            "University search ready.";
+
+          if (university) {
+            text +=
+              " Searching for \"" +
+              university +
+              "\".";
+          }
+
+          if (programme) {
+            text +=
+              " Programme: " +
+              programme +
+              ".";
+          }
+
+          if (city) {
+            text +=
+              " City: " +
+              city +
+              ".";
+          }
+
+          message.textContent = text;
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       AI
+       ===================================================== */
+
+    const aiForm =
+      document.getElementById("aiForm");
+
+    if (aiForm) {
+
+      aiForm.addEventListener(
+        "submit",
+        async function(event) {
+
+          event.preventDefault();
+
+          const university =
+            document.getElementById("aiUniversity").value;
+
+          const question =
+            document.getElementById("aiQuestion").value.trim();
+
+          const answer =
+            document.getElementById("aiAnswer");
+
+          if (!answer) return;
+
+          if (!university || !question) {
+
+            answer.textContent =
+              "Please select a university and enter your question.";
+
+            return;
+          }
+
+          answer.textContent =
+            "Preparing your question for Scholar Path AI…";
+
+          try {
+
+            const response =
+              await fetch(
+                "/api/college-ai",
+                {
+                  method: "POST",
+
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+
+                  body: JSON.stringify({
+                    university: university,
+                    question: question
+                  })
+                }
+              );
+
+
+            if (!response.ok) {
+              throw new Error(
+                "AI service unavailable"
+              );
+            }
+
+
+            const data =
+              await response.json();
+
+
+            answer.textContent =
+              data.answer ||
+              data.response ||
+              data.message ||
+              "The AI assistant did not return an answer.";
+
+          }
+
+          catch (error) {
+
+            answer.innerHTML =
+              "<strong>Scholar Path AI</strong><br><br>" +
+              "The AI service is temporarily unavailable. " +
+              "Please try again shortly. " +
+              "Important: always verify university information " +
+              "against current official sources.";
+
+          }
+
+        }
+      );
+
+    }
+
+  </script>
+
+
+  <!-- Existing project JavaScript -->
+  <script src="app.js"></script>
+
+</body>
+</html>
