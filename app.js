@@ -1,1603 +1,1626 @@
 /*
 ============================================================
 SCHOLAR PATH RUSSIA
-UNIVERSITY EXPLORER — STABLE APPLICATION
+University Explorer
 Virangeeta Navigators
 ============================================================
-This version is intentionally compatible with the current
-index.html:
-- #universitySearch
-- #programmeFilter
+
+Stable version for the existing website.
+
+Uses:
+- data/universities.json
+- #universityGrid
+- #recordCount
+- #courseFilter
 - #cityFilter
-- #universityResults
-- #aiUniversity
-- #aiQuestion
-- #aiResult
-- #askAIButton
+- #mediumFilter
+- #scholarshipFilter
+
+Does NOT modify or replace the university database.
 ============================================================
 */
 
 (function () {
-  "use strict";
+    "use strict";
 
-  const DATA_URL = "./data/universities.json";
-  const BRAND_NAME = "Scholar Path Russia";
-  const BUSINESS_NAME = "Virangeeta Navigators";
-  const LOGO_URL = "./logo.jpg";
-  const APPLY_URL =
-    "https://docs.google.com/forms/d/1lIqIdQQW0ORfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform";
+    /* =========================================================
+       CONFIG
+    ========================================================= */
 
-  let universities = [];
-  let filteredUniversities = [];
+    const DATA_URL = "./data/universities.json";
 
-  const $ = (id) => document.getElementById(id);
+    const APPLY_URL =
+        "https://docs.google.com/forms/d/1lIqIdQQW0ORfNvPE1pR63_nSV4lORq_-bOJwnLPkS3M/viewform";
 
-  const searchInput = $("universitySearch");
-  const programmeFilter = $("programmeFilter");
-  const cityFilter = $("cityFilter");
-  const results = $("universityResults");
-  const aiUniversity = $("aiUniversity");
+    const LOGO_URL = "./logo.jpg";
 
-  function clean(value) {
-    return value === null || value === undefined
-      ? ""
-      : String(value).trim();
-  }
+    /* =========================================================
+       EXISTING WEBSITE ELEMENTS
+    ========================================================= */
 
-  function normalize(value) {
-    return clean(value).toLowerCase().replace(/\s+/g, " ");
-  }
+    const grid =
+        document.getElementById("universityGrid");
 
-  function escapeHTML(value) {
-    return clean(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
+    const recordCount =
+        document.getElementById("recordCount");
 
-  function first(obj, keys) {
-    for (const key of keys) {
-      if (
-        obj &&
-        Object.prototype.hasOwnProperty.call(obj, key) &&
-        clean(obj[key])
-      ) {
-        return obj[key];
-      }
-    }
-    return "";
-  }
+    const courseFilter =
+        document.getElementById("courseFilter");
 
-  function resolveURL(value) {
-    const url = clean(value);
-    if (!url) return "";
-    if (/^https?:\/\//i.test(url)) return url;
-    if (url.startsWith("/") || url.startsWith("./") || url.startsWith("../")) {
-      return new URL(url, window.location.href).href;
-    }
-    if (url.startsWith("assets/") || url.startsWith("data/")) {
-      return new URL("./" + url, window.location.href).href;
-    }
-    return "https://" + url;
-  }
+    const cityFilter =
+        document.getElementById("cityFilter");
 
-  function courseOf(raw) {
-    const text = normalize(
-      [
-        first(raw, ["course", "category", "program", "programme"]),
-        Array.isArray(raw.fields) ? raw.fields.join(" ") : clean(raw.fields)
-      ].join(" ")
-    );
+    const mediumFilter =
+        document.getElementById("mediumFilter");
 
-    if (
-      /medicine|medical|mbbs|health|dentistry|pharmacy|clinical/.test(text)
-    ) {
-      return "Medicine";
-    }
-    if (/engineering|technical|polytechnic|aviation/.test(text)) {
-      return "Engineering";
-    }
-    if (/information technology|informatics|computer|software|technology/.test(text)) {
-      return "IT";
-    }
-    if (/business|finance|economic|management/.test(text)) {
-      return "Business";
-    }
-    if (/law/.test(text)) return "Law";
-    if (/humanities|arts|language|culture/.test(text)) return "Humanities";
+    const scholarshipFilter =
+        document.getElementById("scholarshipFilter");
 
-    return clean(first(raw, ["category", "course", "program", "programme"])) || "Other";
-  }
+    let universities = [];
 
-  function mediumOf(raw) {
-    const value = first(raw, [
-      "medium",
-      "study_medium",
-      "studyMedium",
-      "language",
-      "instruction_language",
-      "instructionLanguage",
-      "teaching_language",
-      "teachingLanguage"
-    ]);
+    /* =========================================================
+       BASIC HELPERS
+    ========================================================= */
 
-    const text = normalize(value);
-    if (!text) return "Not specified";
-    if (text.includes("english") && text.includes("russian")) return "English / Russian";
-    if (text.includes("english")) return "English";
-    if (text.includes("russian")) return "Russian";
-    if (text.includes("bilingual") || text.includes("mixed")) return "Bilingual / Mixed";
-    return clean(value);
-  }
+    function clean(value) {
+        if (
+            value === null ||
+            value === undefined
+        ) {
+            return "";
+        }
 
-  function scholarshipOf(raw) {
-    const values = [
-      first(raw, ["scholarship", "scholarship_status", "scholarshipStatus"]),
-      first(raw, ["openDoors", "open_doors"]),
-      first(raw, ["scholarshipPathway", "scholarship_pathway"]),
-      first(raw, ["governmentScholarship", "government_scholarship"])
-    ];
-
-    for (const value of values) {
-      const text = normalize(value);
-      if (!text) continue;
-      if (
-        /yes|available|listed|present|eligible|offered|provided|supported/.test(text) ||
-        text.includes("scholarship") ||
-        text.includes("government") ||
-        text.includes("open door")
-      ) {
-        return "yes";
-      }
-    }
-    return "no";
-  }
-
-  function verificationOf(raw) {
-    const explicit = normalize(
-      first(raw, ["verification_status", "verificationStatus", "status"])
-    );
-
-    if (explicit.includes("verified") && !explicit.includes("not")) {
-      return "Verified";
-    }
-    if (explicit.includes("partial")) return "Partially verified";
-    if (explicit.includes("unverified") || explicit.includes("not verified")) {
-      return "Not verified";
-    }
-    if (
-      first(raw, ["last_verified", "lastVerified"]) ||
-      first(raw, ["official_source", "officialSource", "source"])
-    ) {
-      return "Source listed";
-    }
-    return "Needs verification";
-  }
-
-  function normalizeUniversity(raw, index) {
-    const fields = Array.isArray(raw.fields)
-      ? raw.fields.map(clean).filter(Boolean)
-      : clean(raw.fields)
-        ? [clean(raw.fields)]
-        : [];
-
-    return {
-      id: clean(first(raw, ["id"])) || "university-" + (index + 1),
-      name:
-        clean(first(raw, ["name", "university", "university_name", "title"])) ||
-        "University information pending",
-      city:
-        clean(first(raw, ["city"])) ||
-        clean(first(raw, ["location"])) ||
-        "City/region to be verified",
-      region: clean(first(raw, ["region", "oblast", "republic", "state"])),
-      country: clean(first(raw, ["country"])) || "Russia",
-      established: clean(first(raw, ["established", "founded", "year_established"])),
-      about: clean(first(raw, ["about", "description", "summary"])),
-      fields,
-      course: courseOf(raw),
-      medium: mediumOf(raw),
-      scholarship: scholarshipOf(raw),
-      tuition: clean(first(raw, ["tuition_fee", "tuitionFee", "tuition", "fee"])),
-      hostel: clean(first(raw, ["hostel_fee", "hostelFee", "hostel", "hostel_cost"])),
-      tuitionStatus: clean(first(raw, ["tuition_status", "tuitionStatus"])),
-      hostelStatus: clean(first(raw, ["hostel_status", "hostelStatus"])),
-      website: resolveURL(first(raw, [
-        "official_website",
-        "officialWebsite",
-        "website",
-        "url"
-      ])),
-      feeSource: resolveURL(first(raw, [
-        "official_fee_source",
-        "officialFeeStructure",
-        "official_fee_structure",
-        "fee_source",
-        "tuition_source"
-      ])),
-      source: resolveURL(first(raw, [
-        "official_source",
-        "officialSource",
-        "source"
-      ])),
-      lastVerified: clean(first(raw, ["last_verified", "lastVerified"])),
-      internationalStudents: clean(
-        first(raw, ["international_students", "internationalStudents"])
-      ),
-      logo: resolveURL(first(raw, ["logo", "logo_url", "logoUrl"])),
-      image: resolveURL(first(raw, [
-        "image",
-        "image_url",
-        "imageUrl",
-        "photo",
-        "photo_url"
-      ])),
-      raw
-    };
-  }
-
-  function locationOf(u) {
-    return [u.city, u.region, u.country].filter(Boolean).join(" • ");
-  }
-    function formatValue(value, fallback = "Not available") {
-    const v = clean(value);
-    return v || fallback;
-  }
-
-  function verificationBadge(u) {
-    const status = u.lastVerified
-      ? "Verified source date available"
-      : verificationOf(u);
-
-    return `
-      <span class="sp-verification-badge">
-        ✓ ${escapeHTML(status)}
-      </span>
-    `;
-  }
-
-  function scholarshipBadge(u) {
-    if (u.scholarship === "yes") {
-      return `
-        <span class="sp-badge sp-badge-green">
-          Scholarship information listed
-        </span>
-      `;
+        return String(value).trim();
     }
 
-    return `
-      <span class="sp-badge">
-        Scholarship: verify current availability
-      </span>
-    `;
-  }
-
-  function universityCard(u) {
-    const logo = u.logo || LOGO_URL;
-
-    return `
-      <article class="sp-university-card"
-        data-university-id="${escapeHTML(u.id)}">
-
-        <div class="sp-card-top">
-
-          <div class="sp-university-logo-wrap">
-            <img
-              class="sp-university-logo"
-              src="${escapeHTML(logo)}"
-              alt="${escapeHTML(u.name)} logo"
-              loading="lazy"
-              onerror="this.onerror=null;this.src='${LOGO_URL}'"
-            >
-          </div>
-
-          <div class="sp-university-heading">
-            <div class="sp-card-label">
-              ${escapeHTML(u.course)}
-            </div>
-
-            <h3>${escapeHTML(u.name)}</h3>
-
-            <p class="sp-location">
-              📍 ${escapeHTML(locationOf(u))}
-            </p>
-          </div>
-
-        </div>
-
-        <div class="sp-card-badges">
-          <span class="sp-badge">
-            ${escapeHTML(u.medium)}
-          </span>
-
-          ${scholarshipBadge(u)}
-
-          ${verificationBadge(u)}
-        </div>
-
-        <div class="sp-card-description">
-          ${
-            escapeHTML(
-              u.about ||
-              "University profile information is being compiled from official and published sources."
-            )
-          }
-        </div>
-
-        <div class="sp-card-data">
-
-          <div class="sp-data-item">
-            <small>Programme</small>
-            <strong>${escapeHTML(u.course)}</strong>
-          </div>
-
-          <div class="sp-data-item">
-            <small>Tuition</small>
-            <strong>${escapeHTML(
-              formatValue(u.tuition, "See official fee source")
-            )}</strong>
-          </div>
-
-          <div class="sp-data-item">
-            <small>Hostel</small>
-            <strong>${escapeHTML(
-              formatValue(u.hostel, "See official source")
-            )}</strong>
-          </div>
-
-          <div class="sp-data-item">
-            <small>Instruction</small>
-            <strong>${escapeHTML(u.medium)}</strong>
-          </div>
-
-        </div>
-
-        <div class="sp-card-actions">
-
-          <button
-            type="button"
-            class="sp-btn sp-btn-primary"
-            data-action="view"
-            data-id="${escapeHTML(u.id)}">
-            View university →
-          </button>
-
-          ${
-            u.website
-              ? `
-                <a
-                  class="sp-btn sp-btn-secondary"
-                  href="${escapeHTML(u.website)}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Official website ↗
-                </a>
-              `
-              : ""
-          }
-
-        </div>
-
-      </article>
-    `;
-  }
-
-  function emptyState(message) {
-    return `
-      <div class="sp-empty-state">
-        <div class="sp-empty-icon">⌕</div>
-
-        <h3>No matching universities found</h3>
-
-        <p>${escapeHTML(message)}</p>
-
-        <button
-          type="button"
-          class="sp-btn sp-btn-primary"
-          id="spClearSearch">
-          Clear search
-        </button>
-      </div>
-    `;
-  }
-
-  function loadingState() {
-    return `
-      <div class="sp-loading-state">
-        <div class="sp-spinner"></div>
-        <p>Loading the university database…</p>
-      </div>
-    `;
-  }
-
-  function errorState() {
-    return `
-      <div class="sp-empty-state sp-error-state">
-
-        <div class="sp-empty-icon">!</div>
-
-        <h3>University database unavailable</h3>
-
-        <p>
-          The university data could not be loaded right now.
-          Please refresh the page or try again shortly.
-        </p>
-
-        <button
-          type="button"
-          class="sp-btn sp-btn-primary"
-          id="spRetry">
-          Try again
-        </button>
-
-      </div>
-    `;
-  }
-
-  function populateFilters() {
-    if (!programmeFilter && !cityFilter) return;
-
-    const programmes = new Set();
-    const cities = new Set();
-
-    universities.forEach((u) => {
-      if (u.course) programmes.add(u.course);
-      if (u.city) cities.add(u.city);
-    });
-
-    if (programmeFilter) {
-      const current = programmeFilter.value;
-
-      programmeFilter.innerHTML = `
-        <option value="">All programmes</option>
-        ${Array.from(programmes)
-          .sort((a, b) => a.localeCompare(b))
-          .map(
-            (p) =>
-              `<option value="${escapeHTML(p)}">${escapeHTML(p)}</option>`
-          )
-          .join("")}
-      `;
-
-      if (
-        Array.from(programmes)
-          .map(normalize)
-          .includes(normalize(current))
-      ) {
-        programmeFilter.value = current;
-      }
-    }
-
-    if (cityFilter) {
-      const current = cityFilter.value;
-
-      cityFilter.innerHTML = `
-        <option value="">All cities</option>
-        ${Array.from(cities)
-          .sort((a, b) => a.localeCompare(b))
-          .map(
-            (city) =>
-              `<option value="${escapeHTML(city)}">${escapeHTML(city)}</option>`
-          )
-          .join("")}
-      `;
-
-      if (
-        Array.from(cities)
-          .map(normalize)
-          .includes(normalize(current))
-      ) {
-        cityFilter.value = current;
-      }
-    }
-  }
-
-  function searchUniversities() {
-    const query = normalize(searchInput ? searchInput.value : "");
-    const programme = normalize(
-      programmeFilter ? programmeFilter.value : ""
-    );
-    const city = normalize(cityFilter ? cityFilter.value : "");
-
-    filteredUniversities = universities.filter((u) => {
-      const searchable = normalize(
-        [
-          u.name,
-          u.city,
-          u.region,
-          u.country,
-          u.course,
-          u.medium,
-          u.about,
-          u.fields.join(" ")
-        ].join(" ")
-      );
-
-      const matchesQuery =
-        !query ||
-        searchable.includes(query);
-
-      const matchesProgramme =
-        !programme ||
-        normalize(u.course) === programme;
-
-      const matchesCity =
-        !city ||
-        normalize(u.city) === city;
-
-      return (
-        matchesQuery &&
-        matchesProgramme &&
-        matchesCity
-      );
-    });
-
-    renderUniversities();
-  }
-
-  function renderUniversities() {
-    if (!results) return;
-
-    if (!filteredUniversities.length) {
-      results.innerHTML = emptyState(
-        "Try a different university name, programme or city."
-      );
-      attachDynamicButtons();
-      return;
-    }
-
-    results.innerHTML = `
-      <div class="sp-results-header">
-
-        <div>
-          <span class="sp-results-kicker">
-            UNIVERSITY DATABASE
-          </span>
-
-          <h2>
-            ${filteredUniversities.length}
-            ${
-              filteredUniversities.length === 1
-                ? "university"
-                : "universities"
+    function firstValue(obj, keys) {
+        for (const key of keys) {
+            if (
+                obj &&
+                Object.prototype.hasOwnProperty.call(
+                    obj,
+                    key
+                ) &&
+                clean(obj[key]) !== ""
+            ) {
+                return obj[key];
             }
-            found
-          </h2>
-        </div>
-
-        <div class="sp-results-note">
-          Source-first information
-        </div>
-
-      </div>
-
-      <div class="sp-university-grid">
-        ${filteredUniversities
-          .map(universityCard)
-          .join("")}
-      </div>
-    `;
-
-    attachDynamicButtons();
-  }
-
-  function attachDynamicButtons() {
-    document
-      .querySelectorAll('[data-action="view"]')
-      .forEach((button) => {
-        button.addEventListener("click", () => {
-          const id = button.getAttribute("data-id");
-          openUniversity(id);
-        });
-      });
-
-    const clearButton = $("spClearSearch");
-
-    if (clearButton) {
-      clearButton.addEventListener("click", () => {
-        if (searchInput) searchInput.value = "";
-        if (programmeFilter) programmeFilter.value = "";
-        if (cityFilter) cityFilter.value = "";
-
-        searchUniversities();
-
-        const explorer = document.querySelector(
-          "#universityExplorer"
-        );
-
-        if (explorer) {
-          explorer.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
         }
-      });
+
+        return "";
     }
 
-    const retryButton = $("spRetry");
-
-    if (retryButton) {
-      retryButton.addEventListener("click", loadUniversities);
-    }
-  }
-
-  function openUniversity(id) {
-    const university = universities.find(
-      (u) => String(u.id) === String(id)
-    );
-
-    if (!university) return;
-
-    const existing = $("spUniversityModal");
-
-    if (existing) existing.remove();
-
-    const modal = document.createElement("div");
-
-    modal.id = "spUniversityModal";
-    modal.className = "sp-modal";
-
-    const image =
-      university.image ||
-      university.logo ||
-      LOGO_URL;
-
-    modal.innerHTML = `
-      <div class="sp-modal-backdrop" data-close-modal></div>
-
-      <div
-        class="sp-modal-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="spModalTitle">
-
-        <button
-          type="button"
-          class="sp-modal-close"
-          aria-label="Close"
-          data-close-modal>
-          ×
-        </button>
-
-        <div class="sp-modal-header">
-
-          <img
-            src="${escapeHTML(image)}"
-            alt="${escapeHTML(university.name)}"
-            class="sp-modal-logo"
-            loading="lazy"
-            onerror="this.onerror=null;this.src='${LOGO_URL}'"
-          >
-
-          <div>
-            <span class="sp-card-label">
-              ${escapeHTML(university.course)}
-            </span>
-
-            <h2 id="spModalTitle">
-              ${escapeHTML(university.name)}
-            </h2>
-
-            <p>
-              📍 ${escapeHTML(locationOf(university))}
-            </p>
-          </div>
-
-        </div>
-
-        <div class="sp-modal-badges">
-          <span class="sp-badge">
-            ${escapeHTML(university.medium)}
-          </span>
-
-          ${scholarshipBadge(university)}
-
-          ${verificationBadge(university)}
-        </div>
-
-        <div class="sp-modal-section">
-
-          <h3>About the university</h3>
-
-          <p>
-            ${escapeHTML(
-              university.about ||
-              "No extended description has been published in the current database."
-            )}
-          </p>
-
-        </div>
-
-        <div class="sp-modal-grid">
-
-          <div>
-            <small>Programme area</small>
-            <strong>${escapeHTML(university.course)}</strong>
-          </div>
-
-          <div>
-            <small>Language / medium</small>
-            <strong>${escapeHTML(university.medium)}</strong>
-          </div>
-
-          <div>
-            <small>Tuition</small>
-            <strong>${escapeHTML(
-              formatValue(
-                university.tuition,
-                "Not currently published"
-              )
-            )}</strong>
-          </div>
-
-          <div>
-            <small>Hostel</small>
-            <strong>${escapeHTML(
-              formatValue(
-                university.hostel,
-                "Not currently published"
-              )
-            )}</strong>
-          </div>
-
-          <div>
-            <small>International students</small>
-            <strong>${escapeHTML(
-              formatValue(
-                university.internationalStudents,
-                "Not currently published"
-              )
-            )}</strong>
-          </div>
-
-          <div>
-            <small>Last verified</small>
-            <strong>${escapeHTML(
-              formatValue(
-                university.lastVerified,
-                "Verification date not listed"
-              )
-            )}</strong>
-          </div>
-
-        </div>
-
-        <div class="sp-modal-section">
-
-          <h3>Available study fields</h3>
-
-          ${
-            university.fields.length
-              ? `
-                <div class="sp-field-list">
-                  ${university.fields
-                    .map(
-                      (field) =>
-                        `<span>${escapeHTML(field)}</span>`
-                    )
-                    .join("")}
-                </div>
-              `
-              : `
-                <p>
-                  Programme details are being compiled.
-                </p>
-              `
-          }
-
-        </div>
-
-        <div class="sp-source-box">
-
-          <strong>Verification principle</strong>
-
-          <p>
-            Scholar Path Russia does not treat an unverified claim
-            as an official fact. Always confirm current admission,
-            tuition, recognition and regulatory requirements with
-            the relevant official authority before applying.
-          </p>
-
-        </div>
-
-        <div class="sp-modal-actions">
-
-          ${
-            university.website
-              ? `
-                <a
-                  class="sp-btn sp-btn-primary"
-                  href="${escapeHTML(university.website)}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Official university website ↗
-                </a>
-              `
-              : ""
-          }
-
-          ${
-            university.feeSource
-              ? `
-                <a
-                  class="sp-btn sp-btn-secondary"
-                  href="${escapeHTML(university.feeSource)}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Official fee source ↗
-                </a>
-              `
-              : ""
-          }
-
-          ${
-            university.source
-              ? `
-                <a
-                  class="sp-btn sp-btn-secondary"
-                  href="${escapeHTML(university.source)}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Source / verification ↗
-                </a>
-              `
-              : ""
-          }
-
-          <a
-            class="sp-btn sp-btn-dark"
-            href="${APPLY_URL}"
-            target="_blank"
-            rel="noopener noreferrer">
-            Enquire about this university →
-          </a>
-
-        </div>
-
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    requestAnimationFrame(() => {
-      modal.classList.add("is-open");
-    });
-
-    modal
-      .querySelectorAll("[data-close-modal]")
-      .forEach((element) => {
-        element.addEventListener("click", closeUniversityModal);
-      });
-
-    document.addEventListener(
-      "keydown",
-      handleModalEscape,
-      { once: true }
-    );
-
-    document.body.classList.add("sp-modal-open");
-  }
-
-  function handleModalEscape(event) {
-    if (event.key === "Escape") {
-      closeUniversityModal();
-    }
-  }
-
-  function closeUniversityModal() {
-    const modal = $("spUniversityModal");
-
-    if (!modal) return;
-
-    modal.classList.remove("is-open");
-
-    setTimeout(() => {
-      modal.remove();
-      document.body.classList.remove("sp-modal-open");
-    }, 180);
-  }
-
-  async function loadUniversities() {
-    if (results) {
-      results.innerHTML = loadingState();
-    }
-
-    try {
-      const response = await fetch(
-        DATA_URL + "?v=" + Date.now(),
-        {
-          cache: "no-store"
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          "University data request failed: " +
-          response.status
-        );
-      }
-
-      const data = await response.json();
-
-      let list = [];
-
-      if (Array.isArray(data)) {
-        list = data;
-      } else if (Array.isArray(data.universities)) {
-        list = data.universities;
-      } else if (Array.isArray(data.data)) {
-        list = data.data;
-      } else {
-        throw new Error(
-          "universities.json does not contain an array."
-        );
-      }
-
-      universities = list.map(normalizeUniversity);
-
-      filteredUniversities = universities.slice();
-
-      populateFilters();
-      renderUniversities();
-
-      populateAIUniversities();
-
-    } catch (error) {
-      console.error(
-        "[Scholar Path Russia] Database error:",
-        error
-      );
-
-      universities = [];
-      filteredUniversities = [];
-
-      if (results) {
-        results.innerHTML = errorState();
-      }
-
-      if (aiUniversity) {
-        aiUniversity.innerHTML =
-          `<option value="">Database unavailable</option>`;
-      }
-    }
-  }  function populateAIUniversities() {
-    if (!aiUniversity) return;
-
-    if (!universities.length) {
-      aiUniversity.innerHTML =
-        `<option value="">No universities available</option>`;
-      return;
-    }
-
-    aiUniversity.innerHTML = `
-      <option value="">Select a university</option>
-      ${universities
-        .map(
-          (u) => `
-            <option value="${escapeHTML(u.id)}">
-              ${escapeHTML(u.name)}
-            </option>
-          `
+    function escapeHTML(value) {
+        return String(
+            value === null ||
+            value === undefined
+                ? ""
+                : value
         )
-        .join("")}
-    `;
-  }
-
-  function getSelectedUniversity() {
-    if (!aiUniversity) return null;
-
-    const id = aiUniversity.value;
-
-    if (!id) return null;
-
-    return universities.find(
-      (u) => String(u.id) === String(id)
-    ) || null;
-  }
-
-  function setAIStatus(message, type = "normal") {
-    if (!aiResult) return;
-
-    const className =
-      type === "error"
-        ? "sp-ai-result sp-ai-error"
-        : "sp-ai-result";
-
-    aiResult.className = className;
-
-    aiResult.innerHTML = `
-      <div class="sp-ai-result-header">
-        <div class="sp-ai-icon">✦</div>
-        <strong>Scholar Path AI</strong>
-      </div>
-
-      <div class="sp-ai-result-content">
-        ${message}
-      </div>
-    `;
-  }
-
-  function setAILoading() {
-    setAIStatus(`
-      <div class="sp-ai-loading">
-
-        <div class="sp-ai-loading-dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        <p>
-          Scholar Path AI is checking the available
-          university information…
-        </p>
-
-      </div>
-    `);
-  }
-
-  function aiAnswerFromDatabase(university, question) {
-    const q = normalize(question);
-
-    if (!university) {
-      return `
-        <p>
-          Please select a university first. Scholar Path AI
-          uses the selected university profile to provide a
-          more specific answer.
-        </p>
-      `;
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
-    const name = escapeHTML(university.name);
-    const city = escapeHTML(locationOf(university));
-    const course = escapeHTML(university.course);
-    const medium = escapeHTML(university.medium);
+    function validURL(value) {
+        const url = clean(value);
 
-    if (
-      q.includes("fee") ||
-      q.includes("tuition") ||
-      q.includes("cost")
-    ) {
-      return `
-        <h4>Tuition and cost</h4>
-
-        <p>
-          The current database lists the tuition information
-          for <strong>${name}</strong> as:
-        </p>
-
-        <div class="sp-ai-highlight">
-          ${escapeHTML(
-            formatValue(
-              university.tuition,
-              "Not currently published in the database"
-            )
-          )}
-        </div>
-
-        <p>
-          Tuition fees can change by academic year or
-          programme. Always verify the current fee schedule
-          from the university's official source before
-          making a payment.
-        </p>
-
-        ${
-          university.feeSource
-            ? `
-              <a
-                href="${escapeHTML(university.feeSource)}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="sp-ai-source-link">
-                View official fee source ↗
-              </a>
-            `
-            : ""
+        if (!url) {
+            return "";
         }
-      `;
+
+        if (
+            url.startsWith("https://") ||
+            url.startsWith("http://")
+        ) {
+            return url;
+        }
+
+        return "https://" + url;
     }
 
-    if (
-      q.includes("hostel") ||
-      q.includes("accommodation") ||
-      q.includes("room")
+    /* =========================================================
+       COURSE DETECTION
+    ========================================================= */
+
+    function getCourse(u) {
+
+        const text = [
+            firstValue(u, [
+                "course",
+                "category",
+                "program",
+                "programme"
+            ]),
+
+            Array.isArray(u.fields)
+                ? u.fields.join(" ")
+                : ""
+        ]
+            .join(" ")
+            .toLowerCase();
+
+        if (
+            text.includes("medicine") ||
+            text.includes("medical") ||
+            text.includes("mbbs") ||
+            text.includes("health") ||
+            text.includes("dentistry") ||
+            text.includes("pharmacy") ||
+            text.includes("clinical")
+        ) {
+            return "Medicine";
+        }
+
+        if (
+            text.includes("engineering") ||
+            text.includes("technical") ||
+            text.includes("polytechnic") ||
+            text.includes("aviation")
+        ) {
+            return "Engineering";
+        }
+
+        if (
+            text.includes("information technology") ||
+            text.includes("technology") ||
+            text.includes("informatics") ||
+            text.includes("computer") ||
+            text.includes("software") ||
+            text.includes("electronic")
+        ) {
+            return "IT";
+        }
+
+        if (
+            text.includes("business") ||
+            text.includes("finance") ||
+            text.includes("economic") ||
+            text.includes("management")
+        ) {
+            return "Business";
+        }
+
+        if (text.includes("law")) {
+            return "Law";
+        }
+
+        if (
+            text.includes("humanities") ||
+            text.includes("arts") ||
+            text.includes("language") ||
+            text.includes("culture")
+        ) {
+            return "Humanities";
+        }
+
+        return (
+            clean(
+                firstValue(u, [
+                    "category",
+                    "course",
+                    "program",
+                    "programme"
+                ])
+            ) || "Other"
+        );
+    }
+
+    /* =========================================================
+       STUDY MEDIUM
+       THIS FIXES THE ORIGINAL MISSING FUNCTION
+    ========================================================= */
+
+    function getMedium(u) {
+
+        const value =
+            firstValue(u, [
+                "medium",
+                "study_medium",
+                "studyMedium",
+                "language",
+                "instruction_language",
+                "instructionLanguage",
+                "teaching_language",
+                "teachingLanguage"
+            ]);
+
+        const text =
+            clean(value).toLowerCase();
+
+        if (!text) {
+            return "Not specified";
+        }
+
+        if (
+            text.includes("english") &&
+            text.includes("russian")
+        ) {
+            return "English / Russian";
+        }
+
+        if (text.includes("english")) {
+            return "English";
+        }
+
+        if (text.includes("russian")) {
+            return "Russian";
+        }
+
+        if (
+            text.includes("bilingual") ||
+            text.includes("mixed")
+        ) {
+            return "Bilingual / Mixed";
+        }
+
+        return clean(value);
+    }
+
+    /* =========================================================
+       SCHOLARSHIP
+    ========================================================= */
+
+    function getScholarship(u) {
+
+        const values = [
+            firstValue(u, [
+                "scholarship",
+                "scholarship_status",
+                "scholarshipStatus"
+            ]),
+
+            firstValue(u, [
+                "openDoors"
+            ]),
+
+            firstValue(u, [
+                "scholarshipPathway"
+            ]),
+
+            firstValue(u, [
+                "governmentScholarship"
+            ])
+        ];
+
+        const positiveWords = [
+            "yes",
+            "available",
+            "listed",
+            "present",
+            "eligible",
+            "offered",
+            "provided",
+            "supported"
+        ];
+
+        const negativeWords = [
+            "no",
+            "none",
+            "not listed",
+            "not available",
+            "unavailable",
+            "n/a",
+            "not verified",
+            "unknown"
+        ];
+
+        for (const value of values) {
+
+            const text =
+                clean(value).toLowerCase();
+
+            if (!text) {
+                continue;
+            }
+
+            if (
+                negativeWords.some(
+                    word => text === word
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                positiveWords.some(
+                    word =>
+                        text === word
+                ) ||
+                text.includes(
+                    "scholarship"
+                ) ||
+                text.includes(
+                    "government"
+                ) ||
+                text.includes(
+                    "open door"
+                )
+            ) {
+                return "yes";
+            }
+        }
+
+        return "no";
+    }
+
+    /* =========================================================
+       NORMALIZE UNIVERSITY
+    ========================================================= */
+
+    function normalizeUniversity(
+        u,
+        index
     ) {
-      return `
-        <h4>Accommodation</h4>
 
-        <p>
-          For <strong>${name}</strong>, the current database
-          records:
-        </p>
+        const name =
+            firstValue(u, [
+                "name",
+                "university",
+                "university_name",
+                "title"
+            ]) ||
+            "University information pending";
 
-        <div class="sp-ai-highlight">
-          ${escapeHTML(
-            formatValue(
-              university.hostel,
-              "Accommodation information is not currently published"
+        const city =
+            firstValue(u, [
+                "city",
+                "location"
+            ]) ||
+            "City/region to be verified";
+
+        const region =
+            firstValue(u, [
+                "region",
+                "oblast",
+                "republic",
+                "state"
+            ]);
+
+        const country =
+            firstValue(u, [
+                "country"
+            ]) ||
+            "Russia";
+
+        const established =
+            firstValue(u, [
+                "established",
+                "founded",
+                "year_established"
+            ]);
+
+        const about =
+            firstValue(u, [
+                "about",
+                "description",
+                "summary"
+            ]);
+
+        const fields =
+            Array.isArray(u.fields)
+                ? u.fields
+                : clean(u.fields)
+                    ? [clean(u.fields)]
+                    : [];
+
+        const officialWebsite =
+            validURL(
+                firstValue(u, [
+                    "official_website",
+                    "officialWebsite",
+                    "website",
+                    "url"
+                ])
+            );
+
+        const officialFeeSource =
+            validURL(
+                firstValue(u, [
+                    "official_fee_source",
+                    "officialFeeStructure",
+                    "official_fee_structure",
+                    "fee_source",
+                    "tuition_source"
+                ])
+            );
+
+        const officialSource =
+            validURL(
+                firstValue(u, [
+                    "official_source",
+                    "officialSource",
+                    "source"
+                ])
+            );
+
+        const tuitionFee =
+            firstValue(u, [
+                "tuition_fee",
+                "tuitionFee",
+                "tuition",
+                "fee"
+            ]);
+
+        const hostelFee =
+            firstValue(u, [
+                "hostel_fee",
+                "hostelFee",
+                "hostel",
+                "hostel_cost"
+            ]);
+
+        const tuitionStatus =
+            firstValue(u, [
+                "tuition_status",
+                "tuitionStatus"
+            ]);
+
+        const hostelStatus =
+            firstValue(u, [
+                "hostel_status",
+                "hostelStatus"
+            ]);
+
+        const lastVerified =
+            firstValue(u, [
+                "last_verified",
+                "lastVerified"
+            ]);
+
+        const internationalStudents =
+            firstValue(u, [
+                "international_students",
+                "internationalStudents"
+            ]);
+
+        return {
+
+            id:
+                clean(
+                    firstValue(
+                        u,
+                        ["id"]
+                    )
+                ) ||
+                "university-" +
+                    (index + 1),
+
+            name:
+                clean(name),
+
+            city:
+                clean(city),
+
+            region:
+                clean(region),
+
+            country:
+                clean(country),
+
+            established:
+                clean(established),
+
+            about:
+                clean(about),
+
+            fields:
+                fields,
+
+            course:
+                getCourse(u),
+
+            medium:
+                getMedium(u),
+
+            scholarship:
+                getScholarship(u),
+
+            tuitionFee:
+                clean(tuitionFee),
+
+            hostelFee:
+                clean(hostelFee),
+
+            tuitionStatus:
+                clean(tuitionStatus),
+
+            hostelStatus:
+                clean(hostelStatus),
+
+            officialWebsite:
+                officialWebsite,
+
+            officialFeeSource:
+                officialFeeSource,
+
+            officialSource:
+                officialSource,
+
+            internationalStudents:
+                clean(
+                    internationalStudents
+                ),
+
+            lastVerified:
+                clean(lastVerified)
+        };
+    }
+
+    /* =========================================================
+       LOAD DATABASE
+    ========================================================= */
+
+    async function loadUniversities() {
+
+        if (grid) {
+
+            grid.innerHTML = `
+                <article class="university-card">
+                    <h3>
+                        Loading universities…
+                    </h3>
+
+                    <p class="location">
+                        Please wait.
+                    </p>
+                </article>
+            `;
+        }
+
+        try {
+
+            const response =
+                await fetch(
+                    DATA_URL +
+                        "?v=" +
+                        Date.now(),
+                    {
+                        cache:
+                            "no-store"
+                    }
+                );
+
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+            }
+
+            const data =
+                await response.json();
+
+            let rawUniversities = [];
+
+            if (
+                Array.isArray(data)
+            ) {
+
+                rawUniversities =
+                    data;
+
+            } else if (
+                data &&
+                Array.isArray(
+                    data.universities
+                )
+            ) {
+
+                rawUniversities =
+                    data.universities;
+
+            } else {
+
+                throw new Error(
+                    "Invalid universities.json format"
+                );
+            }
+
+            universities =
+                rawUniversities
+                    .map(
+                        normalizeUniversity
+                    )
+                    .filter(
+                        u =>
+                            u.name
+                    );
+
+            populateCities();
+
+            updateFilterOptions();
+
+            renderUniversities();
+
+            populateAISelector();
+
+            console.log(
+                "Scholar Path Russia:",
+                universities.length,
+                "university records loaded."
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Scholar Path Russia database error:",
+                error
+            );
+
+            if (recordCount) {
+                recordCount.textContent =
+                    "Database could not be loaded";
+            }
+
+            if (grid) {
+
+                grid.innerHTML = `
+                    <article
+                        class="university-card"
+                    >
+
+                        <h3>
+                            University database unavailable
+                        </h3>
+
+                        <p class="location">
+                            Please refresh the page.
+                        </p>
+
+                        <p>
+                            Please check that
+                            <strong>
+                                data/universities.json
+                            </strong>
+                            exists and contains valid JSON.
+                        </p>
+
+                    </article>
+                `;
+            }
+        }
+    }
+
+    /* =========================================================
+       FILTER OPTIONS
+    ========================================================= */
+
+    function updateFilterOptions() {
+
+        if (!courseFilter) {
+            return;
+        }
+
+        const current =
+            courseFilter.value;
+
+        const courses = [
+            ...new Set(
+                universities
+                    .map(
+                        u =>
+                            u.course
+                    )
+                    .filter(Boolean)
             )
-          )}
-        </div>
+        ].sort(
+            (a, b) =>
+                a.localeCompare(b)
+        );
 
-        <p>
-          Hostel availability, room type and prices should be
-          confirmed directly with the university.
-        </p>
-      `;
+        courseFilter.innerHTML = `
+            <option value="">
+                All courses
+            </option>
+        `;
+
+        courses.forEach(
+            course => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    course;
+
+                option.textContent =
+                    course;
+
+                courseFilter.appendChild(
+                    option
+                );
+            }
+        );
+
+        if (
+            courses.includes(
+                current
+            )
+        ) {
+            courseFilter.value =
+                current;
+        }
     }
 
-    if (
-      q.includes("scholarship") ||
-      q.includes("funding") ||
-      q.includes("stipend")
+    /* =========================================================
+       CITY FILTER
+    ========================================================= */
+
+    function populateCities() {
+
+        if (!cityFilter) {
+            return;
+        }
+
+        const current =
+            cityFilter.value;
+
+        const cities = [
+            ...new Set(
+                universities
+                    .map(
+                        u =>
+                            clean(
+                                u.city
+                            )
+                    )
+                    .filter(
+                        city =>
+                            city &&
+                            city !==
+                                "City/region to be verified"
+                    )
+            )
+        ].sort(
+            (a, b) =>
+                a.localeCompare(b)
+        );
+
+        cityFilter.innerHTML = `
+            <option value="">
+                All cities
+            </option>
+        `;
+
+        cities.forEach(
+            city => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    city;
+
+                option.textContent =
+                    city;
+
+                cityFilter.appendChild(
+                    option
+                );
+            }
+        );
+
+        if (
+            cities.includes(
+                current
+            )
+        ) {
+            cityFilter.value =
+                current;
+        }
+    }
+
+    /* =========================================================
+       FILTER UNIVERSITIES
+    ========================================================= */
+
+    function getFilteredUniversities() {
+
+        const course =
+            courseFilter
+                ? clean(
+                      courseFilter.value
+                  )
+                : "";
+
+        const city =
+            cityFilter
+                ? clean(
+                      cityFilter.value
+                  )
+                : "";
+
+        const medium =
+            mediumFilter
+                ? clean(
+                      mediumFilter.value
+                  )
+                : "";
+
+        const scholarship =
+            scholarshipFilter
+                ? clean(
+                      scholarshipFilter.value
+                  )
+                : "";
+
+        return universities.filter(
+            u => {
+
+                const courseMatch =
+                    !course ||
+                    u.course ===
+                        course;
+
+                const cityMatch =
+                    !city ||
+                    u.city ===
+                        city;
+
+                const mediumMatch =
+                    !medium ||
+                    u.medium ===
+                        medium;
+
+                const scholarshipMatch =
+                    !scholarship ||
+                    u.scholarship ===
+                        scholarship;
+
+                return (
+                    courseMatch &&
+                    cityMatch &&
+                    mediumMatch &&
+                    scholarshipMatch
+                );
+            }
+        );
+    }
+
+    /* =========================================================
+       FEE DISPLAY
+    ========================================================= */
+
+    function feeDisplay(
+        label,
+        value,
+        status,
+        source
     ) {
-      return `
-        <h4>Scholarship information</h4>
 
-        <p>
-          ${
-            university.scholarship === "yes"
-              ? `
-                Scholarship information is listed for
-                <strong>${name}</strong>.
-              `
-              : `
-                The current database does not mark a specific
-                scholarship as confirmed for <strong>${name}</strong>.
-              `
-          }
-        </p>
+        if (value) {
 
-        <p>
-          Scholarship availability, eligibility, funding
-          coverage and deadlines may depend on the programme,
-          nationality and academic year. Verify the current
-          conditions from the official scholarship or
-          university source.
-        </p>
-      `;
+            return `
+                <div class="info-box">
+
+                    <small>
+                        ${escapeHTML(
+                            label
+                        )}
+                    </small>
+
+                    <strong>
+                        ${escapeHTML(
+                            value
+                        )}
+                    </strong>
+
+                    ${
+                        status
+                            ? `
+                                <span class="small-note">
+                                    ${escapeHTML(
+                                        status
+                                    )}
+                                </span>
+                            `
+                            : ""
+                    }
+
+                    ${
+                        source
+                            ? `
+                                <a
+                                    href="${escapeHTML(
+                                        source
+                                    )}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="mini-link"
+                                >
+                                    Official source ↗
+                                </a>
+                            `
+                            : ""
+                    }
+
+                </div>
+            `;
+        }
+
+        return `
+            <div class="info-box">
+
+                <small>
+                    ${escapeHTML(
+                        label
+                    )}
+                </small>
+
+                <strong>
+                    Verify officially
+                </strong>
+
+                <span class="small-note">
+                    Not available in database
+                </span>
+
+            </div>
+        `;
     }
 
-    if (
-      q.includes("admission") ||
-      q.includes("apply") ||
-      q.includes("application") ||
-      q.includes("requirement")
-    ) {
-      return `
-        <h4>Admission guidance</h4>
+    /* =========================================================
+       UNIVERSITY CARD
+    ========================================================= */
 
-        <p>
-          <strong>${name}</strong> is listed in Scholar Path
-          Russia for <strong>${course}</strong>.
-        </p>
+    function createUniversityCard(u) {
 
-        <p>
-          Before applying, verify the current admission
-          requirements, application deadlines, academic
-          documents, language requirements, medical
-          requirements and regulatory requirements with the
-          relevant official authorities.
-        </p>
+        const scholarshipBadge =
+            u.scholarship ===
+            "yes"
+                ? `
+                    <span class="badge green">
+                        Scholarship listed
+                    </span>
+                `
+                : "";
 
-        <ul class="sp-ai-list">
-          <li>Confirm the exact programme.</li>
-          <li>Check current eligibility requirements.</li>
-          <li>Check the current application deadline.</li>
-          <li>Verify required documents.</li>
-          <li>Verify tuition and accommodation costs.</li>
-          <li>Check applicable recognition or licensing requirements.</li>
-        </ul>
-      `;
+        const websiteButton =
+            u.officialWebsite
+                ? `
+                    <a
+                        href="${escapeHTML(
+                            u.officialWebsite
+                        )}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="card-link"
+                    >
+                        Official university website ↗
+                    </a>
+                `
+                : "";
+
+        const feeButton =
+            u.officialFeeSource
+                ? `
+                    <a
+                        href="${escapeHTML(
+                            u.officialFeeSource
+                        )}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="card-link"
+                    >
+                        Official fee source ↗
+                    </a>
+                `
+                : "";
+
+        const sourceButton =
+            u.officialSource
+                ? `
+                    <a
+                        href="${escapeHTML(
+                            u.officialSource
+                        )}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="card-link"
+                    >
+                        Verification source ↗
+                    </a>
+                `
+                : "";
+
+        const locationText = [
+            u.city,
+            u.region,
+            u.country
+        ]
+            .filter(Boolean)
+            .join(" • ");
+
+        const established =
+            u.established
+                ? `
+                    <p>
+                        <strong>
+                            Established:
+                        </strong>
+                        ${escapeHTML(
+                            u.established
+                        )}
+                    </p>
+                `
+                : "";
+
+        const about =
+            u.about
+                ? `
+                    <p class="description">
+                        ${escapeHTML(
+                            u.about
+                        )}
+                    </p>
+                `
+                : "";
+
+        const fields =
+            u.fields.length
+                ? `
+                    <p class="description">
+                        <strong>
+                            Fields:
+                        </strong>
+                        ${escapeHTML(
+                            u.fields.join(
+                                ", "
+                            )
+                        )}
+                    </p>
+                `
+                : "";
+
+        const international =
+            u.internationalStudents
+                ? `
+                    <p class="description">
+                        <strong>
+                            International students:
+                        </strong>
+                        ${escapeHTML(
+                            u.internationalStudents
+                        )}
+                    </p>
+                `
+                : "";
+
+        const verification =
+            u.lastVerified
+                ? `
+                    <div class="verify-note">
+
+                        <strong>
+                            Last verified:
+                        </strong>
+
+                        ${escapeHTML(
+                            u.lastVerified
+                        )}
+
+                        <br>
+
+                        <span>
+                            Always confirm current
+                            information with official
+                            sources.
+                        </span>
+
+                    </div>
+                `
+                : `
+                    <div class="verify-note">
+
+                        <strong>
+                            Verification:
+                        </strong>
+
+                        Source date not listed.
+
+                        <br>
+
+                        <span>
+                            Confirm current information
+                            with official sources.
+                        </span>
+
+                    </div>
+                `;
+
+        return `
+            <article
+                class="university-card"
+            >
+
+                <div class="badges">
+
+                    <span class="badge">
+                        UNIVERSITY RECORD
+                    </span>
+
+                    <span class="badge">
+                        ${escapeHTML(
+                            u.course
+                        )}
+                    </span>
+
+                    ${scholarshipBadge}
+
+                </div>
+
+                <h3>
+                    ${escapeHTML(
+                        u.name
+                    )}
+                </h3>
+
+                <div class="location">
+                    ${escapeHTML(
+                        locationText
+                    )}
+                </div>
+
+                <div class="info-row">
+
+                    <div class="info-box">
+
+                        <small>
+                            Study medium
+                        </small>
+
+                        <strong>
+                            ${escapeHTML(
+                                u.medium
+                            )}
+                        </strong>
+
+                    </div>
+
+                    ${feeDisplay(
+                        "Tuition",
+                        u.tuitionFee,
+                        u.tuitionStatus,
+                        u.officialFeeSource
+                    )}
+
+                    ${feeDisplay(
+                        "Hostel",
+                        u.hostelFee,
+                        u.hostelStatus,
+                        ""
+                    )}
+
+                    <div class="info-box">
+
+                        <small>
+                            Scholarship
+                        </small>
+
+                        <strong>
+                            ${
+                                u.scholarship ===
+                                "yes"
+                                    ? "Listed — verify eligibility"
+                                    : "Check officially"
+                            }
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="university-details">
+
+                    ${established}
+
+                    ${about}
+
+                    ${fields}
+
+                    ${international}
+
+                </div>
+
+                ${verification}
+
+                <div
+                    class="card-actions"
+                    style="
+                        display:flex;
+                        flex-wrap:wrap;
+                        gap:9px;
+                        margin-top:18px;
+                    "
+                >
+
+                    ${websiteButton}
+
+                    ${feeButton}
+
+                    ${sourceButton}
+
+                    <a
+                        href="${APPLY_URL}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="apply-button"
+                    >
+                        Apply / Register ↗
+                    </a>
+
+                </div>
+
+            </article>
+        `;
     }
 
-    if (
-      q.includes("mbbs") ||
-      q.includes("medicine") ||
-      q.includes("medical")
-    ) {
-      return `
-        <h4>Medical programme</h4>
+    /* =========================================================
+       RENDER
+    ========================================================= */
 
-        <p>
-          The current profile lists
-          <strong>${course}</strong> at
-          <strong>${name}</strong>.
-        </p>
+    function renderUniversities() {
 
-        <div class="sp-ai-highlight">
-          Location: ${city}<br>
-          Instruction / medium: ${medium}
-        </div>
+        if (!grid) {
+            console.warn(
+                "Scholar Path Russia: #universityGrid not found."
+            );
+            return;
+        }
 
-        <p>
-          For medical education, do not rely only on a
-          university advertisement. Verify the current
-          regulatory, recognition, licensing and examination
-          requirements applicable to your country and future
-          practice destination.
-        </p>
-      `;
+        const filtered =
+            getFilteredUniversities();
+
+        if (recordCount) {
+
+            recordCount.textContent =
+                filtered.length +
+                (
+                    filtered.length ===
+                    1
+                        ? " university record"
+                        : " university records"
+                );
+        }
+
+        if (!filtered.length) {
+
+            grid.innerHTML = `
+                <article
+                    class="university-card"
+                >
+
+                    <h3>
+                        No matching university found
+                    </h3>
+
+                    <p class="location">
+                        Try changing one or more filters.
+                    </p>
+
+                </article>
+            `;
+
+            return;
+        }
+
+        grid.innerHTML =
+            filtered
+                .map(
+                    createUniversityCard
+                )
+                .join("");
     }
 
-    if (
-      q.includes("city") ||
-      q.includes("location") ||
-      q.includes("where")
-    ) {
-      return `
-        <h4>University location</h4>
+    /* =========================================================
+       AI UNIVERSITY SELECTOR
+       Works if #aiUniversity exists.
+    ========================================================= */
 
-        <p>
-          <strong>${name}</strong> is located in
-          <strong>${city}</strong>.
-        </p>
+    function populateAISelector() {
 
-        <p>
-          When comparing cities, consider accommodation,
-          transportation, climate, living expenses, student
-          population and access to university services.
-        </p>
-      `;
+        const selector =
+            document.getElementById(
+                "aiUniversity"
+            );
+
+        if (!selector) {
+            return;
+        }
+
+        selector.innerHTML = `
+            <option value="">
+                Select a university
+            </option>
+        `;
+
+        universities.forEach(
+            (u, index) => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    index;
+
+                option.textContent =
+                    u.name;
+
+                selector.appendChild(
+                    option
+                );
+            }
+        );
     }
 
-    if (
-      q.includes("verify") ||
-      q.includes("official") ||
-      q.includes("genuine") ||
-      q.includes("authentic")
-    ) {
-      return `
-        <h4>How to verify this university</h4>
+    /* =========================================================
+       SIMPLE AI ASSISTANT
+       The existing /api/college-ai endpoint remains untouched.
+    ========================================================= */
 
-        <p>
-          Scholar Path Russia follows a source-first approach.
-          Important claims should be checked against the
-          relevant official source.
-        </p>
+    async function askCollegeAI() {
 
-        <ul class="sp-ai-list">
-          <li>Official university website</li>
-          <li>Official programme information</li>
-          <li>Published fee information</li>
-          <li>Official scholarship information</li>
-          <li>Applicable regulatory information</li>
-          <li>Current admission requirements</li>
-        </ul>
+        const universitySelect =
+            document.getElementById(
+                "aiUniversity"
+            );
 
-        <p>
-          A listing on Scholar Path Russia should not itself
-          be treated as an approval, accreditation or
-          guarantee.
-        </p>
-      `;
-    }
+        const questionInput =
+            document.getElementById(
+                "aiQuestion"
+            );
 
-    return `
-      <h4>About ${name}</h4>
+        const result =
+            document.getElementById(
+                "aiResult"
+            );
 
-      <p>
-        ${escapeHTML(
-          university.about ||
-          "The current database contains limited information about this university."
-        )}
-      </p>
+        const askButton =
+            document.getElementById(
+                "askAIButton"
+            );
 
-      <div class="sp-ai-highlight">
+        if (
+            !universitySelect ||
+            !questionInput ||
+            !result
+        ) {
+            return;
+        }
 
-        <strong>Programme:</strong>
-        ${course}
-
-        <br><br>
-
-        <strong>Location:</strong>
-        ${city}
-
-        <br><br>
-
-        <strong>Instruction:</strong>
-        ${medium}
-
-      </div>
-
-      <p>
-        Ask about fees, admission, scholarships, hostel,
-        documents, medical programmes, recognition or
-        verification to get a more specific answer.
-      </p>
-    `;
-  }
-
-  async function askScholarPathAI() {
-    const university = getSelectedUniversity();
-
-    const question =
-      aiQuestion
-        ? aiQuestion.value.trim()
-        : "";
-
-    if (!university) {
-      setAIStatus(
-        `
-          <p>
-            Please select a university before asking Scholar
-            Path AI a question.
-          </p>
-        `,
-        "error"
-      );
-
-      if (aiUniversity) {
-        aiUniversity.focus();
-      }
-
-      return;
-    }
-
-    if (!question) {
-      setAIStatus(
-        `
-          <p>
-            Please enter your question first.
-          </p>
-        `,
-        "error"
-      );
-
-      if (aiQuestion) {
-        aiQuestion.focus();
-      }
-
-      return;
-    }
-
-    setAILoading();
-
-    await new Promise((resolve) =>
-      setTimeout(resolve, 350)
-    );
-
-    try {
-      const answer = aiAnswerFromDatabase(
-        university,
-        question
-      );
-
-      setAIStatus(answer);
-
-    } catch (error) {
-      console.error(
-        "[Scholar Path Russia] AI error:",
-        error
-      );
-
-      setAIStatus(
-        `
-          <p>
-            Scholar Path AI could not process this question
-            right now. Please try again.
-          </p>
-        `,
-        "error"
-      );
-    }
-  }
-
-  function setupQuickQuestions() {
-    const quickQuestions =
-      document.querySelectorAll(
-        "[data-ai-question]"
-      );
-
-    quickQuestions.forEach((button) => {
-      button.addEventListener("click", () => {
+        const index =
+            universitySelect.value;
 
         const question =
-          button.getAttribute(
-            "data-ai-question"
-          );
+            clean(
+                questionInput.value
+            );
 
-        if (!question) return;
+        if (
+            index === "" ||
+            !question
+        ) {
 
-        if (aiQuestion) {
-          aiQuestion.value = question;
-          aiQuestion.focus();
+            result.innerHTML = `
+                <p>
+                    Please select a university
+                    and enter your question.
+                </p>
+            `;
+
+            return;
         }
 
-        const aiSection =
-          document.querySelector(
-            "#scholarPathAI"
-          );
+        const university =
+            universities[
+                Number(index)
+            ];
 
-        if (aiSection) {
-          aiSection.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
+        if (!university) {
+            return;
         }
-      });
-    });
-  }
 
-  function setupExplorer() {
-
-    if (searchButton) {
-      searchButton.addEventListener(
-        "click",
-        (event) => {
-          event.preventDefault();
-          searchUniversities();
+        if (askButton) {
+            askButton.disabled = true;
+            askButton.textContent =
+                "Checking…";
         }
-      );
+
+        result.innerHTML = `
+            <div class="ai-loading">
+                Scholar Path AI is preparing
+                your answer…
+            </div>
+        `;
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/college-ai",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            university: {
+                                name:
+                                    university.name,
+
+                                city:
+                                    university.city,
+
+                                region:
+                                    university.region,
+
+                                country:
+                                    university.country,
+
+                                course:
+                                    university.course,
+
+                                medium:
+                                    university.medium,
+
+                                tuition:
+                                    university.tuitionFee,
+
+                                hostel:
+                                    university.hostelFee,
+
+                                scholarship:
+                                    university.scholarship,
+
+                                officialWebsite:
+                                    university.officialWebsite,
+
+                                officialFeeSource:
+                                    university.officialFeeSource,
+
+                                officialSource:
+                                    university.officialSource,
+
+                                lastVerified:
+                                    university.lastVerified
+                            },
+
+                            question:
+                                question
+                        })
+                    }
+                );
+
+            if (!response.ok) {
+                throw new Error(
+                    "AI request failed: " +
+                    response.status
+                );
+            }
+
+            const data =
+                await response.json();
+
+            const answer =
+                data.answer ||
+                data.response ||
+                data.message ||
+                "No answer was returned.";
+
+            result.innerHTML = `
+                <div class="ai-answer">
+
+                    <strong>
+                        Scholar Path AI
+                    </strong>
+
+                    <p>
+                        ${escapeHTML(
+                            answer
+                        )}
+                    </p>
+
+                    <small>
+                        AI answers should be checked
+                        against the official sources
+                        before making important decisions.
+                    </small>
+
+                </div>
+            `;
+
+        } catch (error) {
+
+            console.error(
+                "Scholar Path AI error:",
+                error
+            );
+
+            result.innerHTML = `
+                <div class="ai-answer">
+
+                    <strong>
+                        AI assistant temporarily unavailable
+                    </strong>
+
+                    <p>
+                        Please try again later.
+                    </p>
+
+                    <small>
+                        You can still use the official
+                        university sources shown in
+                        the university database.
+                    </small>
+
+                </div>
+            `;
+
+        } finally {
+
+            if (askButton) {
+
+                askButton.disabled =
+                    false;
+
+                askButton.textContent =
+                    "Ask Scholar Path AI";
+            }
+        }
     }
 
-    if (searchInput) {
-      searchInput.addEventListener(
-        "keydown",
-        (event) => {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            searchUniversities();
-          }
-        }
-      );
+    /* =========================================================
+       EVENT LISTENERS
+    ========================================================= */
 
-      searchInput.addEventListener(
-        "input",
-        () => {
-          if (
-            searchInput.value.trim() === ""
-          ) {
-            searchUniversities();
-          }
-        }
-      );
-    }
+    [
+        courseFilter,
+        cityFilter,
+        mediumFilter,
+        scholarshipFilter
+    ]
+        .filter(Boolean)
+        .forEach(
+            element => {
 
-    if (programmeFilter) {
-      programmeFilter.addEventListener(
-        "change",
-        searchUniversities
-      );
-    }
+                element.addEventListener(
+                    "change",
+                    renderUniversities
+                );
 
-    if (cityFilter) {
-      cityFilter.addEventListener(
-        "change",
-        searchUniversities
-      );
-    }
-  }
-
-  function setupAI() {
-
-    if (aiButton) {
-      aiButton.addEventListener(
-        "click",
-        (event) => {
-          event.preventDefault();
-          askScholarPathAI();
-        }
-      );
-    }
-
-    if (aiQuestion) {
-      aiQuestion.addEventListener(
-        "keydown",
-        (event) => {
-
-          if (
-            event.key === "Enter" &&
-            (event.ctrlKey || event.metaKey)
-          ) {
-            event.preventDefault();
-            askScholarPathAI();
-          }
-
-        }
-      );
-    }
-
-    setupQuickQuestions();
-  }
-
-  function setupNavigation() {
-
-    document
-      .querySelectorAll(
-        'a[href^="#"]'
-      )
-      .forEach((link) => {
-
-        link.addEventListener(
-          "click",
-          (event) => {
-
-            const targetId =
-              link
-                .getAttribute("href")
-                ?.replace("#", "");
-
-            if (!targetId) return;
-
-            const target =
-              document.getElementById(
-                targetId
-              );
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-
-          }
+            }
         );
 
-      });
-
-  }
-
-  function setupGlobalErrors() {
-
-    window.addEventListener(
-      "error",
-      (event) => {
-
-        console.error(
-          "[Scholar Path Russia]",
-          event.error || event.message
+    const askAIButton =
+        document.getElementById(
+            "askAIButton"
         );
 
-      }
-    );
+    if (askAIButton) {
 
-    window.addEventListener(
-      "unhandledrejection",
-      (event) => {
-
-        console.error(
-          "[Scholar Path Russia] Unhandled promise:",
-          event.reason
+        askAIButton.addEventListener(
+            "click",
+            askCollegeAI
         );
+    }
 
-      }
-    );
-
-  }
-
-  function initializeScholarPath() {
-
-    setupExplorer();
-
-    setupAI();
-
-    setupNavigation();
-
-    setupGlobalErrors();
+    /* =========================================================
+       INITIAL LOAD
+    ========================================================= */
 
     loadUniversities();
 
-  }
-
-  if (
-    document.readyState === "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializeScholarPath
-    );
-
-  } else {
-
-    initializeScholarPath();
-
-  }
+})();
