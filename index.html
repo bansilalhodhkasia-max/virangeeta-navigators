@@ -935,6 +935,49 @@ body{
   font-size:0!important;
 }
 
+
+
+/* =========================================================
+   SCHOLAR PATH AI UNIVERSITY ASSISTANT
+   ========================================================= */
+.ai-section{
+  background:linear-gradient(135deg,#07111f 0%,#0d1b2e 55%,#0b403c 100%);
+  color:#fff;
+}
+.ai-wrap{width:min(980px,calc(100% - 28px));margin:auto}
+.ai-header{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.ai-logo{width:58px;height:58px;min-width:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;background:linear-gradient(135deg,#117f76,#39b6a9);box-shadow:0 12px 30px rgba(17,127,118,.28)}
+.ai-badge{display:inline-flex;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#9de8df;font-size:10px;font-weight:900;letter-spacing:1px}
+.ai-header h2{margin:7px 0 3px;font-size:clamp(28px,4vw,42px);line-height:1.05}
+.ai-header p{margin:0;color:#b9c8d5;max-width:720px;font-size:14px}
+.ai-card{background:#fff;color:var(--x);border-radius:24px;padding:25px;border:1px solid rgba(255,255,255,.15);box-shadow:0 20px 60px rgba(0,0,0,.22)}
+.ai-card label{font-size:11px;margin-bottom:6px;color:#334155}
+.ai-card select,.ai-card textarea{width:100%;border:1px solid var(--l);border-radius:12px;padding:12px;background:#fff;color:var(--x);outline:none}
+.ai-card select:focus,.ai-card textarea:focus{border-color:var(--t);box-shadow:0 0 0 4px rgba(17,127,118,.1)}
+.ai-card textarea{min-height:115px;resize:vertical;margin-bottom:14px}
+.ai-quick-title{font-size:11px;font-weight:900;color:var(--mut);margin:3px 0 8px;text-transform:uppercase;letter-spacing:.6px}
+.ai-quick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.ai-quick button{border:1px solid var(--l);background:#f7fafc;color:var(--x);border-radius:999px;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer}
+.ai-quick button:hover{border-color:#9bd7d1;background:#eef9f7;color:#087367}
+.ai-ask{width:100%;min-height:54px;border:0;border-radius:13px;background:linear-gradient(135deg,#117f76,#0b665f);color:#fff;font-weight:900;font-size:15px;box-shadow:0 10px 25px rgba(17,127,118,.22)}
+.ai-ask:disabled{opacity:.65;cursor:wait}
+.ai-loading{display:none;align-items:center;gap:10px;margin-top:16px;padding:13px;border-radius:12px;background:#f1f7f6;color:#53706d;font-size:12px;font-weight:700}
+.ai-spinner{width:18px;height:18px;border:3px solid #cfe9e5;border-top-color:var(--t);border-radius:50%;animation:aiSpin .8s linear infinite}
+@keyframes aiSpin{to{transform:rotate(360deg)}}
+.ai-answer{display:none;margin-top:18px;border:1px solid #d9ebe8;border-radius:16px;overflow:hidden;background:#fbfefd}
+.ai-answer-head{padding:13px 16px;background:#eef8f6;border-bottom:1px solid #d9ebe8;color:#087367;font-weight:900;font-size:13px}
+.ai-answer-body{padding:18px;font-size:13px;line-height:1.75;color:#334155;overflow-wrap:anywhere}
+.ai-answer-body p{margin:0 0 12px}.ai-answer-body p:last-child{margin-bottom:0}.ai-answer-body h3{font-size:16px;color:#102033;margin:18px 0 8px}.ai-answer-body h3:first-child{margin-top:0}.ai-answer-body ul,.ai-answer-body ol{padding-left:22px}.ai-answer-body li{margin-bottom:5px}
+.ai-note{margin-top:13px;padding:11px 13px;border-radius:10px;background:#f5f7fa;color:#68788b;font-size:10px;line-height:1.55}
+@media(max-width:600px){
+  .ai-section{padding:48px 0}
+  .ai-header{align-items:flex-start;gap:11px}
+  .ai-logo{width:46px;height:46px;min-width:46px;border-radius:14px;font-size:22px}
+  .ai-card{padding:17px;border-radius:18px}
+  .ai-quick{gap:6px}.ai-quick button{font-size:10px;padding:7px 9px}
+  .ai-answer-body{padding:15px;font-size:12.5px}
+}
+
 /* RESPONSIVE */
 
 @media(max-width:1000px){
@@ -1093,6 +1136,7 @@ body{
 
     <nav class="navlinks">
       <a href="#universities">Universities</a>
+      <a href="#ai-assistant">AI Assistant</a>
       <a href="#match">Match</a>
       <a href="#map">Map</a>
       <a href="#scholarships">Scholarships</a>
@@ -1138,6 +1182,7 @@ body{
   <div class="container">
     <nav id="mobileMenu" class="mobile-menu">
       <a href="#universities" onclick="closeMobileMenu()">Universities</a>
+      <a href="#ai-assistant" onclick="closeMobileMenu()">AI University Assistant</a>
       <a href="#match" onclick="closeMobileMenu()">University Match</a>
       <a href="#map" onclick="closeMobileMenu()">Russia Map</a>
       <a href="#scholarships" onclick="closeMobileMenu()">Scholarships</a>
@@ -1894,6 +1939,61 @@ body{
 </section>
 
 
+
+
+<!-- AI UNIVERSITY ASSISTANT -->
+<section id="ai-assistant" class="ai-section">
+  <div class="ai-wrap">
+    <div class="ai-header">
+      <div class="ai-logo">✦</div>
+      <div>
+        <span class="ai-badge">SCHOLAR PATH AI</span>
+        <h2>AI University Assistant</h2>
+        <p>Ask about any university in your database — admission, MBBS, fees, scholarships, hostel, documents and more.</p>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <label for="aiUniversity">SELECT UNIVERSITY</label>
+      <select id="aiUniversity">
+        <option value="">Choose a university...</option>
+      </select>
+
+      <label for="aiQuestion" style="margin-top:14px">YOUR QUESTION</label>
+      <textarea id="aiQuestion" placeholder="Example: Tell me everything important about MBBS admission, fees, scholarships and hostel at this university."></textarea>
+
+      <div class="ai-quick-title">Quick questions</div>
+      <div class="ai-quick">
+        <button type="button" onclick="askAIQuick('Give me an overview of this university.')">🎓 Overview</button>
+        <button type="button" onclick="askAIQuick('Tell me about admission requirements and eligibility.')">📋 Admission</button>
+        <button type="button" onclick="askAIQuick('Tell me about tuition fees and other important costs.')">💰 Fees</button>
+        <button type="button" onclick="askAIQuick('Tell me about scholarships available for international students.')">🏆 Scholarships</button>
+        <button type="button" onclick="askAIQuick('Tell me everything important about MBBS or Medicine at this university.')">🩺 MBBS</button>
+        <button type="button" onclick="askAIQuick('Tell me about hostel, accommodation and living expenses.')">🏠 Hostel</button>
+        <button type="button" onclick="askAIQuick('What documents are normally required for international students?')">📄 Documents</button>
+        <button type="button" onclick="askAIQuick('What are the main advantages and things I should verify before applying?')">✅ Pros & Checks</button>
+      </div>
+
+      <button id="askAIButton" class="ai-ask" type="button" onclick="askUniversityAI()">✦ Ask Scholar Path AI</button>
+
+      <div id="aiLoading" class="ai-loading">
+        <div class="ai-spinner"></div>
+        <span>Scholar Path AI is preparing your answer...</span>
+      </div>
+
+      <div id="aiAnswerBox" class="ai-answer">
+        <div class="ai-answer-head">✦ Scholar Path AI</div>
+        <div id="aiAnswer" class="ai-answer-body"></div>
+      </div>
+
+      <div class="ai-note">
+        <strong>Important:</strong> AI guidance may not contain the latest official fees, deadlines, recognition or eligibility rules. Always verify current information with the university and relevant official authorities before making an admission decision.
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- FAQ -->
 
 <section id="faq">
@@ -2473,6 +2573,7 @@ async function load(){
     setup();
     render();
     map();
+    populateAIUniversities();
 
     $("schCount").textContent =
       U.filter(scholarship).length;
@@ -3834,6 +3935,191 @@ document.addEventListener(
 
   }
 );
+
+
+
+
+/* =========================================================
+   SCHOLAR PATH AI UNIVERSITY ASSISTANT
+   Uses the existing U university database and
+   Cloudflare Pages Function: /api/college-ai
+   ========================================================= */
+
+function populateAIUniversities(){
+
+  const select = $("aiUniversity");
+  if(!select || !Array.isArray(U)) return;
+
+  const current = select.value;
+  const names = [];
+
+  U.forEach(u => {
+    const name =
+      u.name ||
+      u.university ||
+      u.title ||
+      u.shortName || "";
+
+    if(name && !names.includes(name)){
+      names.push(name);
+    }
+  });
+
+  select.innerHTML = '<option value="">Choose a university...</option>';
+
+  names.sort((a,b)=>String(a).localeCompare(String(b))).forEach(name=>{
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    select.appendChild(option);
+  });
+
+  if(current && names.includes(current)){
+    select.value = current;
+  }
+}
+
+function askAIQuick(question){
+  const box = $("aiQuestion");
+  if(!box) return;
+  box.value = question;
+  askUniversityAI();
+}
+
+async function askUniversityAI(){
+
+  const university = ($("aiUniversity")?.value || "").trim();
+  const question = ($("aiQuestion")?.value || "").trim();
+  const button = $("askAIButton");
+  const loading = $("aiLoading");
+  const answerBox = $("aiAnswerBox");
+  const answer = $("aiAnswer");
+
+  if(!university && !question){
+    answerBox.style.display = "block";
+    answer.innerHTML = "<p><strong>Please select a university or enter a question.</strong></p>";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "✦ AI is thinking...";
+  loading.style.display = "flex";
+  answerBox.style.display = "none";
+  answer.innerHTML = "";
+
+  try{
+
+    const response = await fetch("/api/college-ai",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({university,question})
+    });
+
+    let data = {};
+    try{
+      data = await response.json();
+    }catch(e){
+      throw new Error("Invalid response from AI service.");
+    }
+
+    if(!response.ok || !data.success){
+      throw new Error(data.error || "AI assistant is temporarily unavailable.");
+    }
+
+    answer.innerHTML = formatAIAnswer(data.answer || "No answer was returned.");
+    answerBox.style.display = "block";
+
+    setTimeout(()=>{
+      answerBox.scrollIntoView({behavior:"smooth",block:"nearest"});
+    },80);
+
+  }catch(error){
+
+    console.error("Scholar Path AI:",error);
+
+    answerBox.style.display = "block";
+    answer.innerHTML = `
+      <p><strong>Sorry, the AI assistant is temporarily unavailable.</strong></p>
+      <p>Please try again in a moment.</p>
+    `;
+
+  }finally{
+    loading.style.display = "none";
+    button.disabled = false;
+    button.textContent = "✦ Ask Scholar Path AI";
+  }
+}
+
+function formatAIAnswer(text){
+
+  let safe = String(text || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+
+  safe = safe.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
+  safe = safe.replace(/^###\s+(.*)$/gm,"<h3>$1</h3>");
+  safe = safe.replace(/^##\s+(.*)$/gm,"<h3>$1</h3>");
+  safe = safe.replace(/^#\s+(.*)$/gm,"<h3>$1</h3>");
+
+  const lines = safe.split("\n");
+  let html = "";
+  let inList = false;
+  let paragraph = [];
+
+  const flushParagraph = ()=>{
+    if(paragraph.length){
+      const value = paragraph.join(" ").trim();
+      if(value) html += `<p>${value}</p>`;
+      paragraph = [];
+    }
+  };
+
+  const closeList = ()=>{
+    if(inList){
+      html += "</ul>";
+      inList = false;
+    }
+  };
+
+  lines.forEach(line=>{
+    const trimmed = line.trim();
+
+    if(!trimmed){
+      flushParagraph();
+      closeList();
+      return;
+    }
+
+    if(/^<h3>/.test(trimmed)){
+      flushParagraph();
+      closeList();
+      html += trimmed;
+      return;
+    }
+
+    const bullet = trimmed.match(/^(?:[-•*])\s+(.*)$/);
+    const numbered = trimmed.match(/^\d+\.\s+(.*)$/);
+
+    if(bullet || numbered){
+      flushParagraph();
+      if(!inList){
+        html += "<ul>";
+        inList = true;
+      }
+      html += `<li>${bullet ? bullet[1] : numbered[1]}</li>`;
+      return;
+    }
+
+    closeList();
+    paragraph.push(trimmed);
+  });
+
+  flushParagraph();
+  closeList();
+
+  return html || "<p>No answer was returned.</p>";
+}
 
 
 /* INITIALIZE */
